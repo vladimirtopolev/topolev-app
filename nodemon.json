@@ -1,0 +1,11 @@
+{
+  "execMap": {
+    "js": "node",
+    "ts": "./node_modules/.bin/ts-node"
+  },
+  "watch": [
+    "serverc",
+    "config"
+  ],
+  "ext": "js,ts"
+}
