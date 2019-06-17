@@ -1,9 +1,7 @@
 import {Application, Request, Response} from 'express';
+import userController from './controllers/users.controller';
 
 export const userModuleRouters = (app: Application, domainPath: string = '/api/users') => {
     app.route(domainPath)
-        .get((req: Request, res: Response) => {
-            console.log('here');
-            res.json({});
-        });
+        .get(userController.getAllUsers);
 };

@@ -15,12 +15,13 @@ const USERS: User[] = [
 export async function up(): Promise<void> {
     await getMongooseConnection()
         .then((config) => {
-            saveItems(UserModel,USERS);
-            console.log(`Migration script connect to DB: ${config.host}`);
-        });
+            return saveItems(UserModel, USERS, () => {
+                console.log(`Migration script connect to DB: ${config.host}`);
+            });
+        })
 }
 
-export async function down():Promise<void> {
+export async function down(): Promise<void> {
     // TODO write the statements to rollback your migration (if possible)
     // Example:
     // return db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: false}});
