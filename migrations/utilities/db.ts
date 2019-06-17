@@ -1,14 +1,14 @@
 import * as async from 'async';
 import {Model, Document} from 'mongoose';
 
-export function saveItem<T extends Document>(model: Model<T>, item: T, cb?: (err: any, item: T) => void): Promise<T> {
-    const newItem: T = new model(item);
+export function saveItem<D extends Document, P>(model: Model<D>, item: P, cb?: (err: any, item: D) => void): Promise<D> {
+    const newItem: D = new model(item);
     return newItem.save((err, savedItem) => cb(err, savedItem));
 }
 
-export function saveItems<T extends Document>(model: Model<T>, items: T[], cb?: (err: any, items: T[]) => void): Promise<T[]> {
+export function saveItems<D extends Document, P>(model: Model<D>, items: P[], cb?: (err: any, items: D[]) => void): Promise<D[]> {
     return new Promise((resolve, reject) => {
-        async.map<T, T>(
+        async.map<P, D>(
             items,
             (item, cb) => saveItem(model, item, cb),
             (err, results) => {
