@@ -9,7 +9,7 @@ import {TableProperties} from '../server/modules/table/models/table.model';
 
 const TABLE: TableProperties = {
     _id: new ObjectId(),
-    name: 'Test',
+    name: 'test',
     title: 'Test'
 };
 const HEADERS: TableHeaderProperties[] = [

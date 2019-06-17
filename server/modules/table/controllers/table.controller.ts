@@ -3,7 +3,14 @@ import {TableModel} from '../models/table.model';
 
 class TableController {
     getTable(req: Request, res: Response) {
-        res.json({res: 'getTable'});
+        const { tableName } = req.params;
+        TableModel.findOne({name: tableName})
+            .exec()
+            .then(table => res.json(table))
+            .catch(e => {
+                console.log(e);
+                res.status(500).json({error: 'Server error'})
+            });
     }
 
     getHeaders(req: Request, res: Response) {
