@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import {TableCell, TableCellProperties} from './tableCell.model';
+import {TableCell, TableCellProperties, TableCellModel} from './tableCell.model';
 
 const {Schema} = mongoose;
 
@@ -14,7 +14,7 @@ export interface TableRow extends TableRowProperties, mongoose.Document {
 
 export const TableRowSchema = new mongoose.Schema({
     cells: [{
-        type: Schema.Types.ObjectId, ref: 'TableCell'
+        type: Schema.Types.ObjectId, ref: TableCellModel.modelName
     }]
 });
 

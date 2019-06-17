@@ -10,7 +10,8 @@ export const tableModuleRouters = (app: Application, domainPath: string = '/api/
         .get(tableController.getHeaders);
 
     app.route(`${domainPath}/:tableName/rows`)
-        .get(tableController.getRows);
+        .get(tableController.getRows)
+        .post(tableController.createRow);
 
     app.route(`${domainPath}/:tableName/rows/:rowId`)
         .get(tableController.getRow)

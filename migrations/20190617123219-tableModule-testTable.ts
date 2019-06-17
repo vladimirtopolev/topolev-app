@@ -45,6 +45,21 @@ const ROWS: TableRowProperties[] = [
             }
         ]
     },
+    {
+        _id: new ObjectId(),
+        cells: [
+            {
+                _id: new ObjectId(),
+                type: HEADERS[0]._id,
+                value: 'Стенд XXXX'
+            },
+            {
+                _id: new ObjectId(),
+                type: HEADERS[1]._id,
+                value: 'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
+            }
+        ]
+    },
 ];
 
 

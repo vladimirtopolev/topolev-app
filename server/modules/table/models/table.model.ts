@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
-import {TableHeader, TableHeaderProperties} from './tableHeader.model';
 import {Model, Schema} from 'mongoose';
-import {TableRow, TableRowProperties} from './tableRow.model';
+import {TableHeader, TableHeaderProperties, TableHeaderModel} from './tableHeader.model';
+import {TableRow, TableRowProperties, TableRowModel} from './tableRow.model';
 
 export interface TableProperties {
     _id: any,
@@ -13,17 +13,17 @@ export interface TableProperties {
 
 export interface Table extends TableProperties, mongoose.Document {
     headers: string[] | TableHeader[] | TableHeaderProperties[],
-    rows: string[] | TableRow[] | TableRowProperties[],
+    rows: Array<string | TableRow | TableProperties | undefined | null>
 }
 
 export const TableSchema = new Schema({
     name: String,
     title: String,
     headers: [{
-        type: Schema.Types.ObjectId, ref: 'TableHeader'
+        type: Schema.Types.ObjectId, ref: TableHeaderModel.modelName
     }],
     rows: [{
-        type: Schema.Types.ObjectId, ref: 'TableRow'
+        type: Schema.Types.ObjectId, ref: TableRowModel.modelName
     }],
     uiConfig: Schema.Types.Mixed,
     adminConfig: Schema.Types.Mixed
