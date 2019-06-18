@@ -33,51 +33,52 @@ class TableController {
         return TableModel.findOne({name: tableName}).exec();
     }
 
-    getTable(req: Request, res: Response) {
+    getTable = async (req: Request, res: Response) => {
         const {tableName} = req.params;
-        TableModel.findOne({name: tableName})
+        const table = await TableModel.findOne({name: tableName})
             .populate('headers')
             .populate(populateRowsDescription)
-            .exec()
-            .then(table => res.json(table))
-            .catch(e => {
-                res.status(500).json({error: 'Server error'});
-            });
-    }
+            .exec();
+        if (table) {
+            return res.json(table);
+        }
+        return res.status(404).json({error: `Table "${tableName}" does not exist`})
+    };
 
-    getHeaders(req: Request, res: Response) {
+    getHeaders = async (req: Request, res: Response) => {
         const {tableName} = req.params;
-        TableModel.findOne({name: tableName})
+        const table = await TableModel.findOne({name: tableName})
             .populate('headers')
-            .exec()
-            .then(table => res.json(table.headers))
-            .catch(e => {
-                res.status(500).json({error: 'Server error'});
-            });
-    }
+            .exec();
+        if (table) {
+            return res.json(table.headers);
+        }
+        return res.status(404).json({error: `Table "${tableName}" does not exist`})
+    };
 
-    getRows(req: Request, res: Response) {
+    getRows = async (req: Request, res: Response) => {
         const {tableName} = req.params;
-        TableModel.findOne({name: tableName})
+        const table = await TableModel.findOne({name: tableName})
             .populate(populateRowsDescription)
-            .exec()
-            .then(table => res.json(table.rows))
-            .catch(e => {
-                res.status(500).json({error: 'Server error'});
-            });
-    }
+            .exec();
+        if (table) {
+            return res.json(table.rows);
+        }
+        return res.status(404).json({error: `Table "${tableName}" does not exist`})
+    };
 
-    getRow(req: Request, res: Response) {
+    getRow = async (req: Request, res: Response) => {
         const {tableName, rowId} = req.params;
 
-        TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}}, {'rows.$': 1})
+        const table = await TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}}, {'rows.$': 1})
             .populate(populateRowsDescription)
-            .exec()
-            .then(table => res.json(table.rows[0]))
-            .catch(e => {
-                res.status(500).json({error: 'Server error'});
-            });
-    }
+            .exec();
+
+        if (table) {
+            return res.json(table.rows[0]);
+        }
+        return res.status(404).json({error: `Table "${tableName}" does not exist`});
+    };
 
     updateRow = async (req: Request, res: Response) => {
         const {tableName, rowId} = req.params;
@@ -97,7 +98,7 @@ class TableController {
         }
 
         await TableModel.findByIdAndUpdate(table._id, {
-            rows: table.rows.filter((row: TableRow) => row._id !== rowId)
+            rows: table.rows.filter((row: any) => row._id !== rowId)
         });
 
         const deletedRow = await TableRowModel.findOneAndRemove(rowId)

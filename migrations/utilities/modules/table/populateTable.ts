@@ -17,8 +17,8 @@ export interface TableInfo {
 
 export const populateTable = ({HEADERS, ROWS, TABLE}: TableInfo, endCallback?: (e: any, res: any) => void) => {
     const CELLS: TableCell[] = ROWS.reduce((cells, row) => {
-        return cells.concat(row.cells)
-    }, []);
+        return cells.concat((<TableCell[]>row.cells))
+    }, <TableCell[]>[]);
 
     return new Promise((resolve, reject) => {
         async.series([

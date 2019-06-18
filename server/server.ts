@@ -1,8 +1,8 @@
-import * as express from "express";
-import * as bodyParser from 'body-parser';
+import express from "express";
+import bodyParser from 'body-parser';
 //@ts-ignore
 import formData from 'express-form-data';
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 import rootRouter from './routes'
 
 export class Server {

@@ -54,11 +54,11 @@ UserSchema.pre<User>('save', function (next) {
 });
 
 
-UserSchema.method('checkPassword', function (password: string): boolean {
+UserSchema.method('checkPassword', function (this: User, password: string): boolean {
     return bcrypt.compareSync(password, this.password);
 });
 
-UserSchema.method('toJSON', function () {
+UserSchema.method('toJSON', function (this: User) {
     const obj = this.toObject();
     delete obj.password;
     return obj;
