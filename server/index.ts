@@ -1,7 +1,7 @@
 import {open} from './dbConnection';
 import {Server} from './server';
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 open()
     .then(() => {

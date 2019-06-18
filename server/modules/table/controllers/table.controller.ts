@@ -1,6 +1,8 @@
+import * as mongoose from 'mongoose';
 import {Request, Response} from 'express';
 import {TableModel, Table} from '../models/table.model';
 import {TableRowModel, TableRow} from '../models/tableRow.model';
+import {TableCellModel, TableCellProperties} from '../models/tableCell.model';
 
 
 const populateRowsDescription = {
@@ -26,6 +28,11 @@ const populateCellDescription = {
 };
 
 class TableController {
+
+    findTableByName(tableName: string) {
+        return TableModel.findOne({name: tableName}).exec();
+    }
+
     getTable(req: Request, res: Response) {
         const {tableName} = req.params;
         TableModel.findOne({name: tableName})
@@ -72,33 +79,61 @@ class TableController {
             });
     }
 
-    updateRow(req: Request, res: Response) {
+    updateRow = async (req: Request, res: Response) => {
+        const {tableName, rowId} = req.params;
+        const table = await this.findTableByName(tableName);
+        if (!table) {
+            return res.status(404).json({error: `Table "${tableName}" does not exist`});
+        }
+
         res.json({res: 'updateRow'});
-    }
+    };
 
-    deleteRow(req: Request, res: Response) {
+    deleteRow = async (req: Request, res: Response) => {
         const {rowId, tableName} = req.params;
-        TableModel.findOne({name: tableName})
-            .exec()
-            .then((table: Table) => {
-                return TableModel.findByIdAndUpdate(
-                    table._id,
-                    {rows: table.rows.filter((row: TableRow) => row._id !== rowId)}
-                ).exec();
-            })
-            .then(() => {
-                return TableRowModel.findOneAndRemove(rowId)
-                    .populate(populateCellDescription)
-                    .exec()
-                    .then(deletedRow => res.json(deletedRow));
-            })
-            .catch(e => {
-                res.status(500).json({error: 'Server error'});
-            });
-    }
+        const table = await this.findTableByName(tableName);
+        if (!table) {
+            return res.status(404).json({error: `Table "${tableName}" does not exist`});
+        }
 
-    createRow(req: Request, res: Response) {
-        res.json({res: 'createRow'});
+        await TableModel.findByIdAndUpdate(table._id, {
+            rows: table.rows.filter((row: TableRow) => row._id !== rowId)
+        });
+
+        const deletedRow = await TableRowModel.findOneAndRemove(rowId)
+            .populate(populateCellDescription)
+            .exec();
+        res.json(deletedRow);
+    };
+
+    createRow = async (req: Request, res: Response) => {
+        const {tableName} = req.params;
+        const table = await this.findTableByName(tableName);
+        if (!table) {
+            return res.status(404).json({error: `Table "${tableName}" does not exist`});
+        }
+
+        if (!req.body.cells) {
+            return res.status(400).json({error: 'Request bode should content "cells" property'});
+        }
+
+        const cells = req.body.cells.map((cell: any) => {
+            return {
+                ...cell,
+                type: mongoose.Types.ObjectId(cell.type),
+            }
+        });
+
+        const savedCells = await TableCellModel.create(cells);
+
+        const tableRow = new TableRowModel({cells: savedCells});
+        const savedTableRow = await tableRow.save();
+
+        await TableModel.findByIdAndUpdate(table._id, {
+            rows: table.rows.concat(savedTableRow._id)
+        });
+
+        res.json(savedTableRow);
     }
 }
 
