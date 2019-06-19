@@ -23,5 +23,11 @@ yarn-debug.log*
 yarn-error.log*
 .idea/
 
-/**/*.js
-/**/*.js.map
+/server/**/*.js
+/server/**/*.js.map
+
+/migrations/**/*.js
+/migrations/**/*.js.map
+
+/config/**/*.js
+/config/**/*.js.map
