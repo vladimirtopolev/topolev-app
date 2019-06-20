@@ -1,21 +1,25 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-    entry: "./client/index.js",
+    entry: {
+        index: './client/index.tsx'
+    },
     output: {
         path: path.join(__dirname, "/dist"),
-        filename: "index_bundle.js"
+        filename: "[name].bundle.js",
+        chunkFilename: "[name].bundle.js"
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js']
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                },
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
             },
             {
                 test: /\.css$/,
@@ -25,7 +29,35 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
+            template: "./client/index.html"
         })
-    ]
+    ],
+
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+           /* minChunks: 2*/
+        },
+        /*
+        minimizer: [
+            new UglifyJsPlugin({
+                uglifyOptions: {
+                    compress: {
+                        unused: true,
+                        dead_code: true,
+                        warnings: false
+                    }
+                },
+                sourceMap: true
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]*/
+    },
+    /*
+    performance: {
+        hints: false
+    },*/
+    devServer: {
+        historyApiFallback: true
+    }
 };
