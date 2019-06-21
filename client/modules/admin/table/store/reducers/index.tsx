@@ -1,8 +1,10 @@
 import {adminTable} from './adminTable';
 import {combineReducers} from 'redux';
 
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
     adminTable
 });
+
+export default rootReducer;
 
 export type TableModuleState = ReturnType<typeof rootReducer>;

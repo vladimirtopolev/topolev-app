@@ -8,7 +8,7 @@ import {
 } from '../actions/types'
 import {act} from 'react-dom/test-utils';
 
-export const adminTable: Reducer<any, AdminTableActions> = (state, action) => {
+export const adminTable: Reducer<any, AdminTableActions> = (state = {}, action) => {
     switch (action.type) {
         case REQUEST_ADMIN_TABLE_SUCCESS: {
             return requestAdminTableSuccess(state, action as RequestAdminTableSuccessAction)

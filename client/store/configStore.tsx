@@ -6,7 +6,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 export interface StoreWithAsyncReducers extends Store {
     asyncReducers?: { [k: string]: any },
-    injectReducer?: (key: string, reducer: any) => void
 }
 
 const store: StoreWithAsyncReducers = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
@@ -24,7 +23,7 @@ export const injectReducer = (key: string, reducer: any) => {
     if (Object.hasOwnProperty.call(store.asyncReducers, key)) return;
 
     store.asyncReducers[key] = reducer;
-    replaceReducer(store.asyncReducers);
+    store.replaceReducer(replaceReducer(store.asyncReducers));
 };
 
 export default () => store;

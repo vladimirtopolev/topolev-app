@@ -1,5 +1,5 @@
 import {createStore, IModuleStore, IModule} from "redux-dynamic-modules";
-import {TableModuleState, rootReducer} from './reducers';
+import rootReducer, {TableModuleState} from './reducers';
 
 export function getUserModule(): IModule<TableModuleState> {
     return {

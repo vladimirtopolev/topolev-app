@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-export default () => {
+const TableComponent = () => {
     return (
         <div>TableModule</div>
-    )
+    );
 };
+
+export default TableComponent;
