@@ -1,0 +1,32 @@
+{
+  "cells": [
+    {
+      "_id": "5d0c936158b0107168d18bb7",
+      "type": {
+        "_id": "5d0c936158b0107168d18bb1",
+        "type": "INPUT",
+        "internalName": "title",
+        "name": "Заголовок",
+        "order": 1,
+        "__v": 0
+      },
+      "value": "Стенд XXXX",
+      "__v": 0
+    },
+    {
+      "_id": "5d0c936158b0107168d18bb8",
+      "type": {
+        "_id": "5d0c936158b0107168d18bb2",
+        "type": "IMAGE",
+        "internalName": "image",
+        "name": "Фото стенда",
+        "order": 2,
+        "__v": 0
+      },
+      "value": "https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg",
+      "__v": 0
+    }
+  ],
+  "_id": "5d0c936158b0107168d18bb6",
+  "__v": 0
+}

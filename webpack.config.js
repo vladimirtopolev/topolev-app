@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const apiMocker = require('connect-api-mocker');
 
 module.exports = {
     entry: {
@@ -10,7 +11,8 @@ module.exports = {
     output: {
         path: path.join(__dirname, "/dist"),
         filename: "[name].bundle.js",
-        chunkFilename: "[name].bundle.js"
+        chunkFilename: "[name].bundle.js",
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
@@ -36,9 +38,8 @@ module.exports = {
     optimization: {
         splitChunks: {
             chunks: 'all',
-           /* minChunks: 2*/
+            minChunks: 2
         },
-        /*
         minimizer: [
             new UglifyJsPlugin({
                 uglifyOptions: {
@@ -51,13 +52,15 @@ module.exports = {
                 sourceMap: true
             }),
             new OptimizeCSSAssetsPlugin({})
-        ]*/
+        ]
     },
-    /*
     performance: {
         hints: false
-    },*/
+    },
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        setup: function(app) {
+            app.use('/api', apiMocker('mocks/api'));
+        }
     }
 };

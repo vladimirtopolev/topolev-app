@@ -3,7 +3,6 @@ import Table from './table.component';
 import * as React from 'react';
 import {match} from 'react-router-dom';
 import {Dispatch} from 'redux';
-import {fetchAdminTable} from '../store/actions/actions';
 
 interface RouteParams {
     tableName: string,

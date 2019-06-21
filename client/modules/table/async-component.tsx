@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {lazy, Suspense} from 'react';
-import {injectReducer} from '../../../store/configStore';
+import {injectReducer} from '../../store/configStore';
 
 
 const Table = lazy(() => import( './components/table-container.component'));
