@@ -12,19 +12,19 @@ export interface Header {
 
 export interface Cell {
     _id: string,
-    type: Header | string,
+    type: Header,
     value: any
 }
 
 export interface Row {
     _id: string,
-    cells: string[] | Cell[]
+    cells: Cell[]
 }
 
 export interface Table {
     _id: string,
     name: string,
     title: string,
-    headers: string[] | Header[],
-    rows: string[] | Row[]
+    headers: Header[],
+    rows: Row[]
 }

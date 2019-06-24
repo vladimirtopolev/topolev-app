@@ -1,9 +1,9 @@
 import * as api from '../../service/api';
-import {asyncActionCreator, AsyncAction} from '../../../../utilities/asyncActions';
+import {asyncActionCreator} from '../../../../utilities/asyncActions';
 import {
     table,
-    headers,
-    rows,
+    tableHeaders,
+    tableRows,
     NormalizedTableHeadersResponse,
     NormalizedTableResponse,
     NormalizedTableRowsResponse
@@ -33,7 +33,8 @@ export function getTableHeaders(tableName: string) {
         GET_TABLE_HEADERS_ACTION,
         api.getTableHeaders(tableName)
             .then(response => {
-                return normalize(response.data, headers);
+                console.log('NORM', response, normalize(response.data, tableHeaders));
+                return normalize(response.data, tableHeaders);
             }),
         {tableName, moduleName: MODULE_NAME}
     );
@@ -44,7 +45,7 @@ export function getTableRows(tableName: string) {
         GET_TABLE_ROWS_ACTION,
         api.getTableRows(tableName)
             .then(response => {
-                return normalize(response.data, rows);
+                return normalize(response.data, tableRows);
             }),
         {tableName, moduleName: MODULE_NAME}
     );

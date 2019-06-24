@@ -1,4 +1,5 @@
 import {Reducer} from 'redux';
+import * as _ from 'lodash';
 import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION} from '../actions/types';
 import {Params} from '../actions/actions';
 
@@ -9,7 +10,7 @@ type GetTableActionSuccess = SucceededAsyncAction<typeof GET_TABLE_ACTION, Norma
 type GetTableHeadersActionSuccess = SucceededAsyncAction<typeof GET_TABLE_HEADERS_ACTION, NormalizedTableHeadersResponse, Params>
 type GetTableRowsActionSuccess = SucceededAsyncAction<typeof GET_TABLE_ROWS_ACTION, NormalizedTableRowsResponse, Params>
 
-export const tables: Reducer<any, AsyncAction<any, any>> = (state = {}, action) => {
+const tables: Reducer<any, AsyncAction<any, any>> = (state = {}, action) => {
     if (action.type === GET_TABLE_ACTION) {
         switch (action.status) {
             case AsyncActionStatus.SUCCEEDED:
@@ -37,6 +38,8 @@ export const tables: Reducer<any, AsyncAction<any, any>> = (state = {}, action) 
     return state;
 };
 
+export default tables;
+
 const requestTableSuccess = (state: any, action: GetTableActionSuccess) => {
     const {entities} = action.payload;
     return {
@@ -49,22 +52,52 @@ const requestTableSuccess = (state: any, action: GetTableActionSuccess) => {
 
 const requestTableHeadersSuccess = (state: any, action: GetTableHeadersActionSuccess) => {
     const {entities} = action.payload;
+    const {tableName} = action.params;
     return {
         ...state,
-        [action.params.tableName]: {
-            ...state[action.params.tableName],
-            ...entities
+        [tableName]: {
+            ...state[tableName],
+            ...entities,
+            headerIds: entities.table[tableName].headers
         }
     };
 };
 
 const requestTableRowsSuccess = (state: any, action: GetTableRowsActionSuccess) => {
     const {entities} = action.payload;
+    const {tableName} = action.params;
     return {
         ...state,
-        [action.params.tableName]: {
-            ...state[action.params.tableName],
-            ...entities
+        [tableName]: {
+            ...state[tableName],
+            ...entities,
+            rowIds: entities.table[tableName].rows
         }
     };
+};
+
+
+//selectors
+export const getTable = (state: any, tableName: string) => state[tableName];
+
+export const getTableHeaders = (state: any, tableName: string) => {
+    const tableMeta = getTable(state, tableName);
+    return _.get(tableMeta, 'headerIds', [])
+        .map((headerKey: any) => tableMeta.headers[headerKey]);
+};
+
+export const getTableRows = (state: any, tableName: string) => {
+    const tableMeta = getTable(state, tableName);
+    return _.get(tableMeta, 'rowIds', [])
+        .map((rowKey: any) => tableMeta.rows[rowKey])
+        .map((row: any) => ({
+            ...row,
+            cells: row.cells.map((cellKey: any) => {
+                const cell = tableMeta.cells[cellKey];
+                return {
+                    ...cell,
+                    type: tableMeta.headers[cell.type]
+                }
+            })
+        }));
 };
