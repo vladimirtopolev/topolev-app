@@ -3,6 +3,8 @@ import {lazy, Suspense} from 'react';
 import {injectReducer} from '../../store/configStore';
 
 
+export const MODULE_NAME = 'tableModule';
+
 const Table = lazy(() => import( './components/table-container.component'));
 
 
@@ -13,7 +15,7 @@ const Components: {[k: string]: any} = {
 const AsyncComponent = (props: any) => {
     import('./store/reducers')
         .then(module => {
-            injectReducer('tableModule', module.default);
+            injectReducer(MODULE_NAME, module.default);
         });
     const { componentName } = props;
     const Component = Components[componentName];

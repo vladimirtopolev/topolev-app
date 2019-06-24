@@ -22,4 +22,16 @@ export interface TableEntities {
     headers: any[]
 }
 
-export interface NormalizedTableResponse extends NormalizedSchema<TableEntities, any[]>{};
+export interface HeadersEntities {
+    table: any,
+    headers: any[]
+}
+
+export interface RowsEntities {
+    table: any,
+    rows: any[]
+}
+
+export interface NormalizedTableResponse extends NormalizedSchema<TableEntities, any[]>{}
+export interface NormalizedTableHeadersResponse extends NormalizedSchema<HeadersEntities, any[]>{}
+export interface NormalizedTableRowsResponse extends NormalizedSchema<RowsEntities, any[]>{}

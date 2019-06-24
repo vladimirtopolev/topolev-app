@@ -5,54 +5,59 @@ export enum AsyncActionStatus {
     FAILED = 'FAILED',
 }
 
-interface StartedAsyncAction<T> {
+export interface StartedAsyncAction<T> {
     type: T;
     status: AsyncActionStatus.STARTED;
 }
 
-interface SucceededAsyncAction<T, P = any> {
-    type: T;
+export interface SucceededAsyncAction<TYPE, PAYLOAD = any, PARAMS = any> {
+    type: TYPE;
     status: AsyncActionStatus.SUCCEEDED;
-    payload: P;
+    payload: PAYLOAD;
+    params?: PARAMS
 }
 
-interface FailedAsyncAction<T> {
-    type: T;
+export interface FailedAsyncAction<TYPE, PARAMS = any> {
+    type: TYPE;
     status: AsyncActionStatus.FAILED;
     payload: Error;
+    params?: PARAMS
 }
 
-export type AsyncAction<T, P = any> = StartedAsyncAction<T> | SucceededAsyncAction<T, P> | FailedAsyncAction<T>;
+export type AsyncAction<TYPE, PAYLOAD = any, PARAMS = any> =
+    StartedAsyncAction<TYPE> | SucceededAsyncAction<TYPE, PAYLOAD, PARAMS> | FailedAsyncAction<TYPE, PARAMS>;
 
-function startedAsyncAction<T>(type: T): StartedAsyncAction<T> {
+function startedAsyncAction<TYPE>(type: TYPE): StartedAsyncAction<TYPE> {
     return {
         type,
         status: AsyncActionStatus.STARTED,
     };
 }
 
-function succeededAsyncAction<T, P>(type: T, payload: P): SucceededAsyncAction<T, P> {
+function succeededAsyncAction<TYPE, PAYLOAD, PARAMS>(type: TYPE, payload: PAYLOAD, params?: PARAMS): SucceededAsyncAction<TYPE, PAYLOAD, PARAMS> {
     return {
         type,
         status: AsyncActionStatus.SUCCEEDED,
         payload,
+        params
     };
 }
 
-function failedAsyncAction<T>(type: T, error: Error): FailedAsyncAction<T> {
+function failedAsyncAction<TYPE, PARAMS>(type: TYPE, error: Error, params?:PARAMS): FailedAsyncAction<TYPE, PARAMS> {
     return {
         type,
         status: AsyncActionStatus.FAILED,
         payload: error,
+        params
     };
 }
 
-export function async<T, P>(type: T, action: (...args: any[]) => Promise<P>, ...args: any[]) {
+export function asyncActionCreator<TYPE, PAYLOAD, PARAMS>(type: TYPE, action: Promise<PAYLOAD>, params?: PARAMS) {
     return async (dispatch: any) => {
         dispatch(startedAsyncAction(type));
         try {
-            const payload = await action(...args);
-            dispatch(succeededAsyncAction(type, payload));
+            const payload = await action;
+            dispatch(succeededAsyncAction(type, payload, params));
         } catch (error) {
             dispatch(failedAsyncAction(type, error));
         }
