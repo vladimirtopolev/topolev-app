@@ -35,12 +35,12 @@ const ROWS: TableRowProperties[] = [
         cells: [
             {
                 _id: new ObjectId(),
-                type: HEADERS[0]._id,
+                header: HEADERS[0]._id,
                 value: 'Стенд Ferolli'
             },
             {
                 _id: new ObjectId(),
-                type: HEADERS[1]._id,
+                header: HEADERS[1]._id,
                 value: 'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
             }
         ]
@@ -50,12 +50,12 @@ const ROWS: TableRowProperties[] = [
         cells: [
             {
                 _id: new ObjectId(),
-                type: HEADERS[0]._id,
+                header: HEADERS[0]._id,
                 value: 'Стенд XXXX'
             },
             {
                 _id: new ObjectId(),
-                type: HEADERS[1]._id,
+                header: HEADERS[1]._id,
                 value: 'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
             }
         ]

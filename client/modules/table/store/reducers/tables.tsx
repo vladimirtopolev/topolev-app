@@ -1,6 +1,11 @@
 import {Reducer} from 'redux';
 import * as _ from 'lodash';
-import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION} from '../actions/types';
+import {
+    GET_TABLE_ACTION,
+    GET_TABLE_HEADERS_ACTION,
+    GET_TABLE_ROW_ACTION,
+    GET_TABLE_ROWS_ACTION
+} from '../actions/types';
 import {Params} from '../actions/actions';
 
 import {AsyncAction, AsyncActionStatus, SucceededAsyncAction} from '../../../../utilities/asyncActions';
@@ -31,6 +36,15 @@ const tables: Reducer<any, AsyncAction<any, any>> = (state = {}, action) => {
         switch (action.status) {
             case AsyncActionStatus.SUCCEEDED:
                 return requestTableRowsSuccess(state, action as GetTableRowsActionSuccess);
+            default:
+                return state;
+        }
+    }
+
+    if (action.type === GET_TABLE_ROW_ACTION) {
+        switch (action.status) {
+            case AsyncActionStatus.SUCCEEDED:
+                return requestTableRowSuccess(state, action as GetTableRowsActionSuccess);
             default:
                 return state;
         }
@@ -76,16 +90,31 @@ const requestTableRowsSuccess = (state: any, action: GetTableRowsActionSuccess) 
     };
 };
 
+const requestTableRowSuccess = (state: any, action: GetTableRowsActionSuccess) => {
+    const {entities} = action.payload;
+    const {tableName} = action.params;
+    return {
+        ...state,
+        [tableName]: {
+            ...state[tableName],
+            ...entities,
+            rowIds: entities.table[tableName].rows.concat(action.params.rowId)
+        }
+    };
+};
+
 
 //selectors
 export const getTable = (state: any, tableName: string) => state[tableName];
 
-export const getTableMeta = (state:any, tableName: string) => {
+export const getTableMeta = (state: any, tableName: string) => {
     const tableMeta = getTable(state, tableName);
-    console.log('META', tableMeta)
     return tableMeta
-        ? tableMeta.table
-        : {}
+        ? tableMeta.table[tableName]
+        : {
+            name: tableName,
+            title: ''
+        }
 };
 
 export const getTableHeaders = (state: any, tableName: string) => {
@@ -104,8 +133,27 @@ export const getTableRows = (state: any, tableName: string) => {
                 const cell = tableMeta.cells[cellKey];
                 return {
                     ...cell,
-                    type: tableMeta.headers[cell.type]
+                    type: tableMeta.headers[cell.header]
                 }
             })
         }));
+};
+
+
+export const getTableRow = (state: any, tableName: string, rowId: string) => {
+    const tableMeta = getTable(state, tableName);
+
+    const row = _.get(tableMeta, `rows.${rowId}`);
+    return row
+        ? {
+            ...row,
+            cells: row.cells.map((cellKey: any) => {
+                const cell = tableMeta.cells[cellKey];
+                return {
+                    ...cell,
+                    type: tableMeta.headers[cell.header]
+                }
+            })
+        }
+        : undefined;
 };

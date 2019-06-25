@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {lazy} from 'react';
 import {injectReducer} from '../../store/configStore';
-
-
-export const MODULE_NAME = 'tableModule';
+import {MODULE_NAME} from './constants';
 
 const Table = lazy(() => import( './components/table/table-container.component'));
 const Row = lazy(() => import('./components/row/row-container.component'));

@@ -12,7 +12,7 @@ const populateRowsDescription = {
         path: 'cells',
         model: 'TableCell',
         populate: {
-            path: 'type',
+            path: 'header',
             model: 'TableHeader'
         }
     }
@@ -22,7 +22,7 @@ const populateCellDescription = {
     path: 'cells',
     model: 'TableCell',
     populate: {
-        path: 'type',
+        path: 'header',
         model: 'TableHeader'
     }
 };

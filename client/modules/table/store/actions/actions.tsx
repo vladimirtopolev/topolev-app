@@ -10,7 +10,8 @@ import {
 } from '../../schema/table';
 import {normalize} from 'normalizr';
 import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROW_ACTION, GET_TABLE_ROWS_ACTION} from './types';
-import {MODULE_NAME} from '../../async-component';
+
+export const MODULE_NAME = 'tableModule';
 
 export type Params = {
     moduleName: string,

@@ -1,14 +1,15 @@
 import * as React from 'react';
-import {Header, Row} from '../../schema/models';
+import {Header, Row, TableMeta} from '../../schema/models';
 import Cell from '../cells/cell.component';
 import {Link} from 'react-router-dom';
 
 interface TableProps {
     headers: Header[],
-    rows: Row[]
+    rows: Row[],
+    tableMeta: TableMeta
 }
 
-const TableComponent = ({headers, rows}: TableProps) => {
+const TableComponent = ({headers, rows, tableMeta}: TableProps) => {
     return (
         <table>
             <thead>
@@ -22,13 +23,13 @@ const TableComponent = ({headers, rows}: TableProps) => {
                 return (
                     <tr key={row._id}>
                         {headers.map(header => {
-                            const cell = row.cells.find(c => c.type._id === header._id);
+                            const cell = row.cells.find(c => c.header._id === header._id);
                             return (<td key={header._id}>
                                 <Cell cell={cell} />
                             </td>)
                         })}
                         <td>
-                            <Link to={`/tables/:tableName/rows/:rowId'`}>Edit</Link>
+                            <Link to={`/tables/${tableMeta.name}/rows/${row._id}`}>Edit</Link>
                         </td>
                     </tr>
                 );

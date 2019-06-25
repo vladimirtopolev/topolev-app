@@ -3,6 +3,11 @@ export enum HEADER_TYPES {
     IMAGE = 'IMAGE'
 }
 
+export interface TableMeta {
+    name: string,
+    title: string
+}
+
 export interface Header {
     _id: string,
     type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT,
@@ -12,7 +17,7 @@ export interface Header {
 
 export interface Cell {
     _id: string,
-    type: Header,
+    header: Header,
     value: any
 }
 
