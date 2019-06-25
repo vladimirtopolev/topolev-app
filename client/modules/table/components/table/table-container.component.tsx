@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
 import * as React from 'react';
 import {match, withRouter} from 'react-router-dom';
-import * as selectors from '../store/reducers';
-import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION} from '../store/actions/types';
+import * as selectors from '../../store/reducers/index';
+import { GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION} from '../../store/actions/types';
 import Table from './table.component';
-import {Header, Row} from '../schema/models';
-import {getTableHeaders, getTableRows} from '../store/actions/actions';
+import {Header, Row} from '../../schema/models';
+import {getTableHeaders, getTableRows} from '../../store/actions/actions';
 
 interface RouteParams {
     tableName: string,
@@ -27,6 +27,7 @@ class TableContainerComponent extends React.Component<TableContainerProps> {
     }
 
     render() {
+        console.log('TABLE PROPS', this.props);
         if (this.props.taskStatuses[GET_TABLE_HEADERS_ACTION] === 'SUCCEEDED') {
             return <Table headers={this.props.headers} rows={this.props.rows}/>
         }
@@ -39,6 +40,7 @@ const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
     return {
         headers: selectors.getTableHeaders(state, tableName),
         rows: selectors.getTableRows(state, tableName),
+        tableMeta:selectors.getTableMeta(state, tableName),
         taskStatuses: selectors.getAsyncTaskStatuses(state)
     };
 };

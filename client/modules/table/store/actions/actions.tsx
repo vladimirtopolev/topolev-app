@@ -9,12 +9,13 @@ import {
     NormalizedTableRowsResponse
 } from '../../schema/table';
 import {normalize} from 'normalizr';
-import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION} from './types';
+import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROW_ACTION, GET_TABLE_ROWS_ACTION} from './types';
 import {MODULE_NAME} from '../../async-component';
 
 export type Params = {
-    tableName: string
-    moduleName: string
+    moduleName: string,
+    tableName: string,
+    rowId?: string,
 }
 
 export function getTable(tableName: string) {
@@ -48,5 +49,16 @@ export function getTableRows(tableName: string) {
                 return normalize(response.data, tableRows);
             }),
         {tableName, moduleName: MODULE_NAME}
+    );
+}
+
+export function getTableRow(tableName: string, rowId: string) {
+    return asyncActionCreator<typeof GET_TABLE_ROW_ACTION, NormalizedTableRowsResponse, Params>(
+        GET_TABLE_ROW_ACTION,
+        api.getTableRow(tableName, rowId)
+            .then(response => {
+                return normalize(response.data, tableRows);
+            }),
+        {tableName, rowId, moduleName: MODULE_NAME}
     );
 }

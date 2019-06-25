@@ -80,6 +80,14 @@ const requestTableRowsSuccess = (state: any, action: GetTableRowsActionSuccess) 
 //selectors
 export const getTable = (state: any, tableName: string) => state[tableName];
 
+export const getTableMeta = (state:any, tableName: string) => {
+    const tableMeta = getTable(state, tableName);
+    console.log('META', tableMeta)
+    return tableMeta
+        ? tableMeta.table
+        : {}
+};
+
 export const getTableHeaders = (state: any, tableName: string) => {
     const tableMeta = getTable(state, tableName);
     return _.get(tableMeta, 'headerIds', [])

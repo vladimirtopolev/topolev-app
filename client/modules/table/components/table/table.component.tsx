@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Header, Row} from '../schema/models';
-import Cell from './cells/cell.component';
+import {Header, Row} from '../../schema/models';
+import Cell from '../cells/cell.component';
 import {Link} from 'react-router-dom';
 
 interface TableProps {
@@ -28,7 +28,7 @@ const TableComponent = ({headers, rows}: TableProps) => {
                             </td>)
                         })}
                         <td>
-                            Actions
+                            <Link to={`/tables/:tableName/rows/:rowId'`}>Edit</Link>
                         </td>
                     </tr>
                 );

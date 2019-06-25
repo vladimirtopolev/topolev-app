@@ -27,6 +27,7 @@ export type TableModuleState = ReturnType<typeof rootReducer>;
 
 // selectors
 export const getTable = (state: any, tableName: string) => fromTables.getTable(state[MODULE_NAME].tables, tableName);
+export const getTableMeta  =(state: any, tableName: string) => fromTables.getTableMeta(state[MODULE_NAME].tables, tableName);
 export const getTableHeaders = (state:any, tableName: string) => fromTables.getTableHeaders(state[MODULE_NAME].tables, tableName);
 export const getTableRows = (state:any, tableName: string) => fromTables.getTableRows(state[MODULE_NAME].tables, tableName);
 
