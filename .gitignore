@@ -32,7 +32,18 @@ yarn-error.log*
 /config/**/*.js
 /config/**/*.js.map
 
-/client/**/*.js
-/client/**/*.js.map
+/client/common/**/*.js
+/client/common/**/*.js.map
 
+/client/modules/**/*.js
+/client/modules/**/*.js.map
+
+/client/store/**/*.js
+/client/store/**/*.js.map
+
+/client/utilities/**/*.js
+/client/utilities/**/*.js.map
+
+/client/index.js
+/client/index.js.map
 

@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const apiMocker = require('connect-api-mocker');
 
 module.exports = {
@@ -32,7 +33,10 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./client/index.html"
-        })
+        }),
+        new CopyPlugin([
+            {from: './client/sources', to: path.join(__dirname, "/dist/sources")}
+        ])
     ],
 
     optimization: {
