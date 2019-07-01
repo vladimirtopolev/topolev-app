@@ -2,7 +2,6 @@ import * as React from 'react';
 import {ReactElement, useState, Fragment} from 'react';
 import {Locale} from '../modules/table/schema/models';
 import {Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
-// @ts-ignore
 import * as styles from './locale-tabs-renderer.component.styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +15,6 @@ export default ({locales, renderLocaleTab}: LocaleTabsRendereeProps) => {
         return renderLocaleTab(locales[0]);
     }
     const [activeLocaleTab, changeLocaleTab] = useState<string>(locales[0].key);
-    console.log('STYLES', styles);
 
     return (
         <Fragment>

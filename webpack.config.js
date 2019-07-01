@@ -29,10 +29,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                loader: 'ts-loader'
-            },
-            {
                 test: cssRegex,
                 exclude: cssModuleRegex,
                 use: [
@@ -45,11 +41,11 @@ module.exports = {
                     }
                 ]
             },
-
             {
                 test: cssModuleRegex,
                 use: [
                     MiniCssExtractPlugin.loader,
+                    'css-modules-typescript-loader',
                     {
                         loader: 'css-loader',
                         options: {
@@ -59,6 +55,10 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
             }
         ]
     },
