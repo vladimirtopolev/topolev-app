@@ -1,31 +1,39 @@
 import * as React from 'react';
 import * as selectors from '../../store/reducers/index';
 import {match, withRouter} from 'react-router';
-import {Header, Row, TableMeta} from '../../schema/models';
+import {Header, Locale, Row, TableMeta} from '../../schema/models';
 import {getTableHeaders, getTableRow} from '../../store/actions/actions';
 import {connect} from 'react-redux';
 import TableRow from './row.component';
+import {locales} from '../table/table-container.component';
+import {History} from 'history';
 
 interface RouteParams {
     tableName: string,
+    locale: string,
     rowId: string
 }
 
 interface TableRowContainerProps {
     match: match<{ [K in keyof RouteParams]?: string }>,
+    history: History,
     dispatch: any,
     headers: Header[],
     row: Row,
     tableMeta: TableMeta,
-    taskStatuses: any
+    taskStatuses: any,
+    locale: Locale,
+    goBack: () => void
 }
 
 const mapStateToProps = (state: any, ownProps: TableRowContainerProps) => {
-    const {tableName, rowId} = ownProps.match.params;
+    const {tableName, rowId, locale} = ownProps.match.params;
     return {
         headers: selectors.getTableHeaders(state, tableName),
         row: selectors.getTableRow(state, tableName, rowId),
-        taskStatuses: selectors.getAsyncTaskStatuses(state)
+        taskStatuses: selectors.getAsyncTaskStatuses(state),
+        locale: locales.find(l => l.key === locale),
+        goBack: () => ownProps.history.push(`/tables/${tableName}`)
     };
 };
 
@@ -39,9 +47,8 @@ class TableRowContainerComponent extends React.Component<TableRowContainerProps>
     }
 
     render() {
-        console.log('PROPS', this.props);
-        const {headers, row} = this.props;
-        return <TableRow headers={headers} row={row}/>
+        const {headers, row, locale, goBack} = this.props;
+        return <TableRow headers={headers} row={row} saveRow={() => {}} locale={locale} goBack={goBack}/>;
     }
 }
 

@@ -1,6 +1,12 @@
+export interface Locale {
+    name: string,
+    key: string
+}
+
 export enum HEADER_TYPES {
     INPUT = 'INPUT',
-    IMAGE = 'IMAGE'
+    IMAGE = 'IMAGE',
+    TEXTAREA = 'TEXTAREA'
 }
 
 export interface TableMeta {
@@ -10,7 +16,7 @@ export interface TableMeta {
 
 export interface Header {
     _id: string,
-    type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT,
+    type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT | HEADER_TYPES.TEXTAREA,
     internalName: string,
     name: string,
 }

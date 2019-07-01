@@ -4,12 +4,12 @@ import * as tinymce from 'tinymce';
 import {Editor} from '@tinymce/tinymce-react';
 
 // @ts-ignore
-tinymce.baseURL = (document.location.pathname + '/sources/tinymce').replace("\/\/", "\/");
+tinymce.baseURL = '/sources/tinymce';
 
 
 interface EditorProps {
     value?: string,
-    onChange?: (vlaue: string) => void
+    onChange?: (value: string) => void
 }
 
 interface EditorState {

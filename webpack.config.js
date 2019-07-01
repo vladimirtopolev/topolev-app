@@ -1,9 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const apiMocker = require('connect-api-mocker');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.component\.styles\.css$/;
+
+
+const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+
 
 module.exports = {
     entry: {
@@ -25,8 +33,32 @@ module.exports = {
                 loader: 'ts-loader'
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                test: cssRegex,
+                exclude: cssModuleRegex,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+
+            {
+                test: cssModuleRegex,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            modules: true,
+                            localIdentName: '[local]___[hash:base64:5]'
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -35,35 +67,17 @@ module.exports = {
             template: "./client/index.html"
         }),
         new CopyPlugin([
-            {from: './client/sources', to: path.join(__dirname, "/dist/sources")}
-        ])
+            { from: './client/sources', to: path.join(__dirname, "/dist/sources") }
+        ]),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+        })
     ],
 
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-            minChunks: 2
-        },
-        minimizer: [
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    compress: {
-                        unused: true,
-                        dead_code: true,
-                        warnings: false
-                    }
-                },
-                sourceMap: true
-            }),
-            new OptimizeCSSAssetsPlugin({})
-        ]
-    },
-    performance: {
-        hints: false
-    },
     devServer: {
         historyApiFallback: true,
-        setup: function(app) {
+        setup: function (app) {
             app.use('/api', apiMocker('mocks/api'));
         }
     }

@@ -3,22 +3,25 @@
     {
       "cells": [
         {
-          "_id": "5d0c936158b0107168d18bb4",
+          "_id": "row1-cell1",
           "header": {
-            "_id": "5d0c936158b0107168d18bb1",
+            "_id": "header1",
             "type": "INPUT",
             "internalName": "title",
             "name": "Заголовок",
             "order": 1,
             "__v": 0
           },
-          "value": "Стенд Ferolli",
+          "value": {
+            "en": "Stend Feroly",
+            "ru": "Стенж ФЕролли"
+          },
           "__v": 0
         },
         {
-          "_id": "5d0c936158b0107168d18bb5",
+          "_id": "row1-cell2",
           "header": {
-            "_id": "5d0c936158b0107168d18bb2",
+            "_id": "header2",
             "type": "IMAGE",
             "internalName": "image",
             "name": "Фото стенда",
@@ -27,9 +30,25 @@
           },
           "value": "https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg",
           "__v": 0
+        },
+        {
+          "_id": "row1-cell3",
+          "header": {
+            "_id": "header3",
+            "type": "TEXTAREA",
+            "internalName": "textarea",
+            "name": "Описание",
+            "order": 3,
+            "__v": 0
+          },
+          "value": {
+            "en": "English proniounce",
+            "ru": "Русская раскладка"
+          },
+          "__v": 0
         }
       ],
-      "_id": "5d0c936158b0107168d18bb3",
+      "_id": "row1",
       "__v": 0
     }
   ],

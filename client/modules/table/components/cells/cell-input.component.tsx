@@ -1,10 +1,15 @@
 import * as React from 'react';
 import {CellProps} from './cell.component';
+import {ChangeEvent, SyntheticEvent} from 'react';
 
-const Input = ({cell, isEditMode}: CellProps) => {
+const Input = ({cell, isEditMode, changeCell, locale}: CellProps) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        changeCell(cell._id, e.target.value, locale)
+    };
+    const value = cell && cell.value && cell.value[locale.key] || '';
     return isEditMode
-        ? <input type="text" value={cell.value}/>
-        : cell.value;
+        ? <input type="text" value={value} onChange={onChange}/>
+        : value;
 };
 
 export default Input;

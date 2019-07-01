@@ -1,22 +1,28 @@
 import * as React from 'react';
-import {Cell} from '../../schema/models';
+import {Cell, Locale} from '../../schema/models';
 
 import InputCell from './cell-input.component';
-import SingleImage from './cell-single-image.component';
+import SingleImageCell from './cell-single-image.component';
+import TextareaCell from './cell-textarea.component';
 
 export interface CellProps {
     cell: Cell,
     isEditMode?: boolean
+    changeCell?: (cellId: string, value: any, locale?: Locale) => void,
+    locale: Locale
 }
 
-const Cell = ({cell, isEditMode = false}: CellProps) => {
+const Cell = (props: CellProps) => {
+    const {cell} = props;
     switch (cell.header.type) {
         case 'INPUT':
-            return <InputCell cell={cell} isEditMode={isEditMode}/>;
+            return <InputCell {...props}/>;
         case 'IMAGE':
-            return <SingleImage cell={cell} isEditMode={isEditMode}/>;
+            return <SingleImageCell {...props}/>;
+        case 'TEXTAREA':
+            return <TextareaCell {...props}/>;
         default:
-            return cell.value;
+            throw Error(`Invalid header type ${cell.header.type}`);
     }
 };
 
