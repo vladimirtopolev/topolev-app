@@ -3,7 +3,7 @@ import {ReactElement, useState, Fragment} from 'react';
 import {Locale} from '../modules/table/schema/models';
 import {Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import * as styles from './locale-tabs-renderer.component.styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import cn from 'classnames';
 
 interface LocaleTabsRendereeProps {
     locales: Locale[],
@@ -17,25 +17,28 @@ export default ({locales, renderLocaleTab}: LocaleTabsRendereeProps) => {
     const [activeLocaleTab, changeLocaleTab] = useState<string>(locales[0].key);
 
     return (
-        <Fragment>
-            <Nav tabs>
+        <div className={styles.LocaleTabsRenderer}>
+            <Nav tabs className={styles.Nav}>
                 {locales.map(locale => (
-                    <NavItem key={locale.key}>
+                    <NavItem key={locale.key} className={styles.Nav__item}>
                         <NavLink
                             onClick={() => changeLocaleTab(locale.key)}
-                            className={styles.LocaleTabsRenderer__TabTitle}
-                        >{locale.name}</NavLink>
+                            className={cn(styles.Nav__link, {
+                                [styles.Nav__link_active]: activeLocaleTab === locale.key
+                            })}
+                        >{locale.title}</NavLink>
                     </NavItem>
                 ))}
-
             </Nav>
-            <TabContent activeTab={activeLocaleTab}>
+            <TabContent activeTab={activeLocaleTab} className={styles.Tabs}>
                 {locales.map(locale => (
-                    <TabPane tabId={locale.key} key={locale.key}>
+                    <TabPane tabId={locale.key} key={locale.key} className={cn(styles.Tabs__tab, {
+                        [styles.Tabs__tab_active]:  activeLocaleTab === locale.key
+                    })}>
                         {renderLocaleTab(locale)}
                     </TabPane>
                 ))}
             </TabContent>
-        </Fragment>
+        </div>
     );
 }

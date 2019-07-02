@@ -1,0 +1,116 @@
+.NavbarItem {
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  position: relative;
+}
+
+.NavbarItem__link {
+  display: block;
+  padding: 7px 20px;
+  color: #a8acb1;
+  text-decoration: none;
+  line-height: 14px;
+  position: relative;
+}
+
+.NavbarItem__link:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #00acac;
+}
+
+.NavbarItem__icon {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.NavbarItem__chevron {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.NavbarItem__chevron:after {
+  position: absolute;
+  top: 0;
+  right: 10px;
+
+  display: flex;
+  align-items: center;
+  height: 32px;
+  width: 10px;
+
+  content: "\f054";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 12px;
+  color: #fff;
+}
+
+.NavbarItem__chevron_open:after {
+  content: "\f078";
+}
+
+:global .NavbarItem__secondaryNav {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+:global .NavbarItem__secondaryNav_open {
+  display: block;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem__link {
+  padding: 7px 20px 7px 58px;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem__icon {
+  display: none;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem__link:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid #889097;
+  top: 10px;
+  left: 40px;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem__link:hover:before {
+  border-color: #242a31;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 15px;
+  height: 2px;
+  background: #242a31;
+  top: 13px;
+  left: 25px;
+  z-index: 100;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 2px;
+  background: #242a31;
+  top: -6px;
+  bottom: 0;
+  left: 25px;
+}
+
+:global .NavbarItem__secondaryNav :local .NavbarItem:last-child:after {
+  bottom: 13px;
+}
+

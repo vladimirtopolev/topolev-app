@@ -1,11 +1,8 @@
 import {combineReducers} from 'redux';
-
-const userReducer = (state:any = {}, action:any) => {
-    return state;
-};
+import auth from '../../common/modules/auth/store/reducers';
 
 export default combineReducers({
-    user: userReducer
+    auth
 });
 
 

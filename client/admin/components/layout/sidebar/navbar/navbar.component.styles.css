@@ -1,0 +1,19 @@
+.Navbar{
+
+}
+
+.Navbar__title{
+  padding: 7px 20px;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+.Navbar__content{
+
+}
+
+.Navbar__navbar{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

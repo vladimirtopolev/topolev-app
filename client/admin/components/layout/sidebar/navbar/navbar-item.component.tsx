@@ -2,6 +2,9 @@ import * as React from 'react';
 import {useState, MouseEvent} from 'react';
 import * as _ from 'lodash';
 import {Link} from 'react-router-dom';
+import cn from 'classnames';
+
+import * as styles from './navbar-item.component.styles.css';
 
 import {NavbarLink} from '../../../../../config/admin-navbar.config';
 
@@ -23,13 +26,20 @@ function NavbarItem({item}: NavbarItem) {
     };
 
     return (
-        <li>
-            <Link to={href} onClick={onClickEvent}>
-                <span/>
+        <li className={styles.NavbarItem}>
+            <Link className={styles.NavbarItem__link}
+                to={href}
+                  onClick={onClickEvent}>
+                <span className={cn(styles.NavbarItem__icon, iconClassName)}/>
                 {title}
+                {existsSubNav && <span className={cn(styles.NavbarItem__chevron, {
+                    [styles.NavbarItem__chevron_open]: isOpenSubNav
+                })}/>}
             </Link>
             {existsSubNav && (
-                <ul>
+                <ul className={cn('NavbarItem__secondaryNav', {
+                    ['NavbarItem__secondaryNav_open']: isOpenSubNav
+                })}>
                     {links.map((item, i) => <NavbarItem item={item} key={i}/>)}
                 </ul>
             )}

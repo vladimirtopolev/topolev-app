@@ -1,0 +1,75 @@
+.UserView{}
+
+.UserView__header{
+  display: flex;
+  padding: 10px;
+}
+.UserView__img img{
+  border-radius: 50%;
+  width: 53px;
+  height: 53px;
+  border: 3px solid #fff;
+  display: block;
+}
+.UserView__description{
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-grow: 1;
+}
+.UserView__greeting{
+  color: #BAB8B8;
+  font-size: 14px;
+}
+.UserView__name{
+  color: #ECF0F1;
+  font-size: 16px;
+}
+.UserView__chevron{
+  font-size: 12px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.UserView__chevron i:hover{
+  color: #00acac;
+}
+
+.UserView__navbar{
+  display: none;
+  border-top: 1px solid  #242a31;
+}
+.UserView__navbar_open{
+  display: block;
+}
+
+
+.Navbar{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Navbar__item{
+  display: block;
+}
+
+.Navbar__link{
+  padding: 7px 20px;
+  display: block;
+  color: #a8acb1;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.Navbar__link:hover{
+  color: #fff;
+  text-decoration: none;
+  background: #00acac;
+}
+
+.Navbar__icon{
+  margin-right: 10px;
+}
+

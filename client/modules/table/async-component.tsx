@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {lazy} from 'react';
+import {lazy, Suspense} from 'react';
 import {injectReducer} from '../../store/configStore';
 import {MODULE_NAME} from './constants';
 
+const TableRoutes = lazy(() => import('./routes'));
 const Table = lazy(() => import( './components/table/table-container.component'));
 const Row = lazy(() => import('./components/row/row-container.component'));
 
-const Components: {[k: string]: any} = {
+const Components: { [k: string]: any } = {
+    TableRoutes,
     Table,
     Row
 };
@@ -16,9 +18,13 @@ const AsyncComponent = (props: any) => {
         .then(module => {
             injectReducer(MODULE_NAME, module.default);
         });
-    const { componentName } = props;
+    const {componentName} = props;
     const Component = Components[componentName];
-    return <Component {...props} />;
+    return (
+        <Suspense fallback={'Loading'}>
+            <Component {...props} />
+        </Suspense>
+    );
 };
 
 export default AsyncComponent;

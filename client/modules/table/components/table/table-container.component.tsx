@@ -12,11 +12,13 @@ import {getTableHeaders, getTableRows} from '../../store/actions/actions';
 export const locales: Locale[] = [
     {
         key: 'ru',
-        name: 'RU'
+        name: 'RU',
+        title: 'Русский'
     },
     {
         key: 'en',
-        name: 'EN'
+        name: 'EN',
+        title: 'Английский'
     }
 ];
 
@@ -31,7 +33,8 @@ interface TableContainerProps {
     headers: Header[],
     rows: Row[],
     tableMeta: TableMeta,
-    taskStatuses: any
+    taskStatuses: any,
+    domainPath: string
 }
 
 class TableContainerComponent extends React.Component<TableContainerProps> {
@@ -42,12 +45,13 @@ class TableContainerComponent extends React.Component<TableContainerProps> {
     }
 
     render() {
-        const {tableMeta, headers, rows, locales} = this.props;
+        const {tableMeta, headers, rows, locales, domainPath} = this.props;
         if (this.props.taskStatuses[GET_TABLE_HEADERS_ACTION] === 'SUCCEEDED') {
             return <LocaleTabsRenderer
                 locales={locales}
                 renderLocaleTab={
-                    locale => <Table tableMeta={tableMeta}
+                    locale => <Table domainPath={domainPath}
+                                     tableMeta={tableMeta}
                                      headers={headers}
                                      rows={rows}
                                      locale={locale}/>}/>;
@@ -57,13 +61,15 @@ class TableContainerComponent extends React.Component<TableContainerProps> {
 }
 
 const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
+    console.log('own', ownProps);
     const {tableName} = ownProps.match.params;
     return {
         headers: selectors.getTableHeaders(state, tableName),
         locales: locales,
         rows: selectors.getTableRows(state, tableName),
         tableMeta: selectors.getTableMeta(state, tableName),
-        taskStatuses: selectors.getAsyncTaskStatuses(state)
+        taskStatuses: selectors.getAsyncTaskStatuses(state),
+        domainPath: ownProps.domainPath
     };
 };
 

@@ -35,4 +35,6 @@
 
 .AdminLayout__page {
     flex-grow: 1;
+    background: #efefef;
+    padding: 20px;
 }

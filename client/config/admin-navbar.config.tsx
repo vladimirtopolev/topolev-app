@@ -20,7 +20,7 @@ export const adminNavbarLinks: NavbarLink[] = [
             {
                 iconClassName: 'fa fa-table link__icon',
                 title: 'Тест',
-                href: `/tables/test`
+                href: `/admin/tables/test`
             }
         ]
     }

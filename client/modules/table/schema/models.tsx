@@ -1,6 +1,7 @@
 export interface Locale {
     name: string,
-    key: string
+    key: string,
+    title: string
 }
 
 export enum HEADER_TYPES {

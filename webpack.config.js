@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const apiMocker = require('connect-api-mocker');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -8,9 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.component\.styles\.css$/;
-
-
-const extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
 
 
 module.exports = {
@@ -59,6 +55,10 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader'
+            },
+            {
+                test: /\.(jpe?g|png|gif)$/i,
+                loader: 'file-loader?name=img/[name].[ext]'
             }
         ]
     },
