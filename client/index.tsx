@@ -9,6 +9,8 @@ import './styles.css';
 import {authRouter} from './common/modules/auth';
 import Client from './client/client-layout.component';
 
+import {navigationRouterCreator} from './modules/navigation'
+
 const AdminPanel = lazy(()=> import('./admin.component'));
 
 const store = configStore();
@@ -19,7 +21,9 @@ ReactDOM.render((
             <Suspense fallback={'Loading...'}>
             <Switch>
                 {authRouter}
+                {navigationRouterCreator('/admin/navigation')}
                 <Route path="/admin" component={AdminPanel}/>
+
                 <Route path="/" component={Client}/>
             </Switch>
             </Suspense>

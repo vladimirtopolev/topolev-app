@@ -52,6 +52,9 @@ yarn-error.log*
 /client/config/**/*.js
 /client/config/**/*.js.map
 
+/client/client/**/*.js
+/client/client/**/*.js.map
+
 /client/index.js
 /client/index.js.map
 

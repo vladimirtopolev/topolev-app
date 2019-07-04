@@ -74,11 +74,11 @@ module.exports = {
             chunkFilename: '[id].css',
         })
     ],
-
     devServer: {
         historyApiFallback: true,
         setup: function (app) {
             app.use('/api', apiMocker('mocks/api'));
         }
-    }
+    },
+    devtool: "source-map"
 };
