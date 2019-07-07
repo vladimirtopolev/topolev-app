@@ -26,7 +26,7 @@ const SignInComponent = ({signIn, taskStatuses, auth}: SignInComponentProps) => 
         <div className={styles.Signin}>
             <div className={styles.Signin__container}>
                 <div className={styles.Signin__logo}>
-                    <img src={require('../../../../sources/img/perfect-leo-logo.png')}/>
+                    <img src={require('../../../../../sources/img/perfect-leo-logo.png')}/>
                 </div>
                 <Form onSubmit={onSubmit}>
                     {(formApi: FormApi) => (

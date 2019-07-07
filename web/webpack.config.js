@@ -72,7 +72,7 @@ module.exports = {
             template: "./src/index.html"
         }),
         new CopyPlugin([
-            { from: './src/sources', to: path.join(__dirname, "/dist/sources") }
+            { from: './sources', to: path.join(__dirname, "/dist/sources") }
         ]),
         new MiniCssExtractPlugin({
             filename: '[name].css',

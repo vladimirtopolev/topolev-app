@@ -14,7 +14,7 @@ export default ({auth, logout}: UserViewProps) => {
         <div className={styles.UserView}>
             <div className={styles.UserView__header}>
                 <div className={styles.UserView__img}>
-                    <img src={require('../../../../../sources/img/no-user.png')}/>
+                    <img src={require('../../../../../../sources/img/no-user.png')}/>
                 </div>
                 <div className={styles.UserView__description}>
                     <div className={styles.UserView__greeting}>

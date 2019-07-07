@@ -14,7 +14,7 @@ export default ({
                     alt = 'image',
                     styles = {},
                     className,
-                    fallbackSrc = require('../../sources/img/noimagefound.jpg')
+                    fallbackSrc = require('../../../sources/img/noimagefound.jpg')
                 }: ImageProps) => {
 
     const [imageSource, changeImageSource] = useState<any>(src);
