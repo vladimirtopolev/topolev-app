@@ -18,7 +18,7 @@ export default (app: express.Application, dirname: string) => {
     console.log(webpackConfig.output.publicPath);
     app.use(webpackHotMiddleware(compiler));
 
-    app.get("*", (req, res, next) => {
+    app.get("/*", (req, res, next) => {
         res.set('Content-Type', 'text/html');
         res.send(
             devMiddleware.fileSystem.readFileSync(webpackConfig.output.path + '/index.html')

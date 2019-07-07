@@ -33,10 +33,6 @@ export class Server {
         this.app.use(bodyParser.text());
         //include logger
         this.app.use(morgan('tiny'));
-
-        if (process.env.NODE_ENV === 'development') {
-            bootDev(this.app, __dirname);
-        }
     }
 
     private routes() {
@@ -46,10 +42,9 @@ export class Server {
         //use router middleware
         this.app.use(router);
 
-        // page router
-        /*this.app.get('/*', (req, res) => {
-            fs.createReadStream(path.resolve(__dirname, 'index.html')).pipe(res);
-        });*/
+        if (process.env.NODE_ENV === 'development') {
+            bootDev(this.app, __dirname);
+        }
     }
 
 }

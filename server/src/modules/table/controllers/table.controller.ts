@@ -51,7 +51,7 @@ class TableController {
             .populate('headers')
             .exec();
         if (table) {
-            return res.json(table.headers);
+            return res.json(table);
         }
         return res.status(404).json({error: `Table "${tableName}" does not exist`})
     };
@@ -62,7 +62,7 @@ class TableController {
             .populate(populateRowsDescription)
             .exec();
         if (table) {
-            return res.json(table.rows);
+            return res.json(table);
         }
         return res.status(404).json({error: `Table "${tableName}" does not exist`})
     };
