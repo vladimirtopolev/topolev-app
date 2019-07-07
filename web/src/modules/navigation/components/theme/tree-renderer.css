@@ -1,0 +1,53 @@
+.rst__lineHalfHorizontalRight::before,
+.rst__lineFullVertical::after,
+.rst__lineHalfVerticalTop::after,
+.rst__lineHalfVerticalBottom::after {
+  background: red;
+  z-index: 100;
+}
+
+.rst__lineHalfHorizontalRight::before{
+  background: none;
+  border-top: 1px dotted red;
+}
+
+.rst__lineHalfVerticalBottom::after{
+  background: none;
+  border-left: 1px dotted red;
+}
+
+.rst__lineHalfVerticalTop::after{
+  background: none;
+  border-left: 1px dotted red;
+}
+
+.rst__lineFullVertical::after,
+.rst__lineHalfVerticalTop::after,
+.rst__lineHalfVerticalBottom::after {
+  background: none;
+  border-left: 1px dotted red;
+}
+
+/*
+.rst__node:first-child .rst__lineBlock:after{
+  content:'';
+  height: 50%;
+  top: 0;
+  left: 50%;
+  border-left: 1px dashed red;
+  position:absolute;
+}
+
+*/
+.rst__node{
+  position:relative;
+}
+.rst__node:first-child:after{
+  content:'';
+  position:absolute;
+  top:0;
+  left: 15px;
+  height: 50%;
+  border-left: 1px dotted red;
+
+}

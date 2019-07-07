@@ -1,0 +1,87 @@
+.Signin {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #000000;
+  justify-content: center;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url('../../../../sources/img/admin-signin-back.jpg');
+  background-size: cover;
+}
+
+.Signin__container {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+}
+
+.Signin__logo {
+  width: 100%;
+  text-align: center;
+}
+
+.Signin__logo img {
+  max-width: 300px;
+}
+
+.Signin__form {
+
+}
+
+.Form {
+  position: relative;
+}
+
+.Form__form {
+  padding-top: 55px;
+  margin-top: 15px;
+}
+
+.Form__group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.Form__error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 14px;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.Form__label {
+  color: #fff;
+}
+
+.Form__control {
+  line-height: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: none;
+}
+
+.Form__btn {
+  margin-top: 20px;
+  line-height: 16px;
+  padding: 10px 25px;
+  background: #00a0e3;
+  border: 1px solid #00a0e3;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 18px;
+}
+
+.Form__btn:hover , .Form__btn:active, .Form__btn:focus{
+  background: none;
+  color: #00a0e3;
+  outline: none;
+}

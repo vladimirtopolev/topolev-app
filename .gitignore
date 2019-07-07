@@ -24,37 +24,15 @@ yarn-debug.log*
 yarn-error.log*
 .idea/
 
-/server/**/*.js
-/server/**/*.js.map
 
-/migrations/**/*.js
-/migrations/**/*.js.map
+/web/src/**/*.js
+/web/src/**/*.js.map
 
-/config/**/*.js
-/config/**/*.js.map
+/server/src/**/*.js
+/server/src/**/*.js.map
 
-/client/common/**/*.js
-/client/common/**/*.js.map
+/server/config/**/*.js
+/server/config/**/*.js.map
 
-/client/modules/**/*.js
-/client/modules/**/*.js.map
-
-/client/store/**/*.js
-/client/store/**/*.js.map
-
-/client/utilities/**/*.js
-/client/utilities/**/*.js.map
-
-/client/admin/**/*.js
-/client/admin/**/*.js.map
-
-
-/client/config/**/*.js
-/client/config/**/*.js.map
-
-/client/client/**/*.js
-/client/client/**/*.js.map
-
-/client/index.js
-/client/index.js.map
-
+/server/migrations/**/*.js
+/server/migrations/**/*.js.map
