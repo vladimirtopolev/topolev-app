@@ -10,6 +10,6 @@ export interface SignInResponse {
 }
 
 export function signIn(user: UserAuthenticationFields): Promise<SignInResponse> {
-    return clientApi.post(`/api/signin`, user);
+    return clientApi.post(`/api/users/signin`, user);
 }
 

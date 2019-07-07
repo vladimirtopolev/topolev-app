@@ -26,7 +26,7 @@ yarn-error.log*
 
 
 /web/src/**/*.js
-/web/src/**/*.js.map
+/web/src/**/*.map.js
 
 /server/src/**/*.js
 /server/src/**/*.js.map

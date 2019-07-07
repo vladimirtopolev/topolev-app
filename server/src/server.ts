@@ -4,6 +4,9 @@ import * as bodyParser from 'body-parser';
 import formData from 'express-form-data';
 import * as morgan from 'morgan';
 import rootRouter from './routes/index';
+import bootDev from './boot/expressBootDevelopment';;
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class Server {
     app: express.Application;
@@ -29,7 +32,11 @@ export class Server {
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(bodyParser.text());
         //include logger
-        this.app.use(morgan('tiny'))
+        this.app.use(morgan('tiny'));
+
+        if (process.env.NODE_ENV === 'development') {
+            bootDev(this.app, __dirname);
+        }
     }
 
     private routes() {
@@ -38,6 +45,11 @@ export class Server {
         rootRouter(this.app);
         //use router middleware
         this.app.use(router);
+
+        // page router
+        /*this.app.get('/*', (req, res) => {
+            fs.createReadStream(path.resolve(__dirname, 'index.html')).pipe(res);
+        });*/
     }
 
 }

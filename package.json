@@ -61,6 +61,9 @@
     "@types/redux-logger": "^3.0.7",
     "@types/redux-thunk": "^2.1.0",
     "@types/tinymce": "^4.5.22",
+    "@types/webpack": "^4.4.34",
+    "@types/webpack-dev-middleware": "^2.0.3",
+    "@types/webpack-hot-middleware": "^2.16.5",
     "babel-loader": "^8.0.6",
     "connect-api-mocker": "^1.5.0",
     "copy-webpack-plugin": "^5.0.3",
@@ -80,13 +83,15 @@
     "ts-node": "^8.2.0",
     "typescript": "^3.5.2",
     "uglifyjs-webpack-plugin": "^2.1.3",
-    "webpack": "^4.34.0",
+    "webpack": "^4.35.2",
     "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "scripts": {
     "client_dev": "webpack-dev-server --config ./web/webpack.config.js --mode development --open --hot",
-    "server_dev": "cd ./server && nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
+    "server_dev": "cd ./server && NODE_ENV=development nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
     "migrate_dev": "cd ./server && tsc && ../node_modules/.bin/migrate-mongo up"
   },
   "eslintConfig": {
