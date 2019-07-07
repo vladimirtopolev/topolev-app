@@ -36,7 +36,10 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
-                value: 'Стенд Ferolli'
+                value: {
+                    ru: 'Стенд Ferolli',
+                    en: 'Stand Ferolly'
+                }
             },
             {
                 _id: new ObjectId(),
@@ -51,7 +54,10 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
-                value: 'Стенд XXXX'
+                value: {
+                    ru: 'Стенд XXXX',
+                    en: 'Stend XXXX'
+                }
             },
             {
                 _id: new ObjectId(),
