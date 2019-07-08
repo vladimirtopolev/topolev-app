@@ -47,7 +47,7 @@ export function getTableRows(tableName: string) {
         GET_TABLE_ROWS_ACTION,
         api.getTableRows(tableName)
             .then(response => {
-                return normalize(response.data, tableRows);
+                return normalize(response.data, table);
             }),
         {tableName, moduleName: MODULE_NAME}
     );
@@ -58,7 +58,8 @@ export function getTableRow(tableName: string, rowId: string) {
         GET_TABLE_ROW_ACTION,
         api.getTableRow(tableName, rowId)
             .then(response => {
-                return normalize(response.data, tableRows);
+                console.log(response.data);
+                return normalize(response.data, table);
             }),
         {tableName, rowId, moduleName: MODULE_NAME}
     );

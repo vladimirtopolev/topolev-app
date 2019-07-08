@@ -3,6 +3,12 @@ export interface DBConfig {
     dbName: string
 }
 
+export interface CloudinaryConfig {
+    cloudName: string,
+    apiKey: string,
+    apiSecret: string
+}
+
 
 export interface ConfigSchema {
 

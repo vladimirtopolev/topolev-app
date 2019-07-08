@@ -4,23 +4,12 @@ import {CellProps} from './cell.component';
 import Image from '../../../../common/elements/image.component';
 import * as styles from './cell-single-image.component.styles.css';
 import ModalImageEditor from './image-modal.component';
-import * as api from '../../../../service/api';
 
 const SingleImage = ({cell, locale, isEditMode, changeCell}: CellProps) => {
     const [isOpen, toggle] = useState(false);
 
-    const onSaveImage = (targetFiles:Blob[]) => {
-        const files = Array.from(targetFiles);
-        const formData = new FormData();
-
-        files.forEach((file, i) => {
-            formData.append(Number(i).toString(), file)
-        });
-
-        api.uploadImage(formData)
-            .then(res => {
-                changeCell(cell._id, res.data[0].url)
-            });
+    const saveImage = (imageUrl:string) => {
+        changeCell(cell._id, imageUrl)
     };
 
     return isEditMode
@@ -31,7 +20,7 @@ const SingleImage = ({cell, locale, isEditMode, changeCell}: CellProps) => {
             </div>
             <ModalImageEditor isOpen={isOpen}
                               toggleModal={() => toggle(!isOpen)}
-                              saveImage={(t: any) => {console.log('SAVE', t)}}
+                              saveImage={saveImage}
                 />
         </div>)
         : <Image src={cell.value}/>;

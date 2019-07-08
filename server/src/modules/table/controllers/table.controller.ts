@@ -70,12 +70,12 @@ class TableController {
     getRow = async (req: Request, res: Response) => {
         const {tableName, rowId} = req.params;
 
-        const table = await TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}}, {'rows.$': 1})
+        const table = await TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}})
             .populate(populateRowsDescription)
             .exec();
 
         if (table) {
-            return res.json(table.rows[0]);
+            return res.json(table);
         }
         return res.status(404).json({error: `Table "${tableName}" does not exist`});
     };

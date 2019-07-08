@@ -1,0 +1,38 @@
+.ImageModal{
+
+}
+
+.ImageModal__title{
+    padding: 10px 15px;
+    background: #00acac;
+    color: #fff;
+}
+.ImageModal__content{
+    padding: 15px 15px;
+}
+
+.ImageModal__dropAreaWrapper{
+    margin-top: 10px;
+    width: 100%;
+    overflow: hidden;
+    height: 0;
+    padding-top: 50%;
+    border: 4px dashed #efefef;
+    position: relative;
+}
+
+.ImageModal__dropArea{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ImageModal__buttons{
+    text-align: right;
+    margin-top: 10px;
+}

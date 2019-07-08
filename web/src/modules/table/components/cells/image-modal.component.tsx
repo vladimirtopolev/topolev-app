@@ -4,12 +4,16 @@ import {Modal} from 'reactstrap';
 import 'react-image-crop/dist/ReactCrop.css';
 import * as ReactCropModule from 'react-image-crop';
 import {Crop} from 'react-image-crop';
+import * as api from '../../../../service/api';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import * as styles from './image-modal.component.styles.css';
+import '../../../../styles.css';
 
 interface ImageModalProps {
     isOpen: boolean,
     imageAspect?: any,
     toggleModal: () => void,
-    saveImage: (image: Blob[]) => void
+    saveImage: (image: string) => void
 }
 
 export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalProps) => {
@@ -21,6 +25,7 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
     });
     const [src, changeSrc] = useState<any>(null);
     const [imageRef, changeImageRef] = useState<HTMLImageElement>(null);
+    const [isUploadingImage, changeUploadingImageStatus] = useState<boolean>(false);
 
     useEffect(() =>
         changeCrop({...crop, aspect: imageAspect}), [imageAspect]);
@@ -37,7 +42,7 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
     };
 
     const changePreviewBtn = (title: string) => (
-        <div>
+        <div className="inputFileBtn">
             <input type="file" onChange={changePreview}/>
             {title}
         </div>
@@ -51,7 +56,23 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
         changeCrop({...crop, ...newCrop});
     };
 
+    const saveImageInCloudinary = (imageFile: any) => {
+        const formData = new FormData();
+        formData.append('0', imageFile);
+
+        api.uploadImage(formData)
+            .then(res => {
+                saveImage(res.data[0].url);
+                changeUploadingImageStatus(true);
+                toggleModal();
+            })
+            .catch(e => {
+                changeUploadingImageStatus(true);
+            });
+    };
+
     const onSaveImage = () => {
+        changeUploadingImageStatus(true);
         const canvas = document.createElement('canvas');
         canvas.width = crop.width;
         canvas.height = crop.height;
@@ -72,23 +93,25 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
         canvas.toBlob((blob: any) => {
             blob.name = 'crop.img';
             blob.lastModifiedDate = new Date();
-            saveImage([blob]);
+            saveImageInCloudinary(blob);
         }, 'image/jpeg');
-
-        toggleModal();
     };
 
     const ReactCrop = (ReactCropModule as any).default;
     return (
-        <Modal isOpen={isOpen} toggle={toggleModal} onClosed={() => {
-        }}>
-            <div className="ImageModal__title">
+        <Modal isOpen={isOpen}
+               size="lg"
+               toggle={toggleModal}
+               onClosed={() => {}}
+               className={styles.ImageModal}
+        >
+            <div className={styles.ImageModal__title}>
                 Редактирование изображения
             </div>
-            <div className="ImageModal__content">
+            <div className={styles.ImageModal__content}>
                 {!src && (
-                    <div className="ImageModal__dropAreaWrapper">
-                        <div className="ImageModal__dropArea">
+                    <div className={styles.ImageModal__dropAreaWrapper}>
+                        <div className={styles.ImageModal__dropArea}>
                             {changePreviewBtn('Выбрать изображение')}
                         </div>
                     </div>
@@ -104,14 +127,14 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
                         className={'ImageModal__previewContainer'}
                     />
                 )}
-                <div className={'ImageModal__buttons'}>
+                <div className={styles.ImageModal__buttons}>
                     {src && (
                         <Fragment>
                             {changePreviewBtn('Изменить изображение')}
-                            <button className={'button'} onClick={onSaveImage}>Сохранить</button>
+                            <button className="button" onClick={onSaveImage}>Сохранить</button>
                         </Fragment>
                     )}
-                    <button onClick={toggleModal} className={'button'}>Отменить</button>
+                    <button onClick={toggleModal} className="button">Отменить</button>
                 </div>
             </div>
         </Modal>);

@@ -42,3 +42,7 @@ export function updateTableRow(tableName: string, idRow: string, row: any) {
 export function deleteTableRow(tableName: string, idRow: string) {
     return clientApi.delete(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/rows/${idRow}`);
 }
+
+export function uploadImage(body: any) {
+    return clientApi.post(`/api/cloudinary/image-upload`, body);
+}

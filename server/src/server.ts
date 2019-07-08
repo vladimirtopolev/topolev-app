@@ -1,12 +1,14 @@
 import * as express from "express";
 import * as bodyParser from 'body-parser';
 //@ts-ignore
-import formData from 'express-form-data';
+import * as formData from 'express-form-data';
 import * as morgan from 'morgan';
 import rootRouter from './routes/index';
-import bootDev from './boot/expressBootDevelopment';;
-import * as fs from 'fs';
-import * as path from 'path';
+import bootDev from './boot/expressBootDevelopment';
+
+export interface FormRequest extends Request{
+    files: any;
+}
 
 export class Server {
     app: express.Application;
@@ -31,6 +33,9 @@ export class Server {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(bodyParser.text());
+        this.app.use(bodyParser.json({type: 'application/json'}));
+        this.app.use(formData.parse());
+
         //include logger
         this.app.use(morgan('tiny'));
     }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_URL_PREFIX = '/api';
+const API_URL_PREFIX = '/api/cloudinary';
 
 const clientApi = axios.create({
     baseURL: window.location.origin

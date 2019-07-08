@@ -11,7 +11,8 @@
       "es2017",
       "dom"
     ],
-    "jsx": "react"
+    "jsx": "react",
+    "typeRoots": [ "./types", "../node_modules/@types"]
   },
   "include": [
     "config/**/*",
@@ -19,7 +20,8 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
+    "../node_modules",
+    "types",
     "**/*.spec.ts"
   ]
 }

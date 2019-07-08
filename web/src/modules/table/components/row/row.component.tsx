@@ -35,6 +35,7 @@ const Row = ({headers, row, locale, goBack}: RowProps) => {
     }, [headers, row]);
 
     const changeCell = (cellId: string, value: any, locale?: Locale) => {
+        console.log('CHANGE CELL VAL', value);
         changeRowInMemory({
             ...row,
             cells: rowInMemory.cells.map(cell => cell._id === cellId
