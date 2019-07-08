@@ -35,7 +35,6 @@ export function getTableHeaders(tableName: string) {
         GET_TABLE_HEADERS_ACTION,
         api.getTableHeaders(tableName)
             .then(response => {
-                console.log('NORM', response, normalize(response.data, tableHeaders));
                 return normalize(response.data, tableHeaders);
             }),
         {tableName, moduleName: MODULE_NAME}
@@ -58,7 +57,6 @@ export function getTableRow(tableName: string, rowId: string) {
         GET_TABLE_ROW_ACTION,
         api.getTableRow(tableName, rowId)
             .then(response => {
-                console.log(response.data);
                 return normalize(response.data, table);
             }),
         {tableName, rowId, moduleName: MODULE_NAME}

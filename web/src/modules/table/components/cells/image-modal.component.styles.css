@@ -36,3 +36,7 @@
     text-align: right;
     margin-top: 10px;
 }
+
+.ImageModal__previewContainer{
+    width: 100%;
+}

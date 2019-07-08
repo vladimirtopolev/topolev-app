@@ -23,6 +23,7 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
         x: 0,
         y: 0
     });
+    const [pixelCrop, changePixelCrop] = useState(null);
     const [src, changeSrc] = useState<any>(null);
     const [imageRef, changeImageRef] = useState<HTMLImageElement>(null);
     const [isUploadingImage, changeUploadingImageStatus] = useState<boolean>(false);
@@ -48,12 +49,27 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
         </div>
     );
 
+    const onToggleModal = () => {
+        if (isOpen === true) {
+            changeSrc(null);
+            changeImageRef(null);
+            changeUploadingImageStatus(false);
+        }
+        toggleModal();
+    };
+
     const onImageLoaded = (image: HTMLImageElement) => {
         changeImageRef(image);
     };
 
-    const onCropChange = (newCrop: Crop) => {
+    const onCropChange = (newCrop: Crop, pixelCrops?: any) => {
+        console.log('Crop', newCrop);
         changeCrop({...crop, ...newCrop});
+    };
+
+    const onCropComplete = (newCrop: Crop, pixelCrops?: any) => {
+        console.log(pixelCrops);
+        changePixelCrop(pixelCrops);
     };
 
     const saveImageInCloudinary = (imageFile: any) => {
@@ -64,7 +80,7 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
             .then(res => {
                 saveImage(res.data[0].url);
                 changeUploadingImageStatus(true);
-                toggleModal();
+                onToggleModal();
             })
             .catch(e => {
                 changeUploadingImageStatus(true);
@@ -74,20 +90,25 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
     const onSaveImage = () => {
         changeUploadingImageStatus(true);
         const canvas = document.createElement('canvas');
-        canvas.width = crop.width;
-        canvas.height = crop.height;
-        const ctx = canvas.getContext('2d');
 
+        const image = document.createElement('img');
+        image.src = src;
+
+        const {height, width} = image;
+        canvas.width = pixelCrop.width * width / 100;
+        canvas.height = pixelCrop.height * height / 100;
+
+        const ctx = canvas.getContext('2d');
         ctx.drawImage(
-            imageRef,
-            crop.x,
-            crop.y,
-            crop.width,
-            crop.height,
+            image,
+            pixelCrop.x * width / 100,
+            pixelCrop.y * height / 100,
+            pixelCrop.width * width / 100,
+            pixelCrop.height * height / 100,
             0,
             0,
-            crop.width,
-            crop.height
+            pixelCrop.width * width / 100,
+            pixelCrop.height * height / 100
         );
 
         canvas.toBlob((blob: any) => {
@@ -102,7 +123,8 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
         <Modal isOpen={isOpen}
                size="lg"
                toggle={toggleModal}
-               onClosed={() => {}}
+               onClosed={() => {
+               }}
                className={styles.ImageModal}
         >
             <div className={styles.ImageModal__title}>
@@ -122,9 +144,10 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
                         crop={crop}
                         onImageLoaded={onImageLoaded}
                         onChange={onCropChange}
+                        onComplete={onCropComplete}
                         keepSelection={true}
                         imageStyle={{width: '100%', maxHeight: 'none'}}
-                        className={'ImageModal__previewContainer'}
+                        className={styles.ImageModal__previewContainer}
                     />
                 )}
                 <div className={styles.ImageModal__buttons}>
@@ -134,7 +157,7 @@ export default ({imageAspect = 1, toggleModal, saveImage, isOpen}: ImageModalPro
                             <button className="button" onClick={onSaveImage}>Сохранить</button>
                         </Fragment>
                     )}
-                    <button onClick={toggleModal} className="button">Отменить</button>
+                    <button onClick={onToggleModal} className="button">Отменить</button>
                 </div>
             </div>
         </Modal>);
