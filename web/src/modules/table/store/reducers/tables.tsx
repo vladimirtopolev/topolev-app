@@ -6,7 +6,8 @@ import {
     GET_TABLE_ROW_ACTION,
     GET_TABLE_ROWS_ACTION,
     SAVE_TABLE_ROW_ACTIONS,
-    UPDATE_TABLE_ROW_ACTION
+    UPDATE_TABLE_ROW_ACTION,
+    DELETE_TABLE_ROW_ACTION
 } from '../actions/types';
 import {Params} from '../actions/actions';
 
@@ -20,7 +21,13 @@ type GetTableRowsActionSuccess = SucceededAsyncAction<typeof GET_TABLE_ROWS_ACTI
 type GetTableRowActionSuccess = SucceededAsyncAction<typeof GET_TABLE_ROW_ACTION, NormalizedTableRowsResponse, Params>;
 type SaveTableRowActionSuccess = SucceededAsyncAction<typeof SAVE_TABLE_ROW_ACTIONS, NormalizedTableRowsResponse, Params>;
 type UpdateTableRowActionSuccess = SucceededAsyncAction<typeof UPDATE_TABLE_ROW_ACTION, NormalizedTableRowsResponse, Params>;
-type TableRowActions = GetTableRowsActionSuccess | GetTableRowActionSuccess | SaveTableRowActionSuccess | UpdateTableRowActionSuccess;
+type TableRowActions =
+    GetTableRowsActionSuccess
+    | GetTableRowActionSuccess
+    | SaveTableRowActionSuccess
+    | UpdateTableRowActionSuccess;
+
+type DeleteTableActionSuccess = SucceededAsyncAction<typeof DELETE_TABLE_ROW_ACTION, any, Params>;
 
 const tables: Reducer<any, AsyncAction<any, any>> = (state = {}, action) => {
     if (action.type === GET_TABLE_ACTION) {
@@ -39,15 +46,22 @@ const tables: Reducer<any, AsyncAction<any, any>> = (state = {}, action) => {
                 return state;
         }
     }
-    if (
-        action.type === GET_TABLE_ROWS_ACTION ||
+    if (action.type === GET_TABLE_ROWS_ACTION ||
         action.type === GET_TABLE_ROW_ACTION ||
         action.type === SAVE_TABLE_ROW_ACTIONS ||
-        action.type === UPDATE_TABLE_ROW_ACTION
-    ) {
+        action.type === UPDATE_TABLE_ROW_ACTION) {
         switch (action.status) {
             case AsyncActionStatus.SUCCEEDED:
                 return requestTableRowsSuccess(state, action as TableRowActions);
+            default:
+                return state;
+        }
+    }
+
+    if (action.type === DELETE_TABLE_ROW_ACTION) {
+        switch (action.status) {
+            case AsyncActionStatus.SUCCEEDED:
+                return requestDeleteTableRowSuccess(state, action as DeleteTableActionSuccess);
             default:
                 return state;
         }
@@ -94,6 +108,17 @@ const requestTableRowsSuccess = (state: any, action: TableRowActions) => {
     };
 };
 
+const requestDeleteTableRowSuccess = (state: any, action: DeleteTableActionSuccess) => {
+    const {tableName, rowId} = action.params;
+    return {
+        ...state,
+        [tableName]: {
+            ...state[tableName],
+            rowIds: state[tableName].rowIds.filter((id: string) => id !== rowId)
+        }
+    };
+};
+
 //selectors
 export const getTable = (state: any, tableName: string) => state[tableName];
 
@@ -104,7 +129,7 @@ export const getTableMeta = (state: any, tableName: string) => {
         : {
             name: tableName,
             title: ''
-        }
+        };
 };
 
 export const getTableHeaders = (state: any, tableName: string) => {
@@ -124,7 +149,7 @@ export const getTableRows = (state: any, tableName: string) => {
                 return {
                     ...cell,
                     type: tableMeta.headers[cell.header]
-                }
+                };
             })
         }));
 };
@@ -142,7 +167,7 @@ export const getTableRow = (state: any, tableName: string, rowId: string) => {
                 return {
                     ...cell,
                     type: tableMeta.headers[cell.header]
-                }
+                };
             })
         }
         : undefined;

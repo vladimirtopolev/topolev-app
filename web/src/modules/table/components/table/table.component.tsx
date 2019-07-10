@@ -1,20 +1,26 @@
 import * as React from 'react';
+import {useState} from 'react';
 import cn from 'classnames';
 import {Header, Locale, Row, TableMeta} from '../../schema/models';
 import Cell from '../cells/cell.component';
 import {Link} from 'react-router-dom';
 import * as styles from './table.component.styles.css';
+import DeleteRowModal from './delete-row-modal.component';
 
 interface TableProps {
     headers: Header[],
     rows: Row[],
     tableMeta: TableMeta,
     locale: Locale,
-    domainPath: string
+    domainPath: string,
+    deleteRow: (rowId: string) => void
 }
 
 const TableComponent = (props: TableProps) => {
-    const {headers, rows, tableMeta, locale, domainPath} = props;
+    const {headers, rows, tableMeta, locale, domainPath, deleteRow} = props;
+    const [isOpen, toggleModal] = useState<boolean>(false);
+    const [deletedRowId, changeDeletedRowId] = useState<string>(null);
+
     return (
         <div className={styles.TableManager}>
             <div className={styles.TableManager__toolbar}>
@@ -41,13 +47,27 @@ const TableComponent = (props: TableProps) => {
                             })}
                             <td>
                                 <Link
+                                    className="iconButton"
                                     to={`${domainPath}/tables/${tableMeta.name}/rows/${locale.key}/${row._id}`}>Edit</Link>
+                                <button
+                                    className="iconButton"
+                                    onClick={() => {
+                                        changeDeletedRowId(row._id);
+                                        toggleModal(true);
+                                    }}>Delete
+                                </button>
                             </td>
                         </tr>
                     );
                 })}
                 </tbody>
             </table>
+            <DeleteRowModal isOpen={isOpen}
+                            toggleModal={() => toggleModal(!isOpen)}
+                            deleteRow={() => {
+                                deleteRow(deletedRowId);
+                                toggleModal(false);
+                            }}/>
         </div>
     );
 };

@@ -45,6 +45,24 @@ body, html, #root{
     outline: none;
 }
 
+/* MODAL */
+.Modal{}
+.Modal__title{
+    padding: 10px 15px;
+    background: #00acac;
+    color: #fff;
+}
+.Modal__title_warning{
+    background: red;
+}
+.Modal__content{
+    padding: 15px 15px;
+}
+.Modal__buttons{
+    text-align: right;
+    margin-top: 10px;
+}
+
 /* COMMON BUTTONS*/
 .button{
     display: inline-block;
@@ -64,5 +82,27 @@ body, html, #root{
 .button:focus,
 .button:active,
 .button:visited{
+    outline: none;
+}
+
+.button_warning{
+    background: red;
+    border: 2px solid red;
+}
+.button_warning:hover{
+    color: red;
+}
+
+
+.iconButton{
+    border: 2px solid #00acac;
+    background: #00acac;
+    color: #fff;
+    padding: 2px;
+    display:inline-block;
+}
+.iconButton:active,
+.iconButton:focus,
+.iconButton:focus{
     outline: none;
 }

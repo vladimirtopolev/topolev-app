@@ -3,7 +3,6 @@ import {asyncActionCreator} from '../../../../utilities/asyncActions';
 import {
     table,
     tableHeaders,
-    tableRows,
     NormalizedTableHeadersResponse,
     NormalizedTableResponse,
     NormalizedTableRowsResponse
@@ -15,7 +14,8 @@ import {
     GET_TABLE_ROW_ACTION,
     GET_TABLE_ROWS_ACTION,
     UPDATE_TABLE_ROW_ACTION,
-    SAVE_TABLE_ROW_ACTIONS
+    SAVE_TABLE_ROW_ACTIONS,
+    DELETE_TABLE_ROW_ACTION
 } from './types';
 import {Row} from '../../schema/models';
 
@@ -87,4 +87,12 @@ export function updateTableRow(tableName: string, rowId: string, row: Row) {
             .then(response => normalize(response.data, table)),
         {tableName, rowId, moduleName: MODULE_NAME}
     );
+}
+
+export function deleteTableRow(tableName: string, rowId: string) {
+    return asyncActionCreator<typeof DELETE_TABLE_ROW_ACTION, any, Params>(
+        DELETE_TABLE_ROW_ACTION,
+        api.deleteTableRow(tableName, rowId),
+        {tableName, rowId, moduleName: MODULE_NAME}
+    )
 }

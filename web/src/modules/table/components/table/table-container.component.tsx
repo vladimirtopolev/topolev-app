@@ -1,12 +1,13 @@
-import {connect} from 'react-redux';
 import * as React from 'react';
+import {connect} from 'react-redux';
+import {useEffect} from 'react';
 import {match, withRouter} from 'react-router-dom';
 import * as selectors from '../../store/reducers/index';
 import {GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION} from '../../store/actions/types';
 import Table from './table.component';
 import LocaleTabsRenderer from '../../../../common/elements/locale-tabs-renderer.component';
 import {Header, Locale, Row, TableMeta} from '../../schema/models';
-import {getTableHeaders, getTableRows} from '../../store/actions/actions';
+import {getTableHeaders, getTableRows, deleteTableRow} from '../../store/actions/actions';
 
 
 export const locales: Locale[] = [
@@ -34,35 +35,35 @@ interface TableContainerProps {
     rows: Row[],
     tableMeta: TableMeta,
     taskStatuses: any,
-    domainPath: string
+    domainPath: string,
+    tableName: string
 }
 
-class TableContainerComponent extends React.Component<TableContainerProps> {
-    componentDidMount() {
-        const {tableName} = this.props.match.params;
-        this.props.dispatch(getTableHeaders(tableName));
-        this.props.dispatch(getTableRows(tableName));
-    }
 
-    render() {
-        const {tableMeta, headers, rows, locales, domainPath} = this.props;
-        if (this.props.taskStatuses[GET_TABLE_HEADERS_ACTION] === 'SUCCEEDED') {
-            return <LocaleTabsRenderer
-                locales={locales}
-                renderLocaleTab={
-                    locale => <Table domainPath={domainPath}
-                                     tableMeta={tableMeta}
-                                     headers={headers}
-                                     rows={rows}
-                                     locale={locale}/>}/>;
-        }
-        return 'Loading....';
+const TableContainerComponent = ({tableMeta, headers, rows, locales, domainPath, dispatch, tableName, taskStatuses}:TableContainerProps) => {
+    useEffect(() => {
+        dispatch(getTableHeaders(tableName));
+        dispatch(getTableRows(tableName))
+    }, []);
+
+    if (taskStatuses[GET_TABLE_HEADERS_ACTION] === 'SUCCEEDED') {
+        return <LocaleTabsRenderer
+            locales={locales}
+            renderLocaleTab={
+                locale => <Table domainPath={domainPath}
+                                 tableMeta={tableMeta}
+                                 headers={headers}
+                                 rows={rows}
+                                 deleteRow={(rowID: string) => dispatch(deleteTableRow(tableName, rowID))}
+                                 locale={locale}/>}/>;
     }
-}
+    return <div>Loading....</div>;
+};
 
 const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
     const {tableName} = ownProps.match.params;
     return {
+        tableName,
         headers: selectors.getTableHeaders(state, tableName),
         locales: locales,
         rows: selectors.getTableRows(state, tableName),
