@@ -33,6 +33,17 @@ const Row = ({tableName, rowId, headers, row, locale, goBack, getTableHeaders, g
     }, [headers, row]);
 
     const changeCell = (cellId: string, value: any, locale?: Locale) => {
+        console.log(cellId, value);
+        console.log({
+            ...row,
+            cells: rowInMemory.cells.map(cell => cell._id === cellId
+                ? {
+                    ...cell,
+                    value: locale ? {...cell.value, [locale.key]: value} : value
+                }
+                : cell
+            )
+        })
         changeRowInMemory({
             ...row,
             cells: rowInMemory.cells.map(cell => cell._id === cellId

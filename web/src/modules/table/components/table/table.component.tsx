@@ -32,7 +32,7 @@ const TableComponent = (props: TableProps) => {
                 <thead>
                 <tr>
                     {headers.map(header => <th key={header._id}>{header.name}</th>)}
-                    <th></th>
+                    <th className={styles.Table__actionColumn}></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,14 +47,15 @@ const TableComponent = (props: TableProps) => {
                             })}
                             <td>
                                 <Link
-                                    className="iconButton"
-                                    to={`${domainPath}/tables/${tableMeta.name}/rows/${locale.key}/${row._id}`}>Edit</Link>
+                                    className={cn('iconButton', 'iconButton_edit')}
+                                    to={`${domainPath}/tables/${tableMeta.name}/rows/${locale.key}/${row._id}`}>
+                                </Link>
                                 <button
-                                    className="iconButton"
+                                    className={cn('iconButton', 'iconButton_warning', 'iconButton_delete')}
                                     onClick={() => {
                                         changeDeletedRowId(row._id);
                                         toggleModal(true);
-                                    }}>Delete
+                                    }}>
                                 </button>
                             </td>
                         </tr>

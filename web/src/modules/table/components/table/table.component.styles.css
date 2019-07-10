@@ -19,6 +19,10 @@
   border-collapse: collapse;
 }
 
+.Table__actionColumn{
+  width: 97px;
+}
+
 .Table td, .Table th {
   border: 1px solid rgb(182, 194, 201);
   padding: 10px;

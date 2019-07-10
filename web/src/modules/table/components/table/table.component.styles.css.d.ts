@@ -5,6 +5,7 @@ interface CssExports {
   'TableManager': string;
   'TableManager__table': string;
   'TableManager__toolbar': string;
+  'Table__actionColumn': string;
 }
 declare var cssExports: CssExports;
 export = cssExports;

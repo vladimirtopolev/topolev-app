@@ -24,8 +24,16 @@ export default ({toggleModal, isOpen, deleteRow}: ImagePreviewModalProps) => {
             <div className="Modal__content">
                 Вы уверены, что хотите удалить эту запись?
                 <div className="Modal__buttons">
-                    <button onClick={deleteRow}
-                    className={cn('button', 'button_warning')}>Удалить</button>
+                    <button
+                        onClick={deleteRow}
+                        className={cn('button', 'button_warning')}>
+                        Удалить
+                    </button>
+                    <button
+                        onClick={toggleModal}
+                        className={cn('button')}>
+                        Отменить
+                    </button>
                 </div>
             </div>
         </Modal>);
