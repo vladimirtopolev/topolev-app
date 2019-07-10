@@ -3,6 +3,7 @@ import {Request, Response} from 'express';
 import {TableModel, Table} from '../models/table.model';
 import {TableRowModel, TableRow} from '../models/tableRow.model';
 import {TableCellModel, TableCellProperties} from '../models/tableCell.model';
+import {BulkWriteOpResultObject} from 'mongodb';
 
 
 const populateRowsDescription = {
@@ -42,7 +43,7 @@ class TableController {
         if (table) {
             return res.json(table);
         }
-        return res.status(404).json({error: `Table "${tableName}" does not exist`})
+        return res.status(404).json({error: `Table "${tableName}" does not exist`});
     };
 
     getHeaders = async (req: Request, res: Response) => {
@@ -53,7 +54,7 @@ class TableController {
         if (table) {
             return res.json(table);
         }
-        return res.status(404).json({error: `Table "${tableName}" does not exist`})
+        return res.status(404).json({error: `Table "${tableName}" does not exist`});
     };
 
     getRows = async (req: Request, res: Response) => {
@@ -64,12 +65,10 @@ class TableController {
         if (table) {
             return res.json(table);
         }
-        return res.status(404).json({error: `Table "${tableName}" does not exist`})
+        return res.status(404).json({error: `Table "${tableName}" does not exist`});
     };
 
-    getRow = async (req: Request, res: Response) => {
-        const {tableName, rowId} = req.params;
-
+    _getRow = async (tableName: string, rowId: string, res: Response) => {
         const table = await TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}})
             .populate(populateRowsDescription)
             .exec();
@@ -80,14 +79,34 @@ class TableController {
         return res.status(404).json({error: `Table "${tableName}" does not exist`});
     };
 
+    getRow = (req: Request, res: Response) => {
+        const {tableName, rowId} = req.params;
+        this._getRow(tableName, rowId, res);
+    };
+
     updateRow = async (req: Request, res: Response) => {
         const {tableName, rowId} = req.params;
-        const table = await this.findTableByName(tableName);
+        const table = await TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}});
         if (!table) {
-            return res.status(404).json({error: `Table "${tableName}" does not exist`});
+            return res
+                .status(404).json({error: `Table "${tableName}" does not exist`});
+        }
+        if (table.rows.length === 0) {
+            return res
+                .status(404).json({error: `Table "${tableName}" does not content row with id ${rowId}`});
         }
 
-        res.json({res: 'updateRow'});
+        const bulkOpts = req.body.cells.reduce((memo: any[], cell: TableCellProperties) => {
+            return memo.concat({
+                updateOne: {
+                    filter: {'_id': cell._id},
+                    update: {'$set': {value: cell.value}}
+                }
+            });
+        }, []);
+
+        await TableCellModel.bulkWrite(bulkOpts);
+        this._getRow(tableName, rowId, res);
     };
 
     deleteRow = async (req: Request, res: Response) => {
@@ -122,7 +141,7 @@ class TableController {
             return {
                 ...cell,
                 type: mongoose.Types.ObjectId(cell.type),
-            }
+            };
         });
 
         const savedCells = await TableCellModel.create(cells);
@@ -134,8 +153,8 @@ class TableController {
             rows: table.rows.concat(savedTableRow._id)
         });
 
-        res.json(savedTableRow);
-    }
+        this._getRow(tableName, savedTableRow._id, res);
+    };
 }
 
 export default new TableController();
