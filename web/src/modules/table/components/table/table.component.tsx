@@ -17,6 +17,11 @@ const TableComponent = (props: TableProps) => {
     const {headers, rows, tableMeta, locale, domainPath} = props;
     return (
         <div className={styles.TableManager}>
+            <div className={styles.TableManager__toolbar}>
+                <Link to={`${domainPath}/tables/${tableMeta.name}/rows/${locale.key}/new`} className="button">
+                    Добавить запись
+                </Link>
+            </div>
             <table className={cn(styles.TableManager__table, styles.Table)}>
                 <thead>
                 <tr>

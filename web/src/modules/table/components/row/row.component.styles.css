@@ -1,92 +1,52 @@
-import * as React from 'react';
-import {Fragment} from 'react';
-import {useState, useEffect} from 'react';
-import {Header, Locale, Row} from '../../schema/models';
-import Cell from '../cells/cell.component';
-import {TableRowContainerProps} from './row-container.component';
-import {getNewLibraryCopy} from 'bluebird';
+.Row {
 
-
-interface RowProps {
-    headers: Header[],
-    row?: Row,
-    locale: Locale,
-    goBack: () => void
 }
 
-const getRow = (headers: Header[], row: Row): Row => {
-    return row || {
-        _id: undefined,
-        cells: headers
-            ? headers.map(header => ({
-                _id: undefined,
-                header,
-                value: ''
-            }))
-            : []
-    };
-};
+.Row__backBtn {
+  background: none;
+  border: none;
+}
 
-const Row = ({tableName, headers, row, localeEntity, goBack, rowId, getTableHeaders, getTableRow, saveTableRow, updateTableRow}: TableRowContainerProps) => {
-    const [isEditMode, changeEditMode] = useState<boolean>(false);
-    const [rowInMemory, changeRowInMemory] = useState<Row>(getRow(headers, row));
+.Row__backBtn:hover {
+  color: #00acac;
+}
 
-    useEffect(() => {
-        getTableHeaders();
-        rowId !== 'new' && getTableRow();
-    }, []);
+.Row__backBtn:focus,
+.Row__backBtn:visited,
+.Row__backBtn:active{
+  outline: none;
+}
 
-    useEffect(() => {
-        changeRowInMemory(getRow(headers, row));
-    }, [headers, row]);
+.Row__backBtn:before {
+  content: "\f0a8";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 7px;
+}
 
-    const changeCell = (cellId: string, value: any, locale?: Locale) => {
-        changeRowInMemory({
-            ...row,
-            cells: rowInMemory.cells.map(cell => cell._id === cellId
-                ? {
-                    ...cell,
-                    value: locale ? {...cell.value, [locale.key]: value} : value
-                }
-                : cell
-            )
-        });
-    };
+.Row__container {
+  margin-top: 15px;
+  background: #ffffff;
+}
 
-    const saveRow = () => {
-        console.log('ROW ID', rowId);
-        return rowId === 'new'
-            ? saveTableRow(rowInMemory)
-            : updateTableRow(rowInMemory)
-    };
+.Row__toolbar{
+  margin-top: 15px;
+  padding: 15px;
+}
 
-    return (
-        <div>
-            {headers.map(header => {
-                const cell = rowInMemory && rowInMemory.cells.find(c => c.header._id === header._id);
-                return (
-                    <div key={header._id}>
-                        <div>{header.name}</div>
-                        <div>
-                            {cell &&
-                            <Cell cell={cell} isEditMode={isEditMode} changeCell={changeCell} locale={localeEntity}/>}
-                        </div>
-                    </div>
-                );
-            })}
-            {isEditMode
-                ? <Fragment>
-                    <button onClick={() => changeEditMode(false)}>Назад</button>
-                    <button onClick={saveRow}>Сохранить</button>
-                </Fragment>
-                : <Fragment>
-                    <button onClick={goBack}>Назад</button>
-                    <button onClick={() => changeEditMode(!isEditMode)}>Edit</button>
-                </Fragment>
-            }
+.Cell {
+  padding: 20px 15px 15px 15px;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+}
 
-        </div>
-    );
-};
+.Cell__title {
+  min-width: 200px;
+  margin-right: 5px;
+  line-height: 42px;
+}
 
-export default Row;
+.Cell__value {
+  flex-grow: 1;
+}
+

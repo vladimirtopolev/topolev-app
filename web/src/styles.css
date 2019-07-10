@@ -36,6 +36,15 @@ body, html, #root{
     top: 0;
 }
 
+.input{
+    padding: 7px 15px;
+    width: 100%;
+}
+.input:active,
+.input:focus{
+    outline: none;
+}
+
 /* COMMON BUTTONS*/
 .button{
     display: inline-block;
@@ -50,4 +59,10 @@ body, html, #root{
     text-decoration: none;
     background: none;
     color: #00acac;
+}
+
+.button:focus,
+.button:active,
+.button:visited{
+    outline: none;
 }

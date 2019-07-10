@@ -8,7 +8,7 @@ const Input = ({cell, isEditMode, changeCell, locale}: CellProps) => {
     };
     const value = cell && cell.value && cell.value[locale.key] || '';
     return isEditMode
-        ? <input type="text" value={value} onChange={onChange}/>
+        ? <input type="text" value={value} onChange={onChange} className="input"/>
         : value;
 };
 

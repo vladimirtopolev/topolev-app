@@ -3,15 +3,8 @@ import {Fragment} from 'react';
 import {useState, useEffect} from 'react';
 import {Header, Locale, Row} from '../../schema/models';
 import Cell from '../cells/cell.component';
-
-
-interface RowProps {
-    headers: Header[],
-    row?: Row,
-    saveRow: () => void,
-    locale: Locale,
-    goBack: () => void
-}
+import {TableRowContainerProps} from './row-container.component';
+import * as styles from './row.component.styles.css';
 
 const getRow = (headers: Header[], row: Row): Row => {
     return row || {
@@ -26,16 +19,20 @@ const getRow = (headers: Header[], row: Row): Row => {
     };
 };
 
-const Row = ({headers, row, locale, goBack}: RowProps) => {
+const Row = ({tableName, rowId, headers, row, locale, goBack, getTableHeaders, getTableRow, localeItem, saveTableRow, updateTableRow}: TableRowContainerProps) => {
     const [isEditMode, changeEditMode] = useState<boolean>(false);
     const [rowInMemory, changeRowInMemory] = useState<Row>(getRow(headers, row));
+
+    useEffect(() => {
+        getTableHeaders();
+        rowId !== 'new' && getTableRow();
+    }, []);
 
     useEffect(() => {
         changeRowInMemory(getRow(headers, row));
     }, [headers, row]);
 
     const changeCell = (cellId: string, value: any, locale?: Locale) => {
-        console.log('CHANGE CELL VAL', value);
         changeRowInMemory({
             ...row,
             cells: rowInMemory.cells.map(cell => cell._id === cellId
@@ -49,34 +46,58 @@ const Row = ({headers, row, locale, goBack}: RowProps) => {
     };
 
     const saveRow = () => {
-
+        rowId === 'new'
+            ? saveTableRow(rowInMemory)
+            : updateTableRow(rowInMemory);
+        goBack();
     };
 
     return (
-        <div>
-            {headers.map(header => {
-                console.log(header._id);
-                const cell = rowInMemory && rowInMemory.cells.find(c => c.header._id === header._id);
-                return (
-                    <div key={header._id}>
-                        <div>{header.name}</div>
-                        <div>
-                            {cell &&
-                            <Cell cell={cell} isEditMode={isEditMode} changeCell={changeCell} locale={locale}/>}
-                        </div>
-                    </div>
-                );
-            })}
+        <div className={styles.Row}>
             {isEditMode
-                ? <Fragment>
-                    <button onClick={() => changeEditMode(false)}>Назад</button>
-                    <button>Сохранить</button>
-                </Fragment>
-                : <Fragment>
-                    <button onClick={goBack}>Назад</button>
-                    <button onClick={() => changeEditMode(!isEditMode)}>Edit</button>
-                </Fragment>
+                ? <button className={styles.Row__backBtn}
+                          onClick={() => changeEditMode(false)}>
+                    К режиму просмотра
+                </button>
+                : <button className={styles.Row__backBtn}
+                          onClick={goBack}>
+                    Назад без сохранения
+                </button>
             }
+            <div className={styles.Row__container}>
+                {headers.map(header => {
+                    const cell = rowInMemory && rowInMemory.cells.find(c => c.header._id === header._id);
+                    return (
+                        <div key={header._id}
+                             className={styles.Cell}>
+                            <div className={styles.Cell__title}>{header.name}</div>
+                            <div className={styles.Cell__value}>
+                                {cell &&
+                                <Cell cell={cell} isEditMode={isEditMode} changeCell={changeCell} locale={localeItem}/>}
+                            </div>
+                        </div>
+                    );
+                })}
+                <div className={styles.Row__toolbar}>
+                    {isEditMode
+                        ? <button onClick={saveRow}
+                                  className="button">
+                            Сохранить
+                        </button>
+                        :
+                        <Fragment>
+                            <button onClick={() => changeEditMode(!isEditMode)}
+                                    className="button">
+                                В режим редактирования
+                            </button>
+                            <button onClick={saveRow}
+                                    className="button">
+                                Сохранить
+                            </button>
+                        </Fragment>
+                    }
+                </div>
+            </div>
 
         </div>
     );

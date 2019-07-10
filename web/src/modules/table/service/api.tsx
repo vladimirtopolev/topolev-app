@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {Row} from '../schema/models';
 
 
 const API_URL_PREFIX = '/api';
@@ -26,15 +27,11 @@ export function getTableRow(tableName: string, rowId: string) {
     return clientApi.get(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/rows/${rowId}`);
 }
 
-export function updateCells(tableName: string, cells: string) {
-    return clientApi.put(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/cells`, cells);
-}
-
-export function saveTableRow(tableName: string, row: any) {
+export function saveTableRow(tableName: string, row: Row) {
     return clientApi.post(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/rows`, row);
 }
 
-export function updateTableRow(tableName: string, idRow: string, row: any) {
+export function updateTableRow(tableName: string, idRow: string, row: Row) {
     return clientApi.put(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/rows/${idRow}`, row);
 
 }

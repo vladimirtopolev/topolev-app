@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as selectors from '../../store/reducers/index';
 import {match, withRouter} from 'react-router';
 import {Header, Locale, Row, TableMeta} from '../../schema/models';
-import {getTableHeaders, getTableRow} from '../../store/actions/actions';
+import {getTableHeaders, getTableRow, updateTableRow, saveTableRow} from '../../store/actions/actions';
 import {connect} from 'react-redux';
 import TableRow from './row.component';
 import {locales} from '../table/table-container.component';
@@ -11,45 +11,47 @@ import {History} from 'history';
 interface RouteParams {
     tableName: string,
     locale: string,
-    rowId: string
-}
-
-interface TableRowContainerProps {
+    rowId: string,
     match: match<{ [K in keyof RouteParams]?: string }>,
     history: History,
+}
+
+export interface TableRowContainerProps extends RouteParams {
     dispatch: any,
     headers: Header[],
     row: Row,
     tableMeta: TableMeta,
     taskStatuses: any,
-    locale: Locale,
+    localeItem: Locale,
     goBack: () => void
+
+    getTableHeaders: () => void,
+    getTableRow: () => void,
+    saveTableRow: (row: Row) => void,
+    updateTableRow: (row: Row) => void
 }
 
-const mapStateToProps = (state: any, ownProps: TableRowContainerProps) => {
+const mapStateToProps = (state: any, ownProps: RouteParams) => {
     const {tableName, rowId, locale} = ownProps.match.params;
     return {
+        tableName,
+        rowId,
         headers: selectors.getTableHeaders(state, tableName),
         row: selectors.getTableRow(state, tableName, rowId),
         taskStatuses: selectors.getAsyncTaskStatuses(state),
-        locale: locales.find(l => l.key === locale),
-        goBack: () => ownProps.history.push(`/tables/${tableName}`)
+        localeItem: locales.find(l => l.key === locale)
     };
 };
 
-class TableRowContainerComponent extends React.Component<TableRowContainerProps> {
-    componentDidMount() {
-        const {tableName, rowId} = this.props.match.params;
-        this.props.dispatch(getTableHeaders(tableName));
-        if (rowId !== 'new') {
-            this.props.dispatch(getTableRow(tableName, rowId));
-        }
-    }
+const mapDispatchToProps = (dispatch: any, ownProps: RouteParams) => {
+    const {tableName, rowId} = ownProps.match.params;
+    return {
+        getTableHeaders: () => dispatch(getTableHeaders(tableName)),
+        getTableRow: () => dispatch(getTableRow(tableName, rowId)),
+        saveTableRow: (row: Row) => dispatch(saveTableRow(tableName, row)),
+        updateTableRow: (row: Row) => dispatch(updateTableRow(tableName, rowId, row)),
+        goBack: () => ownProps.history.push(`/admin/tables/${tableName}`)
+    };
+};
 
-    render() {
-        const {headers, row, locale, goBack} = this.props;
-        return <TableRow headers={headers} row={row} saveRow={() => {}} locale={locale} goBack={goBack}/>;
-    }
-}
-
-export default withRouter<any>(connect(mapStateToProps)(TableRowContainerComponent));
+export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(TableRow));

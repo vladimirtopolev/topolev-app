@@ -9,7 +9,15 @@ import {
     NormalizedTableRowsResponse
 } from '../../schema/table';
 import {normalize} from 'normalizr';
-import {GET_TABLE_ACTION, GET_TABLE_HEADERS_ACTION, GET_TABLE_ROW_ACTION, GET_TABLE_ROWS_ACTION} from './types';
+import {
+    GET_TABLE_ACTION,
+    GET_TABLE_HEADERS_ACTION,
+    GET_TABLE_ROW_ACTION,
+    GET_TABLE_ROWS_ACTION,
+    UPDATE_TABLE_ROW_ACTION,
+    SAVE_TABLE_ROW_ACTIONS
+} from './types';
+import {Row} from '../../schema/models';
 
 export const MODULE_NAME = 'tableModule';
 
@@ -59,6 +67,24 @@ export function getTableRow(tableName: string, rowId: string) {
             .then(response => {
                 return normalize(response.data, table);
             }),
+        {tableName, rowId, moduleName: MODULE_NAME}
+    );
+}
+
+export function saveTableRow(tableName: string, row: Row) {
+    return asyncActionCreator<typeof SAVE_TABLE_ROW_ACTIONS, NormalizedTableRowsResponse, Params>(
+        SAVE_TABLE_ROW_ACTIONS,
+        api.saveTableRow(tableName, row)
+            .then(response => normalize(response.data, table)),
+        {tableName, moduleName: MODULE_NAME}
+    );
+}
+
+export function updateTableRow(tableName: string, rowId: string, row: Row) {
+    return asyncActionCreator<typeof UPDATE_TABLE_ROW_ACTION, NormalizedTableRowsResponse, Params>(
+        UPDATE_TABLE_ROW_ACTION,
+        api.updateTableRow(tableName, rowId, row)
+            .then(response => normalize(response.data, table)),
         {tableName, rowId, moduleName: MODULE_NAME}
     );
 }

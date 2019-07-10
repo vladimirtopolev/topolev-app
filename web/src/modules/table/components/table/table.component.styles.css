@@ -1,13 +1,18 @@
 .TableManager {
   width: 100%;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
   box-sizing: border-box;
   font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.TableManager__toolbar{
+
 }
 
 .TableManager__table {
   width: 100%;
   font-size: 14px;
+  margin-top: 15px;
 }
 
 .Table {
