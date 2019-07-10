@@ -1,0 +1,92 @@
+import * as React from 'react';
+import {Fragment} from 'react';
+import {useState, useEffect} from 'react';
+import {Header, Locale, Row} from '../../schema/models';
+import Cell from '../cells/cell.component';
+import {TableRowContainerProps} from './row-container.component';
+import {getNewLibraryCopy} from 'bluebird';
+
+
+interface RowProps {
+    headers: Header[],
+    row?: Row,
+    locale: Locale,
+    goBack: () => void
+}
+
+const getRow = (headers: Header[], row: Row): Row => {
+    return row || {
+        _id: undefined,
+        cells: headers
+            ? headers.map(header => ({
+                _id: undefined,
+                header,
+                value: ''
+            }))
+            : []
+    };
+};
+
+const Row = ({tableName, headers, row, localeEntity, goBack, rowId, getTableHeaders, getTableRow, saveTableRow, updateTableRow}: TableRowContainerProps) => {
+    const [isEditMode, changeEditMode] = useState<boolean>(false);
+    const [rowInMemory, changeRowInMemory] = useState<Row>(getRow(headers, row));
+
+    useEffect(() => {
+        getTableHeaders();
+        rowId !== 'new' && getTableRow();
+    }, []);
+
+    useEffect(() => {
+        changeRowInMemory(getRow(headers, row));
+    }, [headers, row]);
+
+    const changeCell = (cellId: string, value: any, locale?: Locale) => {
+        changeRowInMemory({
+            ...row,
+            cells: rowInMemory.cells.map(cell => cell._id === cellId
+                ? {
+                    ...cell,
+                    value: locale ? {...cell.value, [locale.key]: value} : value
+                }
+                : cell
+            )
+        });
+    };
+
+    const saveRow = () => {
+        console.log('ROW ID', rowId);
+        return rowId === 'new'
+            ? saveTableRow(rowInMemory)
+            : updateTableRow(rowInMemory)
+    };
+
+    return (
+        <div>
+            {headers.map(header => {
+                const cell = rowInMemory && rowInMemory.cells.find(c => c.header._id === header._id);
+                return (
+                    <div key={header._id}>
+                        <div>{header.name}</div>
+                        <div>
+                            {cell &&
+                            <Cell cell={cell} isEditMode={isEditMode} changeCell={changeCell} locale={localeEntity}/>}
+                        </div>
+                    </div>
+                );
+            })}
+            {isEditMode
+                ? <Fragment>
+                    <button onClick={() => changeEditMode(false)}>Назад</button>
+                    <button onClick={saveRow}>Сохранить</button>
+                </Fragment>
+                : <Fragment>
+                    <button onClick={goBack}>Назад</button>
+                    <button onClick={() => changeEditMode(!isEditMode)}>Edit</button>
+                </Fragment>
+            }
+
+        </div>
+    );
+};
+
+export default Row;

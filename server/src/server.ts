@@ -47,9 +47,10 @@ export class Server {
         //use router middleware
         this.app.use(router);
 
-        if (process.env.NODE_ENV === 'development') {
+        bootDev(this.app, __dirname);
+        /*if (process.env.NODE_ENV === 'development') {
             bootDev(this.app, __dirname);
-        }
+        }*/
     }
 
 }

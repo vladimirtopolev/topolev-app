@@ -109,6 +109,36 @@ class TableController {
         this._getRow(tableName, rowId, res);
     };
 
+    createRow = async (req: Request, res: Response) => {
+        const {tableName} = req.params;
+        const table = await this.findTableByName(tableName);
+        if (!table) {
+            return res.status(404).json({error: `Table "${tableName}" does not exist`});
+        }
+
+        if (!req.body.cells) {
+            return res.status(400).json({error: 'Request bode should content "cells" property'});
+        }
+
+        const cells = req.body.cells.map((cell: any) => {
+            return {
+                ...cell,
+                type: mongoose.Types.ObjectId(cell.header._id || cell.header),
+            };
+        });
+
+        const savedCells = await TableCellModel.create(cells);
+
+        const tableRow = new TableRowModel({cells: savedCells});
+        const savedTableRow = await tableRow.save();
+
+        await TableModel.findByIdAndUpdate(table._id, {
+            rows: table.rows.concat(savedTableRow._id)
+        });
+
+        this._getRow(tableName, savedTableRow._id, res);
+    };
+
     deleteRow = async (req: Request, res: Response) => {
         const {rowId, tableName} = req.params;
         const table = await this.findTableByName(tableName);
@@ -124,36 +154,6 @@ class TableController {
             .populate(populateCellDescription)
             .exec();
         res.json(deletedRow);
-    };
-
-    createRow = async (req: Request, res: Response) => {
-        const {tableName} = req.params;
-        const table = await this.findTableByName(tableName);
-        if (!table) {
-            return res.status(404).json({error: `Table "${tableName}" does not exist`});
-        }
-
-        if (!req.body.cells) {
-            return res.status(400).json({error: 'Request bode should content "cells" property'});
-        }
-
-        const cells = req.body.cells.map((cell: any) => {
-            return {
-                ...cell,
-                type: mongoose.Types.ObjectId(cell.type),
-            };
-        });
-
-        const savedCells = await TableCellModel.create(cells);
-
-        const tableRow = new TableRowModel({cells: savedCells});
-        const savedTableRow = await tableRow.save();
-
-        await TableModel.findByIdAndUpdate(table._id, {
-            rows: table.rows.concat(savedTableRow._id)
-        });
-
-        this._getRow(tableName, savedTableRow._id, res);
     };
 }
 
