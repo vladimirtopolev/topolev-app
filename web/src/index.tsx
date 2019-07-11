@@ -6,11 +6,13 @@ import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import './styles.css';
 import withAuthorizedUser from './common/helpers/with-authenticated-user.hoc';
+import Spinner from './common/elements/spinner.component';
+
 
 import {authRouter} from './common/modules/auth';
 import Client from './client/client-layout.component';
 
-import {navigationRouterCreator} from './modules/navigation'
+import {navigationRouterCreator} from './modules/navigation';
 
 const AdminPanel = lazy(()=> import('./admin.component'));
 
@@ -19,7 +21,7 @@ const store = configStore();
 ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter>
-            <Suspense fallback={'Loading...'}>
+            <Suspense fallback={<Spinner/>}>
             <Switch>
                 {authRouter}
                 {navigationRouterCreator('/admin/navigation')}

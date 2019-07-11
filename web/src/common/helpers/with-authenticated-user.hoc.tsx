@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ReactNode} from 'react';
 import {getAuth} from '../../store/reducers';
 import {Redirect} from 'react-router';
 import {connect} from 'react-redux';
@@ -10,7 +9,6 @@ interface WithAuthenticatedUserProps {
 }
 
 const mapStateToProps = (state: any) => {
-    console.log('STATE', state);
     return {
         auth: getAuth(state)
     };

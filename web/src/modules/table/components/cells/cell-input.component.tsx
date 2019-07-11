@@ -4,8 +4,7 @@ import {ChangeEvent, SyntheticEvent} from 'react';
 
 const Input = ({cell, isEditMode, changeCell, locale}: CellProps) => {
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log('CELL', cell);
-        changeCell(cell._id, e.target.value, locale)
+        changeCell(cell.header._id, e.target.value, locale)
     };
     const value = cell && cell.value && cell.value[locale.key] || '';
     return isEditMode

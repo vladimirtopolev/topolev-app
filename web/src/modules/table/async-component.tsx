@@ -2,6 +2,7 @@ import * as React from 'react';
 import {lazy, Suspense} from 'react';
 import {injectReducer} from '../../store/configStore';
 import {MODULE_NAME} from './constants';
+import Spinner from '../../common/elements/spinner.component';
 
 const TableRoutes = lazy(() => import('./routes'));
 const Table = lazy(() => import( './components/table/table-container.component'));
@@ -21,7 +22,7 @@ const AsyncComponent = (props: any) => {
     const {componentName} = props;
     const Component = Components[componentName];
     return (
-        <Suspense fallback={'Loading'}>
+        <Suspense fallback={<Spinner/>}>
             <Component {...props} />
         </Suspense>
     );

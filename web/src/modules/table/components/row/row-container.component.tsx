@@ -23,7 +23,8 @@ export interface TableRowContainerProps extends RouteParams {
     tableMeta: TableMeta,
     taskStatuses: any,
     localeItem: Locale,
-    goBack: () => void
+    goBack: () => void,
+    isLoading: boolean,
 
     getTableHeaders: () => void,
     getTableRow: () => void,
@@ -39,7 +40,8 @@ const mapStateToProps = (state: any, ownProps: RouteParams) => {
         headers: selectors.getTableHeaders(state, tableName),
         row: selectors.getTableRow(state, tableName, rowId),
         taskStatuses: selectors.getAsyncTaskStatuses(state),
-        localeItem: locales.find(l => l.key === locale)
+        localeItem: locales.find(l => l.key === locale),
+        isLoading: selectors.isLoadingTasks(state, ['GET_TABLE_HEADERS_ACTION'])
     };
 };
 

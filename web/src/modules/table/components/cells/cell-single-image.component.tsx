@@ -12,7 +12,7 @@ const SingleImage = ({cell, locale, isEditMode, changeCell}: CellProps) => {
     const [srcImagePreview, changeSrcImagePreview] = useState('');
 
     const saveImage = (imageUrl: string) => {
-        changeCell(cell._id, imageUrl);
+        changeCell(cell.header._id, imageUrl);
     };
 
     return isEditMode

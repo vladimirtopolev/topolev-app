@@ -6,7 +6,8 @@ import {ReactNode} from 'react';
 
 interface AdminLayoutProps {
     children: () => ReactNode
-};
+}
+
 export default (props: AdminLayoutProps) => (
     <div className={styles.AdminLayout}>
         <div className={styles.AdminLayout__wrapper}>

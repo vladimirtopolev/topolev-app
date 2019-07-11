@@ -8,7 +8,7 @@ import Table from './table.component';
 import LocaleTabsRenderer from '../../../../common/elements/locale-tabs-renderer.component';
 import {Header, Locale, Row, TableMeta} from '../../schema/models';
 import {getTableHeaders, getTableRows, deleteTableRow} from '../../store/actions/actions';
-
+import WithSpinner from '../../../../common/helpers/with-spinner.render-props-component';
 
 export const locales: Locale[] = [
     {
@@ -37,27 +37,32 @@ interface TableContainerProps {
     taskStatuses: any,
     domainPath: string,
     tableName: string
+    isLoading: boolean
 }
 
 
-const TableContainerComponent = ({tableMeta, headers, rows, locales, domainPath, dispatch, tableName, taskStatuses}:TableContainerProps) => {
+const TableContainerComponent = ({tableMeta, headers, rows, locales, domainPath, dispatch, tableName, taskStatuses, isLoading}: TableContainerProps) => {
     useEffect(() => {
         dispatch(getTableHeaders(tableName));
-        dispatch(getTableRows(tableName))
+        dispatch(getTableRows(tableName));
     }, []);
 
-    if (taskStatuses[GET_TABLE_HEADERS_ACTION] === 'SUCCEEDED') {
-        return <LocaleTabsRenderer
-            locales={locales}
-            renderLocaleTab={
-                locale => <Table domainPath={domainPath}
-                                 tableMeta={tableMeta}
-                                 headers={headers}
-                                 rows={rows}
-                                 deleteRow={(rowID: string) => dispatch(deleteTableRow(tableName, rowID))}
-                                 locale={locale}/>}/>;
-    }
-    return <div>Loading....</div>;
+
+    return (
+        <WithSpinner isLoading={isLoading}>
+            {() =>
+                <LocaleTabsRenderer
+                    locales={locales}
+                    renderLocaleTab={
+                        locale => <Table domainPath={domainPath}
+                                         tableMeta={tableMeta}
+                                         headers={headers}
+                                         rows={rows}
+                                         deleteRow={(rowID: string) => dispatch(deleteTableRow(tableName, rowID))}
+                                         locale={locale}/>}/>
+            }
+        </WithSpinner>
+    );
 };
 
 const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
@@ -69,7 +74,8 @@ const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
         rows: selectors.getTableRows(state, tableName),
         tableMeta: selectors.getTableMeta(state, tableName),
         taskStatuses: selectors.getAsyncTaskStatuses(state),
-        domainPath: ownProps.domainPath
+        domainPath: ownProps.domainPath,
+        isLoading: selectors.isLoadingTasks(state, [GET_TABLE_HEADERS_ACTION, GET_TABLE_ROWS_ACTION])
     };
 };
 
