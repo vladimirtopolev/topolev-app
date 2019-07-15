@@ -1,0 +1,65 @@
+[
+  {
+    "_id": "id1",
+    "firstName": "Ivan",
+    "lastName": "Ivanov",
+    "phone": "+375298995270",
+    "status": "CREATED",
+    "statusDates": {
+      "CREATED": "2019-07-12T12:20:16.371Z"
+    }
+  },
+  {
+    "_id": "id2",
+    "firstName": "Eugeny",
+    "lastName": "Kalenchuk",
+    "phone": "+375298995270",
+    "status": "CREATED",
+    "statusDates": {
+      "CREATED": "2019-07-12T12:20:16.371Z"
+    }
+  },
+  {
+    "_id": "id3",
+    "firstName": "Vladinir",
+    "lastName": "Topolev",
+    "phone": "+375298995270",
+    "status": "CREATED",
+    "statusDates": {
+      "CREATED": "2019-07-12T12:20:16.371Z"
+    }
+  },
+  {
+    "_id": "id4",
+    "firstName": "Victoriya",
+    "lastName": "Pavkiva",
+    "phone": "+375298995270",
+    "status": "CREATED",
+    "statusDates": {
+      "CREATED": "2019-07-12T12:20:16.371Z"
+    }
+  },
+
+
+  {
+    "_id": "id5",
+    "firstName": "Artem",
+    "lastName": "Silich",
+    "phone": "+375298995270",
+    "status": "IN-PROGRESS",
+    "statusDates": {
+      "CREATED": "2019-07-12T12:20:16.371Z"
+    }
+  },
+
+  {
+    "_id": "id6",
+    "firstName": "Test",
+    "lastName": "Silich",
+    "phone": "+375298995270",
+    "status": "COMPLETED",
+    "statusDates": {
+      "CREATED": "2019-07-12T12:20:16.371Z"
+    }
+  }
+]

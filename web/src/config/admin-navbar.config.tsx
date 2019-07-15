@@ -14,6 +14,23 @@ export const adminNavbarLinks: NavbarLink[] = [
     },
     {
         iconClassName: 'fa fa-table link__icon',
+        title: 'Заказанные звонки',
+        href: '#',
+        links: [
+            {
+                iconClassName: 'fa fa-table link__icon',
+                title: 'Панель управления',
+                href: `/admin/orderCalls/dashboard`
+            },
+            {
+                iconClassName: 'fa fa-table link__icon',
+                title: 'Заархивированные звонки',
+                href: `/admin/orderCalls`
+            }
+        ]
+    },
+    {
+        iconClassName: 'fa fa-table link__icon',
         title: 'Таблицы',
         href: '#',
         links: [

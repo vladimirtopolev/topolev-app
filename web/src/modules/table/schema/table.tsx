@@ -21,6 +21,7 @@ export const table = new schema.Entity('table', {
     headers: headers
 }, {idAttribute: 'name'});
 
+
 export interface TableEntities {
     table: any,
     rows: any[],

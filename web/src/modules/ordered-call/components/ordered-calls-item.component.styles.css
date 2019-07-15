@@ -1,0 +1,29 @@
+.OrderedCallItem{
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  position:relative;
+}
+
+.OrderedCallItem__container{}
+
+.OrderedCallItem__deleteBtn{}
+
+.OrderedCallItem__bottom{}
+
+.Field{
+  display: flex;
+  margin-bottom:5px;
+}
+.Field__name{
+  margin-right: 5px;
+  min-width: 120px;
+  font-weight: bold;
+}
+.Field__value{}
+
+.DateContainer{}
+.Date{}
+.Date__label{}
+.Date__date{}
+
