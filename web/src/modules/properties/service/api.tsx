@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {Property} from '../schema/models';
 
 
 const API_URL_PREFIX = '/api';
@@ -10,6 +11,10 @@ const clientApi = axios.create({
 // MODULE TABLE
 const MODULE_TABLE_DOMAIN = 'properties';
 
-export function getProperies(): Promise<any> {
+export function getProperties(): Promise<any> {
     return clientApi.get(`/api/${MODULE_TABLE_DOMAIN}`);
+}
+
+export function updateProperties(properties: any): Promise<any> {
+    return clientApi.put(`/api/${MODULE_TABLE_DOMAIN}`, properties);
 }

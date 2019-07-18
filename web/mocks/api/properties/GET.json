@@ -11,8 +11,10 @@
   {
     "_id": "5ca67ee2f47de40f5722f8cc",
     "type": "INPUT",
-    "name": "Ссылка на группу в Vkontacte",
+    "name": "Vkontacte",
     "internalName": "link_vk",
+    "titleGroup": "Ссылки на социальные сети",
+    "group": "social",
     "order": 2,
     "value": "https://vk.com/club50042773",
     "__v": 0
@@ -20,8 +22,10 @@
   {
     "_id": "5ca67ee2f47de40f5722f8c7",
     "type": "INPUT",
-    "name": "Телефон Мегафон",
+    "name": "Мегафон",
     "internalName": "phone2",
+    "titleGroup": "Телефонные номера",
+    "group": "phone",
     "order": 1,
     "value": "+7 921 465 25 01",
     "__v": 0
@@ -38,8 +42,10 @@
   {
     "_id": "5ca67ee2f47de40f5722f8ce",
     "type": "INPUT",
-    "name": "Ссылка на группу в Instagram",
+    "name": "Instagram",
     "internalName": "link_instagram",
+    "titleGroup": "Ссылки на социальные сети",
+    "group": "social",
     "order": 2,
     "value": "https://www.instagram.com/leonid_nyppeli/",
     "__v": 0
@@ -56,8 +62,10 @@
   {
     "_id": "5ca67ee2f47de40f5722f8c6",
     "type": "INPUT",
-    "name": "Телефон МТС",
+    "name": "МТС",
     "internalName": "phone1",
+    "group": "phone",
+    "titleGroup": "Телефонные номер",
     "order": 1,
     "value": "+7 981 400 74 03",
     "__v": 0
@@ -83,8 +91,10 @@
   {
     "_id": "5ca67ee2f47de40f5722f8cd",
     "type": "INPUT",
-    "name": "Ссылка на группу в Facebook",
+    "name": "Facebook",
     "internalName": "link_fb",
+    "group": "social",
+    "titleGroup": "Ссылки на социальные сети",
     "order": 2,
     "value": "https://www.facebook.com/profile.php?id=100034833429304",
     "__v": 0

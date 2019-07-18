@@ -9,19 +9,7 @@ import LocaleTabsRenderer from '../../../../common/elements/locale-tabs-renderer
 import {Header, Locale, Row, TableMeta} from '../../schema/models';
 import {getTableHeaders, getTableRows, deleteTableRow} from '../../store/actions/actions';
 import WithSpinner from '../../../../common/helpers/with-spinner.render-props-component';
-
-export const locales: Locale[] = [
-    {
-        key: 'ru',
-        name: 'RU',
-        title: 'Русский'
-    },
-    {
-        key: 'en',
-        name: 'EN',
-        title: 'Английский'
-    }
-];
+import {LOCALES} from '../../../../config/locales';
 
 interface RouteParams {
     tableName: string,
@@ -70,7 +58,7 @@ const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
     return {
         tableName,
         headers: selectors.getTableHeaders(state, tableName),
-        locales: locales,
+        locales: LOCALES,
         rows: selectors.getTableRows(state, tableName),
         tableMeta: selectors.getTableMeta(state, tableName),
         taskStatuses: selectors.getAsyncTaskStatuses(state),

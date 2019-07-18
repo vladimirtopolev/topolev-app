@@ -4,10 +4,10 @@ import {Modal} from 'reactstrap';
 import 'react-image-crop/dist/ReactCrop.css';
 import * as ReactCropModule from 'react-image-crop';
 import {Crop} from 'react-image-crop';
-import * as api from '../../../../service/api';
+import * as api from '../../../../../service/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as styles from './image-modal.component.styles.css';
-import '../../../../styles.css';
+import '../../../../../styles.css';
 
 interface ImageModalProps {
     isOpen: boolean,

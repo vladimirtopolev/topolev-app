@@ -5,7 +5,7 @@ import {Header, Locale, Row, TableMeta} from '../../schema/models';
 import {getTableHeaders, getTableRow, updateTableRow, saveTableRow} from '../../store/actions/actions';
 import {connect} from 'react-redux';
 import TableRow from './row.component';
-import {locales} from '../table/table-container.component';
+import {LOCALES} from '../../../../config/locales';
 import {History} from 'history';
 
 interface RouteParams {
@@ -40,7 +40,7 @@ const mapStateToProps = (state: any, ownProps: RouteParams) => {
         headers: selectors.getTableHeaders(state, tableName),
         row: selectors.getTableRow(state, tableName, rowId),
         taskStatuses: selectors.getAsyncTaskStatuses(state),
-        localeItem: locales.find(l => l.key === locale),
+        localeItem: LOCALES.find(l => l.key === locale),
         isLoading: selectors.isLoadingTasks(state, ['GET_TABLE_HEADERS_ACTION'])
     };
 };

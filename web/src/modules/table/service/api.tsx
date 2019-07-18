@@ -16,6 +16,9 @@ export function getTable(tableName: string): Promise<any> {
 }
 
 export function getTableHeaders(tableName: string) {
+    console.log('URLLLS --->', window.location.origin, window.location);
+    console.log(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/headers`);
+    console.log(tableName)
     return clientApi.get(`/api/${MODULE_TABLE_DOMAIN}/${tableName}/headers`);
 }
 

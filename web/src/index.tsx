@@ -10,9 +10,9 @@ import Spinner from './common/elements/spinner.component';
 
 
 import {authRouter} from './common/modules/auth';
-import Client from './client/App';
 
-const AdminPanel = lazy(()=> import('./admin.component'));
+const Client = lazy(() => import('./client.component'));
+const Admin = lazy(() => import('./admin.component'));
 
 const store = configStore();
 
@@ -20,11 +20,11 @@ ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter>
             <Suspense fallback={<Spinner/>}>
-            <Switch>
-                {authRouter}
-                <Route path="/admin" component={withAuthorizedUser(AdminPanel)}/>
-                <Route path="/" component={Client}/>
-            </Switch>
+                <Switch>
+                    {authRouter}
+                    <Route path="/admin" component={withAuthorizedUser(Admin)}/>
+                    <Route path="/" component={Client}/>
+                </Switch>
             </Suspense>
         </BrowserRouter>
     </Provider>

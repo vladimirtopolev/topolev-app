@@ -1,9 +1,7 @@
 import * as React from 'react';
 import {Cell, Locale} from '../../schema/models';
 
-import InputCell from './cell-input.component';
-import SingleImageCell from './cell-single-image.component';
-import TextareaCell from './cell-textarea.component';
+import Value from './value.component';
 
 export interface CellProps {
     cell: Cell,
@@ -12,18 +10,14 @@ export interface CellProps {
     locale: Locale
 }
 
-const Cell = (props: CellProps) => {
-    const {cell} = props;
-    switch (cell.header.type) {
-        case 'INPUT':
-            return <InputCell {...props}/>;
-        case 'IMAGE':
-            return <SingleImageCell {...props}/>;
-        case 'TEXTAREA':
-            return <TextareaCell {...props}/>;
-        default:
-            throw Error(`Invalid header type ${cell.header.type}`);
-    }
+const Cell = ({changeCell, cell, ...rest}: CellProps) => {
+    const changeValue = (value: any, locale?: Locale) => {
+        changeCell(cell.header._id, value, locale);
+    };
+    const value = cell && cell.value || '';
+    const type = cell.header.type;
+
+    return <Value type={type} value={value} changeValue={changeValue} {...rest}/>;
 };
 
 export default Cell;

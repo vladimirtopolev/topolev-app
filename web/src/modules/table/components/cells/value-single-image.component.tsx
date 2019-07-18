@@ -1,32 +1,35 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {CellProps} from './cell.component';
+import {ValueRenderProps} from './value.component';
 import Image from '../../../../common/elements/image.component';
-import * as styles from './cell-single-image.component.styles.css';
-import ModalImageEditor from './image-modal.component';
-import ModalPreviewImage from './image-preview-modal.component';
+import * as styles from './value-single-image.component.styles.css';
+import ModalImageEditor from './helpers/image-modal.component';
+import ModalPreviewImage from './helpers/image-preview-modal.component';
+import {getValue} from './helpers/utilities';
 
-const SingleImage = ({cell, locale, isEditMode, changeCell}: CellProps) => {
+const SingleImageValue = ({value, locale, isEditMode, changeValue}: ValueRenderProps) => {
     const [isOpenModalImageEditor, toggleModalImageEditor] = useState(false);
     const [isOpenModalPreviewImage, toggleModalPreviewImage] = useState(false);
     const [srcImagePreview, changeSrcImagePreview] = useState('');
 
     const saveImage = (imageUrl: string) => {
-        changeCell(cell.header._id, imageUrl);
+        changeValue(imageUrl);
     };
+
+    const localizedValue = getValue(value, locale);
 
     return isEditMode
         ? (
             <div className={styles.ImageGallery}>
-                {cell.value && (
+                {localizedValue && (
                     <div className={styles.Item}>
                         <div className={styles.Item__image}
-                             style={{backgroundImage: `url(${cell.value})`}}>
+                             style={{backgroundImage: `url(${localizedValue})`}}>
                         </div>
                         <div className={styles.Item__toolbar}>
                             <button className={styles.Item__btn}
                                     onClick={() => {
-                                        changeSrcImagePreview(cell.value);
+                                        changeSrcImagePreview(localizedValue);
                                         toggleModalPreviewImage(true);
                                     }}>
                                 Просмотр
@@ -40,7 +43,7 @@ const SingleImage = ({cell, locale, isEditMode, changeCell}: CellProps) => {
                         </div>
                     </div>
                 )}
-                {!cell.value && (
+                {!localizedValue && (
                     <button
                         className={styles.SingleImage__uploadBtn}
                         onClick={() => toggleModalImageEditor(!isOpenModalImageEditor)}>
@@ -57,7 +60,7 @@ const SingleImage = ({cell, locale, isEditMode, changeCell}: CellProps) => {
                 />
             </div>
         )
-        : <Image src={cell.value}/>;
+        : <Image src={localizedValue}/>;
 };
 
-export default SingleImage;
+export default SingleImageValue;
