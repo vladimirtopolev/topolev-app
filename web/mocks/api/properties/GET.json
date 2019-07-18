@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "5ca67ee2f47de40f5722f8c9",
+    "type": "INPUT",
+    "name": "Работаем с",
+    "internalName": "workFromYear",
+    "order": 2,
+    "value": "2007",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8cc",
+    "type": "INPUT",
+    "name": "Ссылка на группу в Vkontacte",
+    "internalName": "link_vk",
+    "order": 2,
+    "value": "https://vk.com/club50042773",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8c7",
+    "type": "INPUT",
+    "name": "Телефон Мегафон",
+    "internalName": "phone2",
+    "order": 1,
+    "value": "+7 921 465 25 01",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8ca",
+    "type": "INPUT",
+    "name": "Кол-во реализованных проектов",
+    "internalName": "completedProjects",
+    "order": 2,
+    "value": 80,
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8ce",
+    "type": "INPUT",
+    "name": "Ссылка на группу в Instagram",
+    "internalName": "link_instagram",
+    "order": 2,
+    "value": "https://www.instagram.com/leonid_nyppeli/",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8cf",
+    "type": "TEXTAREA",
+    "name": "О нас",
+    "internalName": "aboutUs",
+    "order": 2,
+    "value": "<p style=\"text-align: justify;\">Здравствуйте, меня зовут Леонид.</p>\n<p style=\"text-align: justify;\">Живу и работаю в Республике Карелия. Начинал трудовую деятельность с плотника.&nbsp; Более 10 лет назад, объединив команду опытных людей, предлагаем свои услуги по загородному строительству.</p>\n<p style=\"text-align: justify;\">Наша философия это открытость и индивидуальный подход к Заказчику. Строим в соответствии с Вашими пожеланиями. Если Вы просто хотите получить комфортный для проживания дом, то можете выбрать один из наших типовых проектов. Используем только качественный хвойный лес, произрастающий в лесах республики Карелия, который перерабатывается на собственном лесопильном производстве. Не стоит забывать, что стоимость работ стройки или ремонта по низким ценам не бывает и напрямую зависит от материалов, качественного производства работ и сроки выполнения. Мы поможем в выборе строительного материала, предлагаем разумные расценки и выгодную систему бонусов за дополнительные работы.</p>",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8c6",
+    "type": "INPUT",
+    "name": "Телефон МТС",
+    "internalName": "phone1",
+    "order": 1,
+    "value": "+7 981 400 74 03",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8cb",
+    "type": "INPUT",
+    "name": "Копирайт",
+    "internalName": "copyright",
+    "order": 2,
+    "value": "2019, Удачный дом",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8c8",
+    "type": "INPUT",
+    "name": "Email",
+    "internalName": "mail",
+    "order": 2,
+    "value": "nyppeli@mail.ru",
+    "__v": 0
+  },
+  {
+    "_id": "5ca67ee2f47de40f5722f8cd",
+    "type": "INPUT",
+    "name": "Ссылка на группу в Facebook",
+    "internalName": "link_fb",
+    "order": 2,
+    "value": "https://www.facebook.com/profile.php?id=100034833429304",
+    "__v": 0
+  }
+]

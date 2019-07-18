@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import Slider from "react-slick";
 import Header from './Header';
 import './App.scss';
@@ -38,8 +39,8 @@ class App extends Component {
         scrollWrapper: true
     };
 
-    toggleScrollWrapper = (newState) => {
-        this.setState(state => {
+    toggleScrollWrapper = (newState:any) => {
+        this.setState((state:any) => {
             const t = {
                 scrollWrapper: newState === undefined ? !state.scrollWrapper : newState
             };
@@ -66,7 +67,7 @@ class App extends Component {
                                     </div>
                                 </div>
                                 <div className="main-view__bg">
-                                    <img src={require('./img/stend.png')} alt=""/>
+                                    <img src={require('../../sources/client/stend.png')} alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +77,7 @@ class App extends Component {
                                 <div className="advantages__item-container col-md-4">
                                     <div className="advantage">
                                         <div className="advantage__label">
-                                            <img className="advantage__img" src={require('./img/ad-project.png')}/>
+                                            <img className="advantage__img" src={require('../../sources/client/ad-project.png')}/>
                                         </div>
                                         <div className="advantage__title">Проектирование</div>
                                         <div className="advantage__description">
@@ -90,7 +91,7 @@ class App extends Component {
                                 <div className="advantages__item-container col-md-4">
                                     <div className="advantage">
                                         <div className="advantage__label">
-                                            <img className="advantage__img" src={require('./img/ad-design.png')}/>
+                                            <img className="advantage__img" src={require('../../sources/client/ad-design.png')}/>
                                         </div>
                                         <div className="advantage__title">Дизайн</div>
                                         <div className="advantage__description">
@@ -103,7 +104,7 @@ class App extends Component {
                                 <div className="advantages__item-container col-md-4">
                                     <div className="advantage">
                                         <div className="advantage__label">
-                                            <img className="advantage__img" src={require('./img/ad-build.png')}/>
+                                            <img className="advantage__img" src={require('../../sources/client/ad-build.png')}/>
                                         </div>
                                         <div className="advantage__title">Строительство</div>
                                         <div className="advantage__description">
@@ -161,7 +162,7 @@ class App extends Component {
                                             <Slider {...settings}>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh01.png')}/>
+                                                        <img src={require('../../sources/client/exh01.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -169,7 +170,7 @@ class App extends Component {
                                                 </div>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh02.png')}/>
+                                                        <img src={require('../../sources/client/exh02.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -177,7 +178,7 @@ class App extends Component {
                                                 </div>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh03.png')}/>
+                                                        <img src={require('../../sources/client/exh03.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -185,7 +186,7 @@ class App extends Component {
                                                 </div>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh04.png')}/>
+                                                        <img src={require('../../sources/client/exh04.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -193,7 +194,7 @@ class App extends Component {
                                                 </div>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh05.png')}/>
+                                                        <img src={require('../../sources/client/exh05.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -201,7 +202,7 @@ class App extends Component {
                                                 </div>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh06.png')}/>
+                                                        <img src={require('../../sources/client/exh06.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -209,7 +210,7 @@ class App extends Component {
                                                 </div>
                                                 <div className="exhibition">
                                                     <div className="exhibition__logo">
-                                                        <img src={require('./img/exh07.png')}/>
+                                                        <img src={require('../../sources/client/exh07.png')}/>
                                                     </div>
                                                     <div className="exhibition__title">
                                                         Название выставки
@@ -269,7 +270,7 @@ class App extends Component {
                                 <div className="bestworks__works row">
                                     <div className="bestworks__work col-md-4 col-sm-6">
                                         <div className="work">
-                                            <img className="work__img" src={require('./img/001.jpg')}/>
+                                            <img className="work__img" src={require('../../sources/client/001.jpg')}/>
                                             <p className="work__description-container">
                                                 <span className="work__description">Стенд Ferroli</span>
                                             </p>
@@ -277,7 +278,7 @@ class App extends Component {
                                     </div>
                                     <div className="bestworks__work col-md-4 col-sm-6">
                                         <div className="work">
-                                            <img className="work__img" src={require('./img/002.jpg')}/>
+                                            <img className="work__img" src={require('../../sources/client/002.jpg')}/>
                                             <p className="work__description-container">
                                                 <span className="work__description">Стенд Grundfos</span>
                                             </p>
@@ -285,7 +286,7 @@ class App extends Component {
                                     </div>
                                     <div className="bestworks__work col-md-4 col-sm-6">
                                         <div className="work">
-                                            <img className="work__img" src={require('./img/003.jpg')}/>
+                                            <img className="work__img" src={require('../../sources/client/003.jpg')}/>
                                             <p className="work__description-container">
                                                 <span className="work__description">Стенд Grundfos</span>
                                             </p>
@@ -293,7 +294,7 @@ class App extends Component {
                                     </div>
                                     <div className="bestworks__work col-md-4 col-sm-6">
                                         <div className="work">
-                                            <img className="work__img" src={require('./img/004.jpg')}/>
+                                            <img className="work__img" src={require('../../sources/client/004.jpg')}/>
                                             <p className="work__description-container">
                                                 <span className="work__description">Стенд Беларусбанк</span>
                                             </p>
@@ -301,7 +302,7 @@ class App extends Component {
                                     </div>
                                     <div className="bestworks__work col-md-4 col-sm-6">
                                         <div className="work">
-                                            <img className="work__img" src={require('./img/005.jpg')}/>
+                                            <img className="work__img" src={require('../../sources/client/005.jpg')}/>
                                             <p className="work__description-container">
                                                 <span className="work__description">Стенд Saer</span>
                                             </p>
@@ -309,7 +310,7 @@ class App extends Component {
                                     </div>
                                     <div className="bestworks__work col-md-4 col-sm-6">
                                         <div className="work">
-                                            <img className="work__img" src={require('./img/006.jpg')}/>
+                                            <img className="work__img" src={require('../../sources/client/006.jpg')}/>
                                             <p className="work__description-container">
                                                 <span className="work__description">Стенд Begerof</span>
                                             </p>
@@ -361,17 +362,17 @@ class App extends Component {
                                 <div className="partners__container row">
                                     <div className="partner col-md-4">
                                         <a href="" className="partner__link">
-                                            <img src={require('./img/expoforum.png')} className="partner__img"/>
+                                            <img src={require('../../sources/client/expoforum.png')} className="partner__img"/>
                                         </a>
                                     </div>
                                     <div className="partner col-md-4">
                                         <a href="" className="partner__link">
-                                            <img src={require('./img/sts-design.png')} className="partner__img"/>
+                                            <img src={require('../../sources/client/sts-design.png')} className="partner__img"/>
                                         </a>
                                     </div>
                                     <div className="partner col-md-4">
                                         <a href="" className="partner__link">
-                                            <img src={require('./img/infoforum.png')} className="partner__img"/>
+                                            <img src={require('../../sources/client/infoforum.png')} className="partner__img"/>
                                         </a>
                                     </div>
                                 </div>

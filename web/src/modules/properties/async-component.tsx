@@ -1,17 +1,12 @@
 import * as React from 'react';
 import {lazy, Suspense} from 'react';
-import {injectReducer} from '../../store/configStore';
-import {MODULE_NAME} from './constants';
 import Spinner from '../../common/elements/spinner.component';
+import {MODULE_NAME} from './constants';
+import {injectReducer} from '../../store/configStore';
 
-const TableRoutes = lazy(() => import('./routes'));
-const Table = lazy(() => import( './components/table/table-container.component'));
-const Row = lazy(() => import('./components/row/row-container.component'));
-
+const Properties = lazy(() => import('./components/properties-container.component'));
 const Components: { [k: string]: any } = {
-    TableRoutes,
-    Table,
-    Row
+    Properties
 };
 
 const AsyncComponent = (props: any) => {
@@ -19,6 +14,7 @@ const AsyncComponent = (props: any) => {
         .then(module => {
             injectReducer(MODULE_NAME, module.default);
         });
+
     const {componentName} = props;
     const Component = Components[componentName];
     return (

@@ -1,1 +1,1 @@
-export const MODULE_NAME = 'tableModule';
+export const MODULE_NAME = 'propertiesModule';

@@ -1,6 +1,6 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../node_modules/slick-carousel/slick/slick.css";
-@import "../node_modules/slick-carousel/slick/slick-theme.css";
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../../node_modules/slick-carousel/slick/slick.css";
+@import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
 $primary-color: #018339;
 $primary-text-color: #444444;
@@ -379,7 +379,7 @@ body, #root {
 .main-view {
   width: 100%;
   min-height: 100vh;
-  background: fixed url("./img/main-bg.jpg") center center no-repeat;
+  background: fixed url("../../sources/client/main-bg.jpg") center center no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
@@ -605,7 +605,7 @@ body, #root {
 // BEST WORKS
 .bestworks {
   box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5);
-  background: fixed url("./img/bg.jpg");
+  background: fixed url("../../sources/client/bg.jpg");
   text-align: center;
   padding-top: 5px;
 
@@ -675,7 +675,7 @@ body, #root {
 
   &__wrapper {
     background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0) 30%),
-    url("./img/make-order2.jpg");
+    url("../../sources/client/make-order2.jpg");
     background-size: cover;
   }
 
@@ -831,7 +831,7 @@ body, #root {
 // NEWS
 .news {
   padding-top: 200px;
-  background: url("./img/news-bg.jpg") center center;
+  background: url("../../sources/client/news-bg.jpg") center center;
   background-size: cover;
   padding-bottom: 30px;
 

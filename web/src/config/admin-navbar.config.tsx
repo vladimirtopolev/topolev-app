@@ -8,12 +8,24 @@ export interface NavbarLink {
 
 export const adminNavbarLinks: NavbarLink[] = [
     {
-        iconClassName: 'fas fa-chart-pie link__icon',
-        title: 'Аналитика',
-        href: '/admin/analitics'
+        iconClassName: 'fas fa-info-circle link__icon',
+        title: 'Общая информация',
+        href: '/admin/properties/dashboard'
     },
     {
         iconClassName: 'fa fa-table link__icon',
+        title: 'Таблицы',
+        href: '#',
+        links: [
+            {
+                iconClassName: 'fa fa-table link__icon',
+                title: 'Тест',
+                href: `/admin/tables/test`
+            }
+        ]
+    },
+    {
+        iconClassName: 'fas fa-phone link__icon',
         title: 'Заказанные звонки',
         href: '#',
         links: [
@@ -28,17 +40,11 @@ export const adminNavbarLinks: NavbarLink[] = [
                 href: `/admin/orderCalls`
             }
         ]
-    },
-    {
-        iconClassName: 'fa fa-table link__icon',
-        title: 'Таблицы',
-        href: '#',
-        links: [
-            {
-                iconClassName: 'fa fa-table link__icon',
-                title: 'Тест',
-                href: `/admin/tables/test`
-            }
-        ]
     }
+    /*
+    {
+        iconClassName: 'fas fa-chart-pie link__icon',
+        title: 'Аналитика',
+        href: '/admin/analitics'
+    },*/
 ];

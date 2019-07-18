@@ -1,9 +1,10 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import Headroom from 'react-headroom';
 import cn from 'classnames';
 
 
-export default class Header extends Component{
+export default class Header extends Component<any, any>{
 
     state = {
         disablePinning: false,
@@ -11,27 +12,30 @@ export default class Header extends Component{
     };
 
     componentDidMount() {
+        // @ts-ignore
         this.mediaQueryListener = window.matchMedia("(max-width: 700px)");
+        // @ts-ignore
         this.togglePinningHeader(this.mediaQueryListener);
+        // @ts-ignore
         this.mediaQueryListener.addListener(this.togglePinningHeader);
     }
 
-    togglePinningHeader = (media) => {
+    togglePinningHeader = (media:any) => {
         console.log('media', media.matches);
         if (!media.matches) {
             this.props.toggleScrollWrapper(true);
         }
-        this.setState((state) => ({
+        this.setState((state:any) => ({
             disablePinning: media.matches,
             toggledMenu: media.matches ? false : state.toggledMenu
         }));
-    }
+    };
 
-    toggleMenu = (e) => {
+    toggleMenu = (e:any) => {
         e.preventDefault();
         this.props.toggleScrollWrapper();
-        this.setState((state) => ({...state, toggledMenu: !state.toggledMenu}))
-    }
+        this.setState((state:any) => ({...state, toggledMenu: !state.toggledMenu}))
+    };
 
     render(){
         return (
@@ -47,12 +51,12 @@ export default class Header extends Component{
                                 <ul className="lang">
                                     <li className="lang__item">
                                         <a href="" className="lang__link">
-                                            <img src={require("./img/ru.gif")}/>
+                                            <img src={require("../../sources/client/ru.gif")}/>
                                         </a>
                                     </li>
                                     <li className="lang__item">
                                         <a href="" className="lang__link">
-                                            <img src={require("./img/en.gif")}/>
+                                            <img src={require("../../sources/client/en.gif")}/>
                                         </a>
                                     </li>
                                 </ul>
@@ -63,7 +67,7 @@ export default class Header extends Component{
                         <div className="header__bottom-container">
                             <div className="header__logo">
                                 <a href="" className="header__logo-link">
-                                    <img src={require("./img/logo.jpg")} className="header__logo-img"/>
+                                    <img src={require("../../sources/client/logo.jpg")} className="header__logo-img"/>
                                 </a>
                             </div>
                             <div className="header__navigation">

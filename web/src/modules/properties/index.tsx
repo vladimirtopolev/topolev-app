@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Route, Switch} from 'react-router';
+import {Route} from 'react-router';
 import {lazy} from 'react';
 
-const TableRoutes = lazy(() => import('./routes'));
+const PropertiesRoutes = lazy(() => import('./routes'));
 
-export const tableRouterCreator = (domainPath: string) =>
-    <Route path={domainPath} render={() => <TableRoutes domainPath={domainPath}/>}/>;
+export const propertiesRouterCreator = (domainPath: string) =>
+    <Route path={domainPath} render={() => <PropertiesRoutes domainPath={domainPath}/>}/>;

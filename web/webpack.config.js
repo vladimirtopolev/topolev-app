@@ -6,9 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 const cssRegex = /\.(scss|css)$/;
-const cssModuleRegex = /\.component\.styles\.css$/;
-
-console.log('DIR', __dirname)
+const cssModuleRegex = /\.component\.styles\.(scss|css)$/;
 
 module.exports = {
     context: __dirname,
@@ -64,6 +62,10 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loader: 'file-loader?name=img/[name].[ext]'
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=fonts/[name].[ext]',
             }
         ]
     },
