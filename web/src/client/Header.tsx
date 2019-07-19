@@ -3,6 +3,7 @@ import {Component} from 'react';
 import Headroom from 'react-headroom';
 import cn from 'classnames';
 
+import {useLocaleState} from '../common/helpers/with-language-context.render-props-component';
 
 export default class Header extends Component<any, any>{
 
