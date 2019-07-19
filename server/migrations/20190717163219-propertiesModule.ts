@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 const {ObjectId} = mongoose.Types;
 import {getMongooseConnection} from './utilities/getDBConnection';
 import {PropertyModel, PropertyProperties} from '../src/modules/properties/models/property.model';
-import {saveItems} from './utilities/db';
+import {saveItems, dropTable} from './utilities/db';
 
 
 const PROPERTIES: PropertyProperties[] = [
@@ -15,7 +15,6 @@ const PROPERTIES: PropertyProperties[] = [
         group: 'address',
         titleGroup: 'Адрес',
         order: 1,
-        notLocalized: true,
         value: {
             ru: '220021, Беларусь, Минск',
             en: '220021, Belarus, Minsk'
@@ -42,10 +41,8 @@ const PROPERTIES: PropertyProperties[] = [
         titleGroup: 'Телефонные номера',
         group: 'phone',
         order: 2,
-        value: {
-            ru: '+375 17 273 73 00',
-            en: '+375 17 273 73 00'
-        },
+        notLocalized: true,
+        value: '+375 17 273 73 01',
     },
     {
         _id: new ObjectId(),
@@ -55,29 +52,27 @@ const PROPERTIES: PropertyProperties[] = [
         titleGroup: 'Телефонные номера',
         group: 'phone',
         order: 2,
-        value: {
-            ru: '+375 17 273 73 00',
-            en: '+375 17 273 73 00'
-        },
+        notLocalized: true,
+        value: '+375 17 273 73 02'
     },
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        name: 'Телефон 02',
-        internalName: 'phone2',
+        name: 'Телефон 03',
+        internalName: 'phone3',
         titleGroup: 'Телефонные номера',
         group: 'phone',
         order: 2,
-        value: {
-            ru: '+375 17 273 73 00',
-            en: '+375 17 273 73 00'
-        },
+        notLocalized: true,
+        value: '+375 17 273 73 03'
+
     },
     {
         _id: new ObjectId(),
         type: 'INPUT',
         name: 'Email',
-        internalName: 'completedProjects',
+        internalName: 'email',
+        notLocalized: true,
         order: 2,
         value: 80,
     },
@@ -89,6 +84,7 @@ const PROPERTIES: PropertyProperties[] = [
         titleGroup: 'Ссылки на социальные сети',
         group: 'social',
         order: 2,
+        notLocalized: true,
         value: 'https://www.instagram.com/leonid_nyppeli/',
     },
     {
@@ -97,17 +93,10 @@ const PROPERTIES: PropertyProperties[] = [
         name: 'О нас',
         internalName: 'aboutUs',
         order: 2,
-        value: 'какой-то текст'
-    },
-    {
-        _id: new ObjectId(),
-        type: 'INPUT',
-        name: 'МТС',
-        internalName: 'phone1',
-        group: 'phone',
-        titleGroup: 'Телефонные номер',
-        order: 1,
-        value: '+7 981 400 74 03',
+        value: {
+            ru: 'text',
+            en: 'какой-то текст'
+        }
     },
     {
         _id: new ObjectId(),
@@ -115,7 +104,10 @@ const PROPERTIES: PropertyProperties[] = [
         name: 'Копирайт',
         internalName: 'copyright',
         order: 2,
-        value: '2019, Удачный дом',
+        value: {
+            ru:'2019, Удачный дом',
+            en: '2019, English copyright'
+        },
     },
     {
         _id: new ObjectId(),
@@ -123,6 +115,7 @@ const PROPERTIES: PropertyProperties[] = [
         name: 'Email',
         internalName: 'mail',
         order: 2,
+        notLocalized: true,
         value: 'nyppeli@mail.ru',
     },
     {
@@ -133,6 +126,7 @@ const PROPERTIES: PropertyProperties[] = [
         group: 'social',
         titleGroup: 'Ссылки на социальные сети',
         order: 2,
+        notLocalized: true,
         value: 'https://www.facebook.com/profile.php?id=100034833429304',
     }
 ];
@@ -151,8 +145,15 @@ export async function up(): Promise<void> {
 }
 
 export async function down(): Promise<void> {
-    // TODO write the statements to rollback your migration (if possible)
-    // Example:
-    // return db.collection('albums').updateOne({artist: 'The Beatles'}, {$set: {blacklisted: false}});
+    await  getMongooseConnection()
+        .then((config) => {
+            return dropTable(PropertyModel, (e) => {
+                if (e) {
+                    console.log('ISSUE');
+                } else {
+                    console.log(`Rollbacl migration script connect to DB: ${config.host}`);
+                }
+            })
+        })
 }
 

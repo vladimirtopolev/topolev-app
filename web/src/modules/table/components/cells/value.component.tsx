@@ -8,7 +8,8 @@ export interface ValueRenderProps {
     value: any,
     isEditMode?: boolean,
     changeValue?: (value: any, locale?: Locale) => void,
-    locale: Locale
+    locale: Locale,
+    notLocalized?: boolean
 }
 export interface ValueProps extends ValueRenderProps{
     type: string

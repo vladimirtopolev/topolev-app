@@ -21,12 +21,12 @@ export default ({locales, renderLocaleTab}: LocaleTabsRendereeProps) => {
             <Nav tabs className={styles.Nav}>
                 {locales.map(locale => (
                     <NavItem key={locale.key} className={styles.Nav__item}>
-                        <NavLink
+                        <a
                             onClick={() => changeLocaleTab(locale.key)}
                             className={cn(styles.Nav__link, {
                                 [styles.Nav__link_active]: activeLocaleTab === locale.key
                             })}
-                        >{locale.title}</NavLink>
+                        >{locale.title}</a>
                     </NavItem>
                 ))}
             </Nav>

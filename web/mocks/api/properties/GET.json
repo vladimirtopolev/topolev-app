@@ -17,6 +17,7 @@
     "group": "social",
     "order": 2,
     "value": "https://vk.com/club50042773",
+    "notLocalized": true,
     "__v": 0
   },
   {
@@ -28,6 +29,7 @@
     "group": "phone",
     "order": 1,
     "value": "+7 921 465 25 01",
+    "notLocalized": true,
     "__v": 0
   },
   {
@@ -37,6 +39,7 @@
     "internalName": "completedProjects",
     "order": 2,
     "value": 80,
+    "notLocalized": true,
     "__v": 0
   },
   {
@@ -48,6 +51,7 @@
     "group": "social",
     "order": 2,
     "value": "https://www.instagram.com/leonid_nyppeli/",
+    "notLocalized": true,
     "__v": 0
   },
   {
@@ -68,6 +72,7 @@
     "titleGroup": "Телефонные номер",
     "order": 1,
     "value": "+7 981 400 74 03",
+    "notLocalized": true,
     "__v": 0
   },
   {
@@ -86,6 +91,7 @@
     "internalName": "mail",
     "order": 2,
     "value": "nyppeli@mail.ru",
+    "notLocalized": true,
     "__v": 0
   },
   {
@@ -97,6 +103,7 @@
     "titleGroup": "Ссылки на социальные сети",
     "order": 2,
     "value": "https://www.facebook.com/profile.php?id=100034833429304",
+    "notLocalized": true,
     "__v": 0
   }
 ]

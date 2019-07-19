@@ -8,5 +8,6 @@ export interface Property {
     order: number,
     group?: string,
     titleGroup?:string,
-    value: any
+    value: any,
+    notLocalized?: boolean
 }

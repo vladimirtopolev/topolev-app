@@ -25,6 +25,7 @@ export const PropertySchema = new Schema({
     order: Number,
     group: String,
     titleGroup: String,
+    notLocalized: Boolean,
     value: Schema.Types.Mixed
 });
 
