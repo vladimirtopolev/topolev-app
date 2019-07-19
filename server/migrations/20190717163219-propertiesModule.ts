@@ -10,35 +10,73 @@ const PROPERTIES: PropertyProperties[] = [
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        name: 'Работаем с',
-        internalName: 'workFromYear',
-        order: 2,
-        value: '2007',
+        name: 'Индекс, страна, город',
+        internalName: 'country',
+        group: 'address',
+        titleGroup: 'Адрес',
+        order: 1,
+        notLocalized: true,
+        value: {
+            ru: '220021, Беларусь, Минск',
+            en: '220021, Belarus, Minsk'
+        },
     },
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        name: 'Vkontacte',
-        internalName: 'link_vk',
-        titleGroup: 'Ссылки на социальные сети',
-        group: 'social',
-        order: 2,
-        value: 'https://vk.com/club50042773',
+        name: 'Улица, дом, офис',
+        internalName: 'street',
+        group: 'address',
+        titleGroup: 'Адрес',
+        order: 1,
+        value: {
+            ru: 'ул. Челюскинцев, 15-1',
+            en: 'st. Cheluskincev, 15-1'
+        },
     },
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        name: 'Мегафон',
+        name: 'Телефон 01',
+        internalName: 'phone1',
+        titleGroup: 'Телефонные номера',
+        group: 'phone',
+        order: 2,
+        value: {
+            ru: '+375 17 273 73 00',
+            en: '+375 17 273 73 00'
+        },
+    },
+    {
+        _id: new ObjectId(),
+        type: 'INPUT',
+        name: 'Телефон 02',
         internalName: 'phone2',
         titleGroup: 'Телефонные номера',
         group: 'phone',
-        order: 1,
-        value: '+7 921 465 25 01',
+        order: 2,
+        value: {
+            ru: '+375 17 273 73 00',
+            en: '+375 17 273 73 00'
+        },
     },
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        name: 'Кол-во реализованных проектов',
+        name: 'Телефон 02',
+        internalName: 'phone2',
+        titleGroup: 'Телефонные номера',
+        group: 'phone',
+        order: 2,
+        value: {
+            ru: '+375 17 273 73 00',
+            en: '+375 17 273 73 00'
+        },
+    },
+    {
+        _id: new ObjectId(),
+        type: 'INPUT',
+        name: 'Email',
         internalName: 'completedProjects',
         order: 2,
         value: 80,

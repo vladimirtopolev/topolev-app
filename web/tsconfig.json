@@ -11,13 +11,15 @@
       "es2017",
       "dom"
     ],
-    "jsx": "react"
+    "jsx": "react",
+    "typeRoots": [ "./types", "../node_modules/@types"]
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
     "../node_modules",
+    "types",
     "**/*.spec.ts"
   ]
 }

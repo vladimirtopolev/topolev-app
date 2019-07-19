@@ -8,6 +8,7 @@ export interface PropertyProperties {
     name: string,
     internalName: string,
     order: number,
+    notLocalized?: true,
     group?: string,
     titleGroup?:string,
     value: any
