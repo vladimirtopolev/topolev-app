@@ -1,0 +1,274 @@
+@import "../../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "../../../../../../node_modules/slick-carousel/slick/slick.css";
+@import "../../../../../../node_modules/slick-carousel/slick/slick-theme.css";
+
+$primary-color: #018339;
+$primary-text-color: #444444;
+
+// HEADER
+.headroom-wrapper {
+  width: 100%;
+  height: 200px;
+  position: absolute;
+
+}
+
+.headroom {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  height: 200px;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 10000;
+  position: relative;
+
+  &__top {
+    width: 100%;
+    height: 100px;
+  }
+
+  &__top-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+    height: 100%;
+  }
+
+  &__phone {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    line-height: 100px;
+    padding-left: 20px;
+    padding-right: 40px;
+
+    & .fas {
+      line-height: 100px;
+      padding-right: 10px;
+    }
+  }
+
+  &__bottom {
+    width: 100%;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  &__bottom-container {
+    height: 100px;
+    @extend .container;
+  }
+
+  &__logo {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+  }
+
+  &__logo-link {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: block;
+  }
+
+  &__logo-img {
+    position: absolute;
+    bottom: 40px;
+    width: 100px;
+    transition: all 500ms;
+  }
+
+  &__navigation {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.lang {
+  display: flex;
+  justify-content: stretch;
+  height: 100%;
+  margin: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    padding: 5px;
+  }
+}
+
+.main-nav {
+  display: flex;
+  list-style: none;
+  color: #fff;
+  height: 100%;
+
+  &__item {
+    display: flex;
+    align-items: stretch;
+    color: #fff;
+  }
+
+  &__link {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: "Open Sans";
+    position: relative;
+    display: block;
+
+    line-height: 80px;
+    padding: 10px;
+
+    &:before, &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: $primary-color;
+      display: none;
+    }
+
+    &:before {
+      top: 0;
+    }
+
+    &:after {
+      bottom: 0;
+    }
+
+    &:hover.main-nav__link:after,
+    &:hover.main-nav__link:before {
+      display: block;
+    }
+
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  &__toggler {
+    height: 100px;
+    line-height: 100px;
+    color: #fff;
+    text-align: right;
+    display: none;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.headroom--scrolled {
+
+  .header__top {
+    display: none;
+  }
+
+  .header__bottom {
+    background: #444;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .header__logo-img {
+    bottom: 10px;
+    width: 80px;
+  }
+}
+
+.header_static{
+  .header__top {
+    display: none;
+  }
+
+  .header__bottom {
+    background: #444;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .header__logo-img {
+    bottom: 10px;
+    width: 80px;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-nav{
+    display: none;
+    height: calc(100vh - 200px);
+    overflow: scroll;
+
+    &__toggler{
+      display: block;
+    }
+  }
+  .header {
+    &_close-nav {
+      background: $primary-text-color;
+      height: 100vh;
+      overflow: hidden;
+
+      .main-nav{
+        display: block;
+      }
+    }
+    &__top-container{
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    &__phone{
+      line-height: 30px;
+      padding: 0;
+      .fas {
+        line-height: 30px;
+      }
+    }
+    &__lang{
+      margin-bottom: 10px;
+    }
+
+    &__navigation {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+
+  .main-nav {
+    flex-direction: column;
+
+    display: none;
+    &_close {
+      display: block;
+    }
+  }
+
+  .wrapper {
+    // overflow-y:hidden;
+  }
+}
+
+// END HEADER

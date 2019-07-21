@@ -1,0 +1,80 @@
+.Contact{
+  width: 100%;
+  height: 100%;
+  padding-bottom: 30px;
+}
+
+.Contact__title{
+  text-align: center;
+  font-size: 34px;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.Contact__description{
+  text-align: center;
+}
+
+.Contact__content{
+  margin: 30px 0;
+}
+
+
+.AddressContainer{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.Address{
+  margin-bottom: 40px;
+  flex-grow: 1;
+}
+.Address__title{
+  font-size:24px;
+  font-weight: 500;
+  margin: 0;
+}
+.Address__companyName{
+  font-size: 18px;
+  font-weight: 600;
+  margin: 5px 0;
+  margin-top: 20px;
+}
+.Address__item{
+  font-size: 16px;
+  font-weight: 400;
+  margin:0;
+}
+
+
+.ContactItems{
+  margin-bottom:5px;
+}
+.ContactItems__item{
+  display: flex;
+}
+.ContactItems__title{
+  min-width: 100px;
+  font-weight: 600;
+}
+.ContactItems__content{}
+
+
+.AskQuestion{}
+.AskQuestion__title{
+  font-size:24px;
+  font-weight: 500;
+  margin: 0 0 15px 0;
+}
+
+.AskQuestion__form{
+
+}
+
+.Map{}
+.Map__title{
+  font-size:24px;
+  font-weight: 500;
+  margin: 0 0 15px;
+}

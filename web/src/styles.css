@@ -1,9 +1,131 @@
-body, html, #root{
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/slick-carousel/slick/slick.css";
+@import "../../node_modules/slick-carousel/slick/slick-theme.css";
+
+$primary-color: #018339;
+$primary-text-color: #444444;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body, #root {
+    font-family: "Open Sans";
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
 }
+
+.container {
+    max-width: 1380px;
+    margin: 0 auto
+}
+
+.btn {
+    border: none;
+    background: none;
+    display: inline-block;
+    padding: 10px 20px;
+}
+
+.btn-primary {
+    border: 2px solid $primary-color;
+    background: $primary-color;
+    color: #fff;
+}
+
+.link {
+    color: $primary-color;
+    font-size: 16px;
+    border: none;
+    background: none;
+    text-decoration: underline;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.btn-primary-inverse {
+    @extend .btn-primary;
+
+    &:hover {
+        background: none;
+        color: $primary-color;
+        outline: none;
+        border: 2px solid $primary-color;
+    }
+}
+
+.title {
+    color: #444;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        background: $primary-color;
+        bottom: -4px;
+        left: 0;
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+.secondary-content{
+    padding-top: 120px;
+}
+.footer {
+    flex: 0 0 auto;
+    background: #585856;
+    padding: 20px 0;
+    color: #fff;
+
+    &__container {
+        display: flex;
+    }
+
+    &__address {
+        flex-grow: 1;
+    }
+
+    &__copyright {
+        align-self: flex-end;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        &__container {
+            flex-direction: column;
+        }
+
+        &__copyright {
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #ffffff;
+        }
+    }
+}
+
 
 
 /*INPUT FILE BTN*/

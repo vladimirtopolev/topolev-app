@@ -3,19 +3,33 @@ import {useState, createContext} from 'react';
 import {Locale} from '../../modules/table/schema/models';
 import {DEFAULT_LOCALE} from '../../config/locales';
 
-export const LanguageContext = createContext<Locale>(DEFAULT_LOCALE);
 
 interface WithLanguageContextRenderProps {
     children: JSX.Element
 }
 
-export const useLocaleState = () => useState<Locale>(DEFAULT_LOCALE);
+export interface LanguageContextState {
+    locale: Locale,
+    changeLocale: (locale: Locale) => void
+}
+
+const InitLanguageContext: LanguageContextState = {
+    locale: DEFAULT_LOCALE,
+    changeLocale: (locale: Locale) => {
+    }
+};
+
+export const LanguageContext = createContext<LanguageContextState>(InitLanguageContext);
+
 
 export default ({children}: WithLanguageContextRenderProps) => {
-    const [locale] = useLocaleState();
-    console.log('HOC', locale);
+    const [locale, changeLocale] = useState<Locale>(DEFAULT_LOCALE);
+    console.log('LOCALE', locale);
     return (
-        <LanguageContext.Provider value={locale}>
+        <LanguageContext.Provider value={{
+            locale,
+            changeLocale: (locale: Locale) => changeLocale(locale)
+        }}>
             {children}
         </LanguageContext.Provider>
     );

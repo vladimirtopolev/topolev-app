@@ -1,14 +1,21 @@
 import {Route, Switch} from 'react-router';
 import * as React from 'react';
 import {lazy, useEffect} from 'react';
+import {connect} from 'react-redux';
 
-import {LanguageContext} from './common/helpers/with-language-context.render-props-component';
 import WithLanguageContext from './common/helpers/with-language-context.render-props-component';
-const MainPage = lazy(() => import('./client/App')) ;
 
+const MainPage = lazy(() => import('./client/components/pages/main'));
+const ContactPage = lazy(() => import('./client/components/pages/contacts/contact.component'));
 
-const ContactPage = lazy(() => import('./client/components/pages/contacts/contact.component'))
-export default () => {
+import {getProperties} from './common/modules/properties/store/actions/actions'
+
+interface ClientProps {
+    dispatch: any
+}
+
+const Client = ({dispatch}: ClientProps) => {
+    useEffect(() => {dispatch(getProperties())}, []);
     return (
         <WithLanguageContext>
             <Switch>
@@ -17,4 +24,7 @@ export default () => {
             </Switch>
         </WithLanguageContext>
     );
-}
+};
+
+
+export default connect()(Client);

@@ -7,6 +7,7 @@ export interface TableHeaderProperties {
     internalName: string,
     previewHidden?: boolean,
     properties?: object,
+    notLocalized?: boolean,
     order?: Number
 }
 
@@ -19,6 +20,7 @@ export const TableHeaderSchema = new mongoose.Schema<TableHeader>({
     internalName: String,
     previewHidden: Boolean,
     properties: Object,
+    notLocalized: Boolean,
     order: Number,
 });
 
