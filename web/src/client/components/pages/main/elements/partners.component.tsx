@@ -16,7 +16,7 @@ export const Partners = (props: WithAdminTableDataHoc) => {
                                 const url = getCellValueByInternalName(partnerRow, 'url');
                                 const img = getCellValueByInternalName(partnerRow, 'logo');
                                 return (
-                                    <div className="partner col-md-4">
+                                    <div className="partner col-md-4" key={partnerRow._id}>
                                         <a href={url} className="partner__link">
                                             <img src={img} className="partner__img"/>
                                         </a>
