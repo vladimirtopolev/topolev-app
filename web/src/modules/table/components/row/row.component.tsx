@@ -6,6 +6,8 @@ import Cell from '../cells/cell.component';
 import {TableRowContainerProps} from './row-container.component';
 import WithSpinner from '../../../../common/helpers/with-spinner.render-props-component';
 import * as styles from './row.component.styles.css';
+import {LOCALES} from '../../../../config/locales';
+import * as _ from 'lodash';
 
 const getRow = (headers: Header[], row: Row): Row => {
     return row || {
@@ -36,13 +38,17 @@ const Row = ({tableName, rowId, headers, row, locale, goBack, getTableHeaders, g
     const changeCell = (headerId: string, value: any, locale?: Locale) => {
         changeRowInMemory({
             ...row,
-            cells: rowInMemory.cells.map(cell => cell.header._id === headerId
-                ? {
-                    ...cell,
-                    value: locale ? {...cell.value, [locale.key]: value} : value
+            cells: rowInMemory.cells.map(cell => {
+                if (cell.header._id !== headerId) {
+                    return cell;
                 }
-                : cell
-            )
+                const newValue = locale
+                    ? _.isObject(cell.value)
+                        ? {...cell.value, [locale.key]: value}
+                        : LOCALES.reduce((memo, locale) => ({...memo, [locale.key]: value}), {})
+                    : value;
+                return {...cell, value: newValue};
+            })
         });
     };
 
@@ -76,7 +82,10 @@ const Row = ({tableName, rowId, headers, row, locale, goBack, getTableHeaders, g
                                     <div className={styles.Cell__title}>{header.name}</div>
                                     <div className={styles.Cell__value}>
                                         {cell &&
-                                        <Cell cell={cell} isEditMode={isEditMode} changeCell={changeCell}
+                                        <Cell cell={cell}
+                                              isEditMode={isEditMode}
+                                              changeCell={changeCell}
+                                              notLocalized={header.notLocalized}
                                               locale={localeItem}/>}
                                     </div>
                                 </div>

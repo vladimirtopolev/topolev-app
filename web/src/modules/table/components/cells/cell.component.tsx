@@ -7,6 +7,7 @@ export interface CellProps {
     cell: Cell,
     isEditMode?: boolean
     changeCell?: (cellId: string, value: any, locale?: Locale) => void,
+    notLocalized?: boolean,
     locale: Locale
 }
 

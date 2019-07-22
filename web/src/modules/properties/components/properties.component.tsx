@@ -35,10 +35,9 @@ export default ({properties, locale, updateProperties}: PropertiesProps) => {
                             return property;
                         }
                         const newValue = locale
-                            ? _.isObject(property.value) ? {
-                                ...property.value,
-                                [locale.key]: value
-                            } : LOCALES.reduce((memo, locale) => ({...memo, [locale.key]: value}), {})
+                            ? _.isObject(property.value)
+                                ? {...property.value, [locale.key]: value}
+                                : LOCALES.reduce((memo, locale) => ({...memo, [locale.key]: value}), {})
                             : value;
                         return {...property, value: newValue};
                     });

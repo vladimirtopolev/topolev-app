@@ -19,8 +19,13 @@ export const adminNavbarLinks: NavbarLink[] = [
         links: [
             {
                 iconClassName: 'fa fa-table link__icon',
-                title: 'Тест',
-                href: `/admin/tables/test`
+                title: 'Новости',
+                href: `/admin/tables/news`
+            },
+            {
+                iconClassName: 'fa fa-table link__icon',
+                title: 'Партнеры',
+                href: `/admin/tables/partners`
             }
         ]
     },

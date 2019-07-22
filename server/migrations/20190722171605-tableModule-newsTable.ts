@@ -9,31 +9,38 @@ import {TableProperties} from '../src/modules/table/models/table.model';
 
 const TABLE: TableProperties = {
     _id: new ObjectId(),
-    name: 'partners',
-    title: 'Партнеры'
+    name: 'news',
+    title: 'Новости'
 };
 const HEADERS: TableHeaderProperties[] = [
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        internalName: 'title',
-        name: 'Наименование',
+        internalName: 'date',
+        name: 'Дата публикации',
+        notLocalized: true,
         order: 1
     },
     {
         _id: new ObjectId(),
         type: 'INPUT',
-        internalName: 'url',
-        name: 'URL сайта',
-        notLocalized: true,
+        internalName: 'title',
+        name: 'Заголовок',
         order: 1
     },
     {
         _id: new ObjectId(),
         type: 'IMAGE',
-        internalName: 'logo',
-        name: 'Логотип',
+        internalName: 'article_img',
+        name: 'Основное изображение',
         notLocalized: true,
+        order: 2
+    },
+    {
+        _id: new ObjectId(),
+        type: 'TEXTAREA',
+        internalName: 'text',
+        name: 'Содержание новости',
         order: 2
     }
 ];
@@ -45,21 +52,29 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
-                value: {
-                    ru: 'Экспофорум',
-                    en: 'Expoforum'
-                }
+                value: new Date()
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://expoforum.by/'
+                value: {
+                    ru: 'Первая новость',
+                    en: 'The first new'
+                }
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
                 value: 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png'
-            }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Первая новость сожержание',
+                    en: 'The first new content'
+                }
+            },
         ]
     },
     {
@@ -68,44 +83,29 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
-                value: {
-                    ru: 'Инфо-форум',
-                    en: 'Info-forum'
-                }
+                value: new Date()
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://infoforum.ru/'
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[2]._id,
-                value: 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723529/infoforum_q4jzym.png'
-            }
-        ]
-    },
-    {
-        _id: new ObjectId(),
-        cells: [
-            {
-                _id: new ObjectId(),
-                header: HEADERS[0]._id,
                 value: {
-                    ru: 'STS- дизайн',
-                    en: 'STS-дизайн'
+                    ru: 'Вторая новость',
+                    en: 'The first new'
                 }
             },
             {
                 _id: new ObjectId(),
-                header: HEADERS[1]._id,
-                value: 'https://www.stsdesignandprint.com/'
+                header: HEADERS[2]._id,
+                value: 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png'
             },
             {
                 _id: new ObjectId(),
-                header: HEADERS[2]._id,
-                value: 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723538/sts-design_z58cff.png'
-            }
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Вторая новость сожержание',
+                    en: 'The second new content'
+                }
+            },
         ]
     },
 

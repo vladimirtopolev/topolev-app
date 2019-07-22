@@ -74,10 +74,13 @@ export default tables;
 
 const requestTableSuccess = (state: any, action: GetTableActionSuccess) => {
     const {entities} = action.payload;
+    const {tableName} = action.params;
     return {
         ...state,
-        [action.params.tableName]: {
-            ...entities
+        [tableName]: {
+            ...entities,
+            headerIds: entities.table[tableName].headers,
+            rowIds: entities.table[tableName].rows
         }
     };
 };

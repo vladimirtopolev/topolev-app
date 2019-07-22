@@ -6,8 +6,9 @@ import * as styles from './value-single-image.component.styles.css';
 import ModalImageEditor from './helpers/image-modal.component';
 import ModalPreviewImage from './helpers/image-preview-modal.component';
 import {getValue} from './helpers/utilities';
+import {DEFAULT_LOCALE} from '../../../../config/locales';
 
-const SingleImageValue = ({value, locale, isEditMode, changeValue}: ValueRenderProps) => {
+const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized}: ValueRenderProps) => {
     const [isOpenModalImageEditor, toggleModalImageEditor] = useState(false);
     const [isOpenModalPreviewImage, toggleModalPreviewImage] = useState(false);
     const [srcImagePreview, changeSrcImagePreview] = useState('');
@@ -18,8 +19,9 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue}: ValueRenderP
 
     const localizedValue = getValue(value, locale);
 
-    return isEditMode
-        ? (
+    return !isEditMode || (notLocalized && DEFAULT_LOCALE.key !== locale.key)
+        ? <Image src={localizedValue}/>
+        : (
             <div className={styles.ImageGallery}>
                 {localizedValue && (
                     <div className={styles.Item}>
@@ -60,7 +62,6 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue}: ValueRenderP
                 />
             </div>
         )
-        : <Image src={localizedValue}/>;
 };
 
 export default SingleImageValue;

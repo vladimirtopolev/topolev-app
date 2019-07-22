@@ -33,7 +33,7 @@ const TableContainerComponent = ({tableMeta, headers, rows, locales, domainPath,
     useEffect(() => {
         dispatch(getTableHeaders(tableName));
         dispatch(getTableRows(tableName));
-    }, []);
+    }, [tableName]);
 
 
     return (

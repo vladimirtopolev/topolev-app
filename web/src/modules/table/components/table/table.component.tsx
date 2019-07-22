@@ -24,7 +24,7 @@ const TableComponent = (props: TableProps) => {
     return (
         <div className={styles.TableManager}>
             <div className={styles.TableManager__toolbar}>
-                <Link to={`${domainPath}/tables/${tableMeta.name}/rows/${locale.key}/new`} className="button">
+                <Link to={`${domainPath}/${tableMeta.name}/rows/${locale.key}/new`} className="button">
                     Добавить запись
                 </Link>
             </div>
@@ -48,7 +48,7 @@ const TableComponent = (props: TableProps) => {
                             <td>
                                 <Link
                                     className={cn('iconButton', 'iconButton_edit')}
-                                    to={`${domainPath}/tables/${tableMeta.name}/rows/${locale.key}/${row._id}`}>
+                                    to={`${domainPath}/${tableMeta.name}/rows/${locale.key}/${row._id}`}>
                                 </Link>
                                 <button
                                     className={cn('iconButton', 'iconButton_warning', 'iconButton_delete')}

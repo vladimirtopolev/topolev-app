@@ -36,7 +36,5 @@ export const getAsyncTaskStatuses = (state: any) => state[MODULE_NAME].asyncStat
 
 
 export const isLoadingTasks = (state: any, tasks: string[]) => {
-    console.log('ASYNC STATS', state[MODULE_NAME].asyncStatuses);
-    console.log(tasks.some(actionKey => state[MODULE_NAME].asyncStatuses[actionKey] === 'STARTED'))
     return tasks.some(actionKey => state[MODULE_NAME].asyncStatuses[actionKey] === 'STARTED')
 }

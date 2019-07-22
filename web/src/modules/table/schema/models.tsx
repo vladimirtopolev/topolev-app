@@ -19,6 +19,7 @@ export interface Header {
     _id: string,
     type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT | HEADER_TYPES.TEXTAREA,
     internalName: string,
+    notLocalized?: boolean,
     name: string,
 }
 
