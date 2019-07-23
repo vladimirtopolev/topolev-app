@@ -26,6 +26,20 @@ const HEADERS: TableHeaderProperties[] = [
         internalName: 'image',
         name: 'Фото стенда',
         order: 2
+    },
+    {
+        _id: new ObjectId(),
+        type: 'TEXTAREA',
+        internalName: 'textarea',
+        name: 'Описание',
+        order: 3
+    },
+    {
+        _id: new ObjectId(),
+        type: 'IMAGE_GALLERY',
+        internalName: 'gallery',
+        name: 'Галлерея',
+        order: 4
     }
 ];
 
@@ -44,8 +58,28 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
-            }
+                value: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg']
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[2]._id,
+                value: {
+                    ru: 'Стенд Ferolli',
+                    en: 'Stand Ferolly'
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: [
+                    'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100-1_rrluyq.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/002_bwkafl.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/001-2_rrylso.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100_hn1msm.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/003_h1rehi.jpg'
+                ]
+            },
         ]
     },
     {
@@ -62,8 +96,24 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
-            }
+                value: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg']
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[2]._id,
+                value: {
+                    ru: 'Стенд Ferolli',
+                    en: 'Stand Ferolly'
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: [
+                    'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg',
+                    'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
+                ]
+            },
         ]
     },
 ];

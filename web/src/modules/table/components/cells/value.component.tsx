@@ -20,9 +20,11 @@ export default ({type, ...rest}: ValueProps) => {
         case 'INPUT':
             return <InputValue  {...rest}/>;
         case 'IMAGE':
-            return <SingleImageCell {...rest}/>;
+            return <SingleImageCell {...rest} isSingleImage={true}/>;
         case 'TEXTAREA':
             return <TextareaValue {...rest}/>;
+        case 'IMAGE_GALLERY':
+            return <SingleImageCell {...rest}/>
         default:
             throw Error(`Invalid header type ${type}`);
     }

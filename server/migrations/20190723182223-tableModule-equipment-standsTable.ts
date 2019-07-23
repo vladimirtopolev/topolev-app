@@ -9,8 +9,8 @@ import {TableProperties} from '../src/modules/table/models/table.model';
 
 const TABLE: TableProperties = {
     _id: new ObjectId(),
-    name: 'partners',
-    title: 'Партнеры'
+    name: 'buildingStands',
+    title: 'Строительство стендов'
 };
 const HEADERS: TableHeaderProperties[] = [
     {
@@ -22,18 +22,25 @@ const HEADERS: TableHeaderProperties[] = [
     },
     {
         _id: new ObjectId(),
-        type: 'INPUT',
-        internalName: 'url',
-        name: 'URL сайта',
+        type: 'IMAGE',
+        internalName: 'image',
+        name: 'Основное изображение',
         notLocalized: true,
-        order: 1
+        order: 2
     },
     {
         _id: new ObjectId(),
-        type: 'IMAGE',
-        internalName: 'logo',
-        name: 'Логотип',
+        type: 'IMAGE_GALLERY',
+        internalName: 'image-gallery',
+        name: 'Галлерея',
         notLocalized: true,
+        order: 2
+    },
+    {
+        _id: new ObjectId(),
+        type: 'TEXTAREA',
+        internalName: 'text',
+        name: 'Описание',
         order: 2
     }
 ];
@@ -46,20 +53,31 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
                 value: {
-                    ru: 'Экспофорум',
-                    en: 'Expoforum'
+                    ru: 'Стеновый блок',
+                    en: 'Building block'
                 }
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://expoforum.by/'
+                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/001_dmaslm.jpg']
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png']
-            }
+                value: [
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/001-1_nx7w5q.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/001-2_rrylso.jpg'
+                ]
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Первая новость сожержание',
+                    en: 'The first new content'
+                }
+            },
         ]
     },
     {
@@ -69,20 +87,30 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
                 value: {
-                    ru: 'Инфо-форум',
-                    en: 'Info-forum'
+                    ru: 'Стеновый блок дугообразный',
+                    en: 'Object2'
                 }
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://infoforum.ru/'
+                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/002_bwkafl.jpg']
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723529/infoforum_q4jzym.png']
-            }
+                value: [
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/002-1_qhhbsj.jpg',
+                ]
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Вторая новость сожержание',
+                    en: 'The second new content'
+                }
+            },
         ]
     },
     {
@@ -92,20 +120,31 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
                 value: {
-                    ru: 'STS- дизайн',
-                    en: 'STS-дизайн'
+                    ru: 'Дверь раздвижная',
+                    en: 'Object2'
                 }
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://www.stsdesignandprint.com/'
+                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/003_h1rehi.jpg']
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723538/sts-design_z58cff.png']
-            }
+                value: [
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/003-1_s28us5.jpg',
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/003-2_oeiyg0.jpg'
+                ]
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Вторая новость сожержание',
+                    en: 'The second new content'
+                }
+            },
         ]
     },
 

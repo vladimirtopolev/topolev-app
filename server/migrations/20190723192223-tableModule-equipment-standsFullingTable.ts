@@ -9,8 +9,8 @@ import {TableProperties} from '../src/modules/table/models/table.model';
 
 const TABLE: TableProperties = {
     _id: new ObjectId(),
-    name: 'partners',
-    title: 'Партнеры'
+    name: 'fullingStands',
+    title: 'Наполнение стендов'
 };
 const HEADERS: TableHeaderProperties[] = [
     {
@@ -22,18 +22,25 @@ const HEADERS: TableHeaderProperties[] = [
     },
     {
         _id: new ObjectId(),
-        type: 'INPUT',
-        internalName: 'url',
-        name: 'URL сайта',
+        type: 'IMAGE',
+        internalName: 'image',
+        name: 'Основное изображение',
         notLocalized: true,
-        order: 1
+        order: 2
     },
     {
         _id: new ObjectId(),
-        type: 'IMAGE',
-        internalName: 'logo',
-        name: 'Логотип',
+        type: 'IMAGE_GALLERY',
+        internalName: 'image-gallery',
+        name: 'Галлерея',
         notLocalized: true,
+        order: 2
+    },
+    {
+        _id: new ObjectId(),
+        type: 'TEXTAREA',
+        internalName: 'text',
+        name: 'Описание',
         order: 2
     }
 ];
@@ -46,69 +53,32 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[0]._id,
                 value: {
-                    ru: 'Экспофорум',
-                    en: 'Expoforum'
+                    ru: 'Стеновый блок наполнение',
+                    en: 'Building block'
                 }
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
-                value: 'https://expoforum.by/'
+                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100_hn1msm.jpg']
             },
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png']
-            }
-        ]
-    },
-    {
-        _id: new ObjectId(),
-        cells: [
+                value: [
+                    'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100-1_rrluyq.jpg'
+                ]
+            },
             {
                 _id: new ObjectId(),
-                header: HEADERS[0]._id,
+                header: HEADERS[3]._id,
                 value: {
-                    ru: 'Инфо-форум',
-                    en: 'Info-forum'
+                    ru: 'Первая новость сожержание',
+                    en: 'The first new content'
                 }
             },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[1]._id,
-                value: 'https://infoforum.ru/'
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723529/infoforum_q4jzym.png']
-            }
         ]
-    },
-    {
-        _id: new ObjectId(),
-        cells: [
-            {
-                _id: new ObjectId(),
-                header: HEADERS[0]._id,
-                value: {
-                    ru: 'STS- дизайн',
-                    en: 'STS-дизайн'
-                }
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[1]._id,
-                value: 'https://www.stsdesignandprint.com/'
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723538/sts-design_z58cff.png']
-            }
-        ]
-    },
-
+    }
 ];
 
 

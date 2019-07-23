@@ -65,7 +65,7 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png'
+                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png']
             },
             {
                 _id: new ObjectId(),
@@ -96,7 +96,7 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png'
+                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png']
             },
             {
                 _id: new ObjectId(),
