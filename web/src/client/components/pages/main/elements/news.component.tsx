@@ -1,10 +1,16 @@
 import * as React from 'react';
+import {useContext} from 'react';
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import withAdminTableData, {WithAdminTableDataHoc} from '../../../../../common/helpers/with-admin-table-data.hoc';
 import {getCellValueByInternalName} from '../../../../../common/modules/adminTableData/helpers';
+import {
+    LanguageContext
+} from '../../../../../common/helpers/with-language-context.render-props-component';
 
 const News = (props: WithAdminTableDataHoc) => {
     const {adminTableData} = props;
+    const languageContext = useContext(LanguageContext);
     return (
         <section className="news">
             <div className="news__container container">
@@ -16,15 +22,18 @@ const News = (props: WithAdminTableDataHoc) => {
                         <div className="news__container row">
                             {
                                 _.take(adminTableData, 2)
-                                    .map(newRow => {
+                                    .map(newsRow => {
+                                        const date = getCellValueByInternalName(newsRow, 'date');
+                                        const title = getCellValueByInternalName(newsRow, 'title', languageContext.locale);
+
+                                        console.log('---> -->', date, title);
                                         return (
                                             <div className="col-md-6">
                                                 <div className="new-item">
-                                                    <div className="new-item__date">02.2019</div>
+                                                    <div
+                                                        className="new-item__date">{moment(date).format('DD.MM.YYYY')}</div>
                                                     <div className="new-item__title">
-                                                        Открыта регистрация на конгресс "Эффективное тепло- и
-                                                        водоснабжение
-                                                        в Республике Беларусь", Минск, 19-20 марта
+                                                        {title}
                                                     </div>
                                                     <div className="new-item__link">
                                                         <button className="link">Читать...</button>
@@ -40,6 +49,6 @@ const News = (props: WithAdminTableDataHoc) => {
             </div>
         </section>
     );
-}
+};
 
 export default withAdminTableData<any>('news')(News);

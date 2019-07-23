@@ -1,6 +1,8 @@
-import {Row} from '../../../../modules/table/schema/models';
+import {Locale, Row} from '../../../../modules/table/schema/models';
 
-export const getCellValueByInternalName = (row: Row, internalName: string) => {
-    const cell =  row.cells.find(cell => cell.header.internalName === internalName);
-    return cell && cell.value || '';
+export const getCellValueByInternalName = (row: Row, internalName: string, locale?: Locale) => {
+    const cell = row.cells.find(cell => cell.header.internalName === internalName);
+    return locale
+        ? cell && cell.value && cell.value[locale.key] || ''
+        : cell && cell.value || '';
 };
