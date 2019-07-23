@@ -91,6 +91,7 @@ body, #root {
 }
 .secondary-content{
     padding-top: 120px;
+    height: 100%;
 }
 .footer {
     flex: 0 0 auto;

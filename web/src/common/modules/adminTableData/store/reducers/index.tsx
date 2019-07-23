@@ -1,17 +1,21 @@
 import {Reducer} from 'redux';
 import {AsyncAction, AsyncActionStatus, SucceededAsyncAction} from '../../../../../utilities/asyncActions';
-import {GET_ADMIN_TABLE_DATA} from '../actions/types';
+import {GET_ADMIN_TABLE_ROWS_DATA, GET_ADMIN_TABLE_ROW_DATA} from '../actions/types';
 import {NormalizedTableResponse} from '../../../../../modules/table/schema/table';
 import {Params} from '../../../../../modules/table/store/actions/actions';
 import * as _ from 'lodash';
 
-type GetTableActionSuccess = SucceededAsyncAction<typeof GET_ADMIN_TABLE_DATA, NormalizedTableResponse, Params>;
+type GetTableRowsActionSuccess = SucceededAsyncAction<typeof GET_ADMIN_TABLE_ROWS_DATA, NormalizedTableResponse, Params>;
+type GetTableRowActionSuccess = SucceededAsyncAction<typeof GET_ADMIN_TABLE_ROW_DATA, NormalizedTableResponse, Params>;
+
+type GetTableActionsSuccess = GetTableRowsActionSuccess | GetTableRowActionSuccess;
 
 const adminTableData: Reducer<any, AsyncAction<any, any>> = (state = {}, action) => {
-    if (action.type === GET_ADMIN_TABLE_DATA) {
+    if (action.type === GET_ADMIN_TABLE_ROWS_DATA
+        || action.type === GET_ADMIN_TABLE_ROW_DATA) {
         switch (action.status) {
             case AsyncActionStatus.SUCCEEDED:
-                return requestTableSuccess(state, action as GetTableActionSuccess);
+                return requestTableSuccess(state, action as GetTableActionsSuccess);
             default:
                 return state;
         }
@@ -21,7 +25,7 @@ const adminTableData: Reducer<any, AsyncAction<any, any>> = (state = {}, action)
 
 export default adminTableData;
 
-const requestTableSuccess = (state: any, action: GetTableActionSuccess) => {
+const requestTableSuccess = (state: any, action: GetTableActionsSuccess) => {
     const {entities} = action.payload;
     const {tableName} = action.params;
     return {
@@ -61,4 +65,22 @@ export const getTableRows = (state: any, tableName: string) => {
                 };
             })
         }));
+};
+
+export const getTableRow = (state: any, tableName: string, rowId: string) => {
+    const tableMeta = getTable(state, tableName);
+
+    const row = _.get(tableMeta, `rows.${rowId}`);
+    return row
+        ? {
+            ...row,
+            cells: row.cells.map((cellKey: any) => {
+                const cell = tableMeta.cells[cellKey];
+                return {
+                    ...cell,
+                    type: tableMeta.headers[cell.header]
+                };
+            })
+        }
+        : undefined;
 };

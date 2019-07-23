@@ -71,6 +71,7 @@ class TableController {
     _getRow = async (tableName: string, rowId: string, res: Response) => {
         const table = await TableModel.findOne({name: tableName, rows: {$elemMatch: {$eq: rowId}}})
             .populate(populateRowsDescription)
+            .populate('headers')
             .exec();
 
         if (table) {

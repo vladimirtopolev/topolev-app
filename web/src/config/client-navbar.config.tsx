@@ -13,12 +13,12 @@ export const clientNavbarLinks: ClientNavbarLink[] = [
         href: '#'
     },
     {
-        title: 'Услугм',
-        href: '#'
+        title: 'Оборудование',
+        href: '/equipments'
     },
     {
-        title: 'Оборудование',
-        href: '#'
+        title: 'Новости',
+        href: '/news'
     },
     {
         title: 'Контакты',

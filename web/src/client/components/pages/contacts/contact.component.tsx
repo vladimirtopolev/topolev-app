@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {YMaps, Map, Placemark} from 'react-yandex-maps';
-import cn from 'classnames';
 import Layout from '../../layout/layout.component';
 
 import * as styles from './contact.component.styles.scss';

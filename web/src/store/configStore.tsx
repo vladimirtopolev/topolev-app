@@ -25,7 +25,7 @@ const createReducer = (asyncReducers?: any) => {
         ...staticReducers,
         ...asyncReducers
     });
-}
+};
 
 const store: StoreWithAsyncReducers = createStore(
     createReducer(),

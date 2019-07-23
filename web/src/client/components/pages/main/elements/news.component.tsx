@@ -7,6 +7,7 @@ import {getCellValueByInternalName} from '../../../../../common/modules/adminTab
 import {
     LanguageContext
 } from '../../../../../common/helpers/with-language-context.render-props-component';
+import {Link} from 'react-router-dom';
 
 const News = (props: WithAdminTableDataHoc) => {
     const {adminTableData} = props;
@@ -26,7 +27,6 @@ const News = (props: WithAdminTableDataHoc) => {
                                         const date = getCellValueByInternalName(newsRow, 'date');
                                         const title = getCellValueByInternalName(newsRow, 'title', languageContext.locale);
 
-                                        console.log('---> -->', date, title);
                                         return (
                                             <div className="col-md-6">
                                                 <div className="new-item">
@@ -36,7 +36,7 @@ const News = (props: WithAdminTableDataHoc) => {
                                                         {title}
                                                     </div>
                                                     <div className="new-item__link">
-                                                        <button className="link">Читать...</button>
+                                                        <Link to={`/news/${newsRow._id}`} className="link">Читать...</Link>
                                                     </div>
                                                 </div>
                                             </div>

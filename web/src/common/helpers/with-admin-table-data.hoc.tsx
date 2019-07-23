@@ -17,7 +17,7 @@ export interface WithAdminTableDataHoc{
 export default function withAdminTableData<PROPS>(tableName: string) {
     const mapStateToProps = (state: any):WithAdminTableDataHoc => {
         return {
-            adminTableData: fromAdminTableData.getAdminTableData(state, tableName)
+            adminTableData: fromAdminTableData.getAdminTableRowsData(state, tableName)
         };
     };
 

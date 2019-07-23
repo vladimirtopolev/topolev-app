@@ -16,4 +16,5 @@ export default {
 export const getAuth = (state: any) => fromAuth.getAuth(state.auth);
 export const getAuthAsyncStatuses = (state: any) => fromAuth.getAsyncStatuses(state.auth);
 
-export const getAdminTableData = (state:any, tableName: string) => fromAdminTableData.getTableRows(state.adminTableData, tableName);
+export const getAdminTableRowsData = (state:any, tableName: string) => fromAdminTableData.getTableRows(state.adminTableData, tableName);
+export const getAdminTableRowData = (state:any, tableName: string, rowId:string) => fromAdminTableData.getTableRow(state.adminTableData, tableName, rowId);
