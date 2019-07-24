@@ -21,6 +21,7 @@ export interface Header {
     type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT | HEADER_TYPES.TEXTAREA | HEADER_TYPES.IMAGE_GALLERY,
     internalName: string,
     notLocalized?: boolean,
+    properties?: any,
     name: string,
 }
 

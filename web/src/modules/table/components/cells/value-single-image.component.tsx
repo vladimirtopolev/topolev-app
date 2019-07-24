@@ -14,7 +14,7 @@ interface ImageGalleryValueProps extends ValueRenderProps {
     isSingleImage?: boolean
 }
 
-const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized, isSingleImage}: ImageGalleryValueProps) => {
+const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized, isSingleImage, properties}: ImageGalleryValueProps) => {
     const [isOpenModalImageEditor, toggleModalImageEditor] = useState(false);
     const [isOpenModalPreviewImage, toggleModalPreviewImage] = useState(false);
     const [srcImagePreview, changeSrcImagePreview] = useState('');
@@ -77,6 +77,7 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized,
                     </button>
                 )}
                 <ModalImageEditor isOpen={isOpenModalImageEditor}
+                                  properties={properties}
                                   toggleModal={() => toggleModalImageEditor(!isOpenModalImageEditor)}
                                   saveImage={saveImage}
                 />

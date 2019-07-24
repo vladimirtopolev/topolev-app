@@ -26,6 +26,9 @@ const HEADERS: TableHeaderProperties[] = [
         internalName: 'image',
         name: 'Фото стенда',
         notLocalized: true,
+        properties:{
+            aspectRatio: 1
+        },
         order: 2
     },
     {

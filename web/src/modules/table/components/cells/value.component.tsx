@@ -9,6 +9,7 @@ export interface ValueRenderProps {
     isEditMode?: boolean,
     changeValue?: (value: any, locale?: Locale) => void,
     locale: Locale,
+    properties?: any,
     notLocalized?: boolean
 }
 export interface ValueProps extends ValueRenderProps{

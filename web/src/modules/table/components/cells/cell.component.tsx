@@ -18,7 +18,7 @@ const Cell = ({changeCell, cell, ...rest}: CellProps) => {
     const value = cell && cell.value || '';
     const type = cell.header.type;
 
-    return <Value type={type} value={value} changeValue={changeValue} {...rest}/>;
+    return <Value type={type} value={value} changeValue={changeValue} properties={cell.header.properties} {...rest}/>;
 };
 
 export default Cell;
