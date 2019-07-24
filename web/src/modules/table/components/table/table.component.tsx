@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useState} from 'react';
 import cn from 'classnames';
-import {Header, Locale, Row, TableMeta} from '../../schema/models';
+import {Header, HEADER_TYPES, Locale, Row, TableMeta} from '../../schema/models';
 import Cell from '../cells/cell.component';
 import {Link} from 'react-router-dom';
 import * as styles from './table.component.styles.css';
@@ -21,6 +21,7 @@ const TableComponent = (props: TableProps) => {
     const [isOpen, toggleModal] = useState<boolean>(false);
     const [deletedRowId, changeDeletedRowId] = useState<string>(null);
 
+    const headerFilters = (header:Header) => header.type !== HEADER_TYPES.IMAGE_GALLERY
     return (
         <div className={styles.TableManager}>
             <div className={styles.TableManager__toolbar}>
@@ -31,7 +32,9 @@ const TableComponent = (props: TableProps) => {
             <table className={cn(styles.TableManager__table, styles.Table)}>
                 <thead>
                 <tr>
-                    {headers.map(header => <th key={header._id}>{header.name}</th>)}
+                    {headers
+                        .filter(headerFilters)
+                        .map(header => <th key={header._id}>{header.name}</th>)}
                     <th className={styles.Table__actionColumn}></th>
                 </tr>
                 </thead>
@@ -39,12 +42,14 @@ const TableComponent = (props: TableProps) => {
                 {rows.map(row => {
                     return (
                         <tr key={row._id}>
-                            {headers.map(header => {
-                                const cell = row.cells.find(c => c.header._id === header._id);
-                                return (<td key={header._id}>
-                                    <Cell cell={cell} locale={locale}/>
-                                </td>);
-                            })}
+                            {headers
+                                .filter(headerFilters)
+                                .map(header => {
+                                    const cell = row.cells.find(c => c.header._id === header._id);
+                                    return (<td key={header._id}>
+                                        <Cell cell={cell} locale={locale} notLocalized={header.notLocalized}/>
+                                    </td>);
+                                })}
                             <td>
                                 <Link
                                     className={cn('iconButton', 'iconButton_edit')}

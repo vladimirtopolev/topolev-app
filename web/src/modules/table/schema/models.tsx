@@ -7,7 +7,8 @@ export interface Locale {
 export enum HEADER_TYPES {
     INPUT = 'INPUT',
     IMAGE = 'IMAGE',
-    TEXTAREA = 'TEXTAREA'
+    TEXTAREA = 'TEXTAREA',
+    IMAGE_GALLERY= 'IMAGE_GALLERY'
 }
 
 export interface TableMeta {
@@ -17,7 +18,7 @@ export interface TableMeta {
 
 export interface Header {
     _id: string,
-    type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT | HEADER_TYPES.TEXTAREA,
+    type: HEADER_TYPES.IMAGE | HEADER_TYPES.INPUT | HEADER_TYPES.TEXTAREA | HEADER_TYPES.IMAGE_GALLERY,
     internalName: string,
     notLocalized?: boolean,
     name: string,

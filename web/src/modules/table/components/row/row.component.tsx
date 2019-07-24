@@ -76,6 +76,7 @@ const Row = ({tableName, rowId, headers, row, locale, goBack, getTableHeaders, g
                     <div className={styles.Row__container}>
                         {headers.map(header => {
                             const cell = rowInMemory && rowInMemory.cells.find(c => c.header._id === header._id);
+                            console.log('NOT LOCALIZED ROW', header);
                             return (
                                 <div key={header._id}
                                      className={styles.Cell}>

@@ -25,6 +25,14 @@ const HEADERS: TableHeaderProperties[] = [
         type: 'IMAGE',
         internalName: 'image',
         name: 'Фото стенда',
+        notLocalized: true,
+        order: 2
+    },
+    {
+        _id: new ObjectId(),
+        type: 'IMAGE',
+        internalName: 'image2',
+        name: 'Фото стенда',
         order: 2
     },
     {
@@ -39,7 +47,15 @@ const HEADERS: TableHeaderProperties[] = [
         type: 'IMAGE_GALLERY',
         internalName: 'gallery',
         name: 'Галлерея',
-        order: 4
+        order: 4,
+        notLocalized: true
+    },
+    {
+        _id: new ObjectId(),
+        type: 'IMAGE_GALLERY',
+        internalName: 'gallery2',
+        name: 'Галлерея',
+        order: 4,
     }
 ];
 
@@ -64,13 +80,21 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
                 value: {
+                    ru: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'],
+                    en: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg']
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
                     ru: 'Стенд Ferolli',
                     en: 'Stand Ferolly'
                 }
             },
             {
                 _id: new ObjectId(),
-                header: HEADERS[3]._id,
+                header: HEADERS[4]._id,
                 value: [
                     'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg',
                     'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100-1_rrluyq.jpg',
@@ -80,6 +104,14 @@ const ROWS: TableRowProperties[] = [
                     'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/003_h1rehi.jpg'
                 ]
             },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[5]._id,
+                value: {
+                    ru: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'],
+                    en: [ 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100-1_rrluyq.jpg']
+                }
+            }
         ]
     },
     {
@@ -102,18 +134,34 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
                 value: {
+                    ru: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'],
+                    en: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg']
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
                     ru: 'Стенд Ferolli',
                     en: 'Stand Ferolly'
                 }
             },
             {
                 _id: new ObjectId(),
-                header: HEADERS[3]._id,
+                header: HEADERS[4]._id,
                 value: [
                     'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg',
                     'https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'
                 ]
             },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[5]._id,
+                value: {
+                    ru: ['https://res.cloudinary.com/dix3v9vzg/image/upload/v1548243408/exposervice/001.jpg'],
+                    en: [ 'https://res.cloudinary.com/dsee6uh8u/image/upload/v1563896786/equipment/100-1_rrluyq.jpg']
+                }
+            }
         ]
     },
 ];

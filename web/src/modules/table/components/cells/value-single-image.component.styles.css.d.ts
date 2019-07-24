@@ -7,6 +7,7 @@ interface CssExports {
   'Item__image': string;
   'Item__toolbar': string;
   'SingleImage__uploadBtn': string;
+  'SingleImage__uploadBtn_section': string;
 }
 declare var cssExports: CssExports;
 export = cssExports;

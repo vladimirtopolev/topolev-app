@@ -9,6 +9,10 @@ export const getValue = (value: any, locale: Locale) => {
         : _.isObject(value) ? value[locale.key] || value[DEFAULT_LOCALE.key] || '' : value || ''
 };
 
-export const getValueAsArray = (value: any) => {
-    return value || [];
-}
+export const getValueAsArray = (value: any, locale: Locale) => {
+    return !locale
+        ? value || []
+        // @ts-ignore
+        : _.isObject(value) ? value[locale.key] || value[DEFAULT_LOCALE.key] || [] : value || []
+};
+

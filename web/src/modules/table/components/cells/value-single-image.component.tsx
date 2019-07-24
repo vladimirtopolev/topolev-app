@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import * as _ from 'lodash';
+import cn from 'classnames';
 import {ValueRenderProps} from './value.component';
 import Image from '../../../../common/elements/image.component';
 import * as styles from './value-single-image.component.styles.css';
@@ -19,21 +19,23 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized,
     const [isOpenModalPreviewImage, toggleModalPreviewImage] = useState(false);
     const [srcImagePreview, changeSrcImagePreview] = useState('');
 
+    const valueLocale = !notLocalized ? locale : undefined;
+    const images = getValueAsArray(value, valueLocale);
+
     const saveImage = (imageUrl: string) => {
-        changeValue(imageUrl);
+        changeValue(images.concat(imageUrl), valueLocale);
     };
 
-    const localizedValue = getValue(value, locale);
-
-    const localeValue = !notLocalized ? locale : undefined;
+    const deleteImage = (imageIndex:number) => {
+        changeValue(images.filter((image:any, i:number) => i!== imageIndex), valueLocale);
+    };
 
     const renderImageGalleryInPreviewMode = () => {
         return (
             <div>
-                {(value || [])
-                    .map((image: any, i: number) => {
-                        return <Image src={getValue(image, localeValue)} key={i}/>;
-                    })}
+                {images.map((image: any, i: number) => {
+                    return <Image src={image} key={i}/>;
+                })}
             </div>
         );
     };
@@ -41,37 +43,37 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized,
     const renderImageGalleryInEditMode = () => {
         return (
             <div className={styles.ImageGallery}>
-                {(value || [])
-                    .map((image: any, i: number) => {
-                        const imageSrc = getValue(image, localeValue);
-                        return (
-                            <div className={styles.Item}>
-                                <div className={styles.Item__image}
-                                     style={{backgroundImage: `url(${imageSrc})`}}>
-                                </div>
-                                <div className={styles.Item__toolbar}>
-                                    <button className={styles.Item__btn}
-                                            onClick={() => {
-                                                changeSrcImagePreview(imageSrc);
-                                                toggleModalPreviewImage(true);
-                                            }}>
-                                        Просмотр
-                                    </button>
-                                    <button className={styles.Item__btn}
-                                            onClick={() => {
-                                                //saveImage('');
-                                            }}>
-                                        Удалить
-                                    </button>
-                                </div>
+                {images.map((image: any, i: number) => {
+                    return (
+                        <div className={styles.Item}>
+                            <div className={styles.Item__image}
+                                 style={{backgroundImage: `url(${image})`}}>
                             </div>
-                        );
-                    })}
-                {!isSingleImage && (
+                            <div className={styles.Item__toolbar}>
+                                <button className={styles.Item__btn}
+                                        onClick={() => {
+                                            changeSrcImagePreview(image);
+                                            toggleModalPreviewImage(true);
+                                        }}>
+                                    Просмотр
+                                </button>
+                                <button className={styles.Item__btn}
+                                        onClick={() => {
+                                            deleteImage(i);
+                                        }}>
+                                    Удалить
+                                </button>
+                            </div>
+                        </div>
+                    );
+                })}
+                {(!isSingleImage || (isSingleImage && images.length === 0)) && (
                     <button
-                        className={styles.SingleImage__uploadBtn}
+                        className={cn(styles.SingleImage__uploadBtn, {
+                            [styles.SingleImage__uploadBtn_section]: images.length !== 0
+                        })}
                         onClick={() => toggleModalImageEditor(!isOpenModalImageEditor)}>
-                        Изменить изображение
+                        Загрузить изображение
                     </button>
                 )}
                 <ModalImageEditor isOpen={isOpenModalImageEditor}
@@ -90,50 +92,6 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized,
     return !isEditMode || (notLocalized && DEFAULT_LOCALE.key !== locale.key)
         ? renderImageGalleryInPreviewMode()
         : renderImageGalleryInEditMode();
-
-
-    /*
-    (
-        <div className={styles.ImageGallery}>
-            {localizedValue && (
-                <div className={styles.Item}>
-                    <div className={styles.Item__image}
-                         style={{backgroundImage: `url(${localizedValue})`}}>
-                    </div>
-                    <div className={styles.Item__toolbar}>
-                        <button className={styles.Item__btn}
-                                onClick={() => {
-                                    changeSrcImagePreview(localizedValue);
-                                    toggleModalPreviewImage(true);
-                                }}>
-                            Просмотр
-                        </button>
-                        <button className={styles.Item__btn}
-                                onClick={() => {
-                                    saveImage('');
-                                }}>
-                            Удалить
-                        </button>
-                    </div>
-                </div>
-            )}
-            {!localizedValue && (
-                <button
-                    className={styles.SingleImage__uploadBtn}
-                    onClick={() => toggleModalImageEditor(!isOpenModalImageEditor)}>
-                    Изменить изображение
-                </button>
-            )}
-            <ModalImageEditor isOpen={isOpenModalImageEditor}
-                              toggleModal={() => toggleModalImageEditor(!isOpenModalImageEditor)}
-                              saveImage={saveImage}
-            />
-            <ModalPreviewImage isOpen={isOpenModalPreviewImage}
-                               toggleModal={() => toggleModalPreviewImage(!isOpenModalPreviewImage)}
-                               srcImage={srcImagePreview}
-            />
-        </div>
-    );*/
 };
 
 export default SingleImageValue;
