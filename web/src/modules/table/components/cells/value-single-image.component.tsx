@@ -2,11 +2,10 @@ import * as React from 'react';
 import {useState} from 'react';
 import cn from 'classnames';
 import {ValueRenderProps} from './value.component';
-import Image from '../../../../common/elements/image.component';
 import * as styles from './value-single-image.component.styles.css';
 import ModalImageEditor from './helpers/image-modal.component';
 import ModalPreviewImage from './helpers/image-preview-modal.component';
-import {getValue, getValueAsArray} from './helpers/utilities';
+import {getValueAsArray} from './helpers/utilities';
 import {DEFAULT_LOCALE} from '../../../../config/locales';
 
 
@@ -14,29 +13,60 @@ interface ImageGalleryValueProps extends ValueRenderProps {
     isSingleImage?: boolean
 }
 
-const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized, isSingleImage, properties}: ImageGalleryValueProps) => {
+const SingleImageValue = ({
+                              value,
+                              locale,
+                              isEditMode,
+                              changeValue,
+                              notLocalized,
+                              isSingleImage,
+                              properties,
+                              isTableValue,
+                          }: ImageGalleryValueProps) => {
     const [isOpenModalImageEditor, toggleModalImageEditor] = useState(false);
     const [isOpenModalPreviewImage, toggleModalPreviewImage] = useState(false);
     const [srcImagePreview, changeSrcImagePreview] = useState('');
 
     const valueLocale = !notLocalized ? locale : undefined;
     const images = getValueAsArray(value, valueLocale);
+    const aspectRatio = properties && properties.aspectRatio;
 
     const saveImage = (imageUrl: string) => {
         changeValue(images.concat(imageUrl), valueLocale);
     };
 
-    const deleteImage = (imageIndex:number) => {
-        changeValue(images.filter((image:any, i:number) => i!== imageIndex), valueLocale);
+    const deleteImage = (imageIndex: number) => {
+        changeValue(images.filter((image: any, i: number) => i !== imageIndex), valueLocale);
     };
 
     const renderImageGalleryInPreviewMode = () => {
         return (
-            <div>
-                {images.map((image: any, i: number) => {
-                    return <Image src={image} key={i}/>;
-                })}
-            </div>
+            images.length === 0
+                ? (<div>Изображение не задано</div>)
+                : (
+                    <div className={cn(
+                        styles.ImagesPreview, {[styles.ImagesPreview_tableValue]: isTableValue})}>
+                        {images.map((image: any, i: number) => {
+                            return (
+                                <div className={styles.ImagesPreview__item}
+                                     key={i}
+                                     onClick={() => {
+                                         changeSrcImagePreview(image);
+                                         toggleModalPreviewImage(true);
+                                     }}
+                                     style={{
+                                         backgroundImage: `url(${image})`
+                                     }}
+                                >
+                                </div>
+                            );
+                        })}
+                        <ModalPreviewImage isOpen={isOpenModalPreviewImage}
+                                           toggleModal={() => toggleModalPreviewImage(!isOpenModalPreviewImage)}
+                                           srcImage={srcImagePreview}
+                        />
+                    </div>
+                )
         );
     };
 
@@ -47,7 +77,9 @@ const SingleImageValue = ({value, locale, isEditMode, changeValue, notLocalized,
                     return (
                         <div className={styles.Item}>
                             <div className={styles.Item__image}
-                                 style={{backgroundImage: `url(${image})`}}>
+                                 style={{
+                                     backgroundImage: `url(${image})`
+                                 }}>
                             </div>
                             <div className={styles.Item__toolbar}>
                                 <button className={styles.Item__btn}

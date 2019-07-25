@@ -21,7 +21,7 @@ const TableComponent = (props: TableProps) => {
     const [isOpen, toggleModal] = useState<boolean>(false);
     const [deletedRowId, changeDeletedRowId] = useState<string>(null);
 
-    const headerFilters = (header:Header) => header.type !== HEADER_TYPES.IMAGE_GALLERY
+    const headerFilters = (header: Header) => header.type !== HEADER_TYPES.IMAGE_GALLERY
     return (
         <div className={styles.TableManager}>
             <div className={styles.TableManager__toolbar}>
@@ -47,7 +47,10 @@ const TableComponent = (props: TableProps) => {
                                 .map(header => {
                                     const cell = row.cells.find(c => c.header._id === header._id);
                                     return (<td key={header._id}>
-                                        <Cell cell={cell} locale={locale} notLocalized={header.notLocalized}/>
+                                        <Cell cell={cell}
+                                              locale={locale}
+                                              notLocalized={header.notLocalized}
+                                              isTableValue={true}/>
                                     </td>);
                                 })}
                             <td>

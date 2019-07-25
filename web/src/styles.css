@@ -144,6 +144,13 @@ body, #root {
     background: none;
     color: #00acac;
 }
+.inputFileBtn_disabled,
+.inputFileBtn_disabled:hover {
+    border: 2px solid #00acac;
+    background: #00acac;
+    opacity: 0.5;
+    color: #fff;
+}
 
 .inputFileBtn [type=file] {
     cursor: inherit;
@@ -196,10 +203,18 @@ body, #root {
     margin-right: 10px;
 }
 
+
 .button:hover{
     text-decoration: none;
     background: none;
     color: #00acac;
+}
+
+.button:disabled,
+.button:hover:disabled{
+    background: #00acac;
+    color: #fff;
+    opacity: 0.5;
 }
 
 .button:focus,

@@ -5,7 +5,7 @@ import {Crop} from 'react-image-crop';
 import * as styles from './image-modal.component.styles.css';
 import * as ReactCropModule from 'react-image-crop';
 import {useEffect} from 'react';
-
+import Spinner from '../../../../../common/elements/spinner.component';
 
 interface ImageUploaderWithCroppingProps {
     src: any,
@@ -15,6 +15,7 @@ interface ImageUploaderWithCroppingProps {
     ChangePreviewButtonRenderer: any,
     changeUploadingImageStatus: (status: boolean) => void,
     saveImageInCloudinary: (imageFile: any) => void,
+    isUploadingImage: boolean
 }
 
 export default ({
@@ -24,7 +25,8 @@ export default ({
                     ChangePreviewButtonRenderer,
                     changeUploadingImageStatus,
                     saveImageInCloudinary,
-                    toggleModal
+                    toggleModal,
+                    isUploadingImage
                 }: ImageUploaderWithCroppingProps) => {
 
     const [crop, changeCrop] = useState<Crop>({
@@ -84,24 +86,27 @@ export default ({
     return (
         <Fragment>
             {src && (
-                <ReactCrop
-                    src={src}
-                    crop={crop}
-                    onChange={onCropChange}
-                    onComplete={onCropComplete}
-                    keepSelection={true}
-                    imageStyle={{width: '100%', maxHeight: 'none'}}
-                    className={styles.ImageModal__previewContainer}
-                />
+                <div className={styles.ImageModal__previewCroppingImage}>
+                    <ReactCrop
+                        src={src}
+                        crop={crop}
+                        onChange={onCropChange}
+                        onComplete={onCropComplete}
+                        keepSelection={true}
+                        imageStyle={{width: '100%', maxHeight: 'none'}}
+                        className={styles.ImageModal__previewContainer}
+                    />
+                    {isUploadingImage && <Spinner className={styles.ImageModal__previewImage_spinner}/>}
+                </div>
             )}
             <div className={styles.ImageModal__buttons}>
                 {src && (
                     <Fragment>
-                        <ChangePreviewButtonRenderer/>
-                        <button className="button" onClick={onSaveImage}>Сохранить</button>
+                        <ChangePreviewButtonRenderer disabled={isUploadingImage}/>
+                        <button className="button" onClick={onSaveImage} disabled={isUploadingImage}>Сохранить</button>
                     </Fragment>
                 )}
-                <button onClick={toggleModal} className="button">Отменить</button>
+                <button onClick={toggleModal} className="button" disabled={isUploadingImage}>Отменить</button>
             </div>
         </Fragment>
     );

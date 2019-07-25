@@ -3,6 +3,7 @@ import {useState, ChangeEvent} from 'react';
 import {Modal} from 'reactstrap';
 import 'react-image-crop/dist/ReactCrop.css';
 import * as api from '../../../../../service/api';
+import cn from 'classnames';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as styles from './image-modal.component.styles.css';
 import '../../../../../styles.css';
@@ -34,8 +35,8 @@ export default ({toggleModal, saveImage, isOpen, properties}: ImageModalProps) =
         reader.readAsDataURL(fileList[0]);
     };
 
-    const changePreviewBtn = (title: string) => (
-        <div className="inputFileBtn">
+    const changePreviewBtn = (title: string, disabled?: boolean) => (
+        <div className={cn('inputFileBtn', {'inputFileBtn_disabled': disabled})}>
             <input type="file" onChange={changePreview}/>
             {title}
         </div>
@@ -65,7 +66,7 @@ export default ({toggleModal, saveImage, isOpen, properties}: ImageModalProps) =
             });
     };
 
-    const ChangePreviewButtonRenderer = () => changePreviewBtn('Изменить изображение');
+    const ChangePreviewButtonRenderer = (props: any) => changePreviewBtn('Изменить изображение', props.disabled);
 
     return (
         <Modal isOpen={isOpen}
@@ -95,12 +96,14 @@ export default ({toggleModal, saveImage, isOpen, properties}: ImageModalProps) =
                         changeUploadingImageStatus={changeUploadingImageStatus}
                         ChangePreviewButtonRenderer={ChangePreviewButtonRenderer}
                         saveImageInCloudinary={saveImageInCloudinary}
+                        isUploadingImage={isUploadingImage}
                     />
                     : <ImageUploader
                         src={src}
                         ChangePreviewButtonRenderer={ChangePreviewButtonRenderer}
                         toggleModal={onToggleModal}
                         saveImageInCloudinary={saveImageInCloudinary}
+                        isUploadingImage={isUploadingImage}
                     />
                 }
 

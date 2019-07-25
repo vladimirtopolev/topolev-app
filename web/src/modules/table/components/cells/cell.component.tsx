@@ -8,7 +8,8 @@ export interface CellProps {
     isEditMode?: boolean
     changeCell?: (cellId: string, value: any, locale?: Locale) => void,
     notLocalized?: boolean,
-    locale: Locale
+    locale: Locale,
+    isTableValue?:boolean
 }
 
 const Cell = ({changeCell, cell, ...rest}: CellProps) => {

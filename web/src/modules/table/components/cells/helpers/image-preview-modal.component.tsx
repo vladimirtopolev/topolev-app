@@ -21,9 +21,11 @@ export default ({toggleModal, isOpen, srcImage}: ImagePreviewModalProps) => {
                 Просмотр изображения
             </div>
             <div className={styles.ImageModal__content}>
-                <img src={srcImage}/>
+                <div className={styles.ImageModal__previewImage}
+                     style={{backgroundImage: `url(${srcImage})`}}>
+                </div>
                 <div className={styles.ImageModal__buttons}>
-                    <button className="button" onClick={()=> toggleModal()}>Закрыть</button>
+                    <button className="button" onClick={() => toggleModal()}>Закрыть</button>
                 </div>
             </div>
         </Modal>);

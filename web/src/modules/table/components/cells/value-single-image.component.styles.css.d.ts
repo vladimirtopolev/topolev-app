@@ -2,6 +2,9 @@
 // Please do not change this file!
 interface CssExports {
   'ImageGallery': string;
+  'ImagesPreview': string;
+  'ImagesPreview__item': string;
+  'ImagesPreview_tableValue': string;
   'Item': string;
   'Item__btn': string;
   'Item__image': string;

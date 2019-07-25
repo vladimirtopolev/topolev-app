@@ -10,7 +10,8 @@ export interface ValueRenderProps {
     changeValue?: (value: any, locale?: Locale) => void,
     locale: Locale,
     properties?: any,
-    notLocalized?: boolean
+    notLocalized?: boolean,
+    isTableValue?:boolean
 }
 export interface ValueProps extends ValueRenderProps{
     type: string

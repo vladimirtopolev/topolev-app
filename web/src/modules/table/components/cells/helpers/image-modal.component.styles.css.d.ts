@@ -7,6 +7,9 @@ interface CssExports {
   'ImageModal__dropArea': string;
   'ImageModal__dropAreaWrapper': string;
   'ImageModal__previewContainer': string;
+  'ImageModal__previewCroppingImage': string;
+  'ImageModal__previewImage': string;
+  'ImageModal__previewImage_spinner': string;
   'ImageModal__title': string;
 }
 declare var cssExports: CssExports;
