@@ -1,0 +1,20 @@
+.List{
+
+}
+
+.Item{
+
+}
+
+.Item__row{
+    display: flex;
+}
+
+.Item__cellName{
+    min-width: 150px;
+}
+.Item__cellValue{}
+
+.Item__toolbar{
+
+}
