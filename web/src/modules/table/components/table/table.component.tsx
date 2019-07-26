@@ -34,8 +34,16 @@ const TableComponent = (props: TableProps) => {
                 <Link to={`${domainPath}/${tableMeta.name}/rows/${locale.key}/new`} className="button">
                     Добавить запись
                 </Link>
-                <button onClick={() => changeView('table')}>Table</button>
-                <button onClick={() => changeView('list')}>List</button>
+                <div className={styles.buttonGroup}>
+                    <button className={cn('button', styles.button, {[styles.button_active]: view === 'table'})}
+                            onClick={() => changeView('table')}>
+                        <i className="fas fa-table"></i>
+                    </button>
+                    <button className={cn('button', styles.button, {[styles.button_active]: view === 'list'})}
+                            onClick={() => changeView('list')}>
+                        <i className="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
             <div className={styles.TableManager__table}>
                 <TableRenderer

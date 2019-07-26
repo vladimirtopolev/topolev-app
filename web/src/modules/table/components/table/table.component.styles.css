@@ -14,3 +14,18 @@
   font-size: 14px;
   margin-top: 15px;
 }
+
+.buttonGroup{
+  display: inline-flex;
+}
+
+.button{
+  margin:0;
+}
+
+
+.button_active{
+  background: #fff;
+  color: #00acac;
+}
+

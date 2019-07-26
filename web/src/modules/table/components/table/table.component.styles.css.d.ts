@@ -4,6 +4,9 @@ interface CssExports {
   'TableManager': string;
   'TableManager__table': string;
   'TableManager__toolbar': string;
+  'button': string;
+  'buttonGroup': string;
+  'button_active': string;
 }
 declare var cssExports: CssExports;
 export = cssExports;

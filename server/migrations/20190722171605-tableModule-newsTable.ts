@@ -33,6 +33,9 @@ const HEADERS: TableHeaderProperties[] = [
         type: 'IMAGE',
         internalName: 'article_img',
         name: 'Основное изображение',
+        properties:{
+            aspectRatio:323/215
+        },
         notLocalized: true,
         order: 2
     },
@@ -65,7 +68,9 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png']
+                value: [
+                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564080210/spdaoj1pwja4bl4qd8hn.jpg'
+                ]
             },
             {
                 _id: new ObjectId(),
@@ -96,7 +101,42 @@ const ROWS: TableRowProperties[] = [
             {
                 _id: new ObjectId(),
                 header: HEADERS[2]._id,
-                value: ['https://res.cloudinary.com/dsee6uh8u/image/upload/v1563723500/expoforum_cotlci.png']
+                value: [
+                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564080272/ipkiegnfsigvzwppqnxk.jpg'
+                ]
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Вторая новость сожержание',
+                    en: 'The second new content'
+                }
+            },
+        ]
+    },
+    {
+        _id: new ObjectId(),
+        cells: [
+            {
+                _id: new ObjectId(),
+                header: HEADERS[0]._id,
+                value: new Date()
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[1]._id,
+                value: {
+                    ru: 'Вторая новость',
+                    en: 'The first new'
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[2]._id,
+                value: [
+                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564137390/l1m6n7qolvxyt6fylmow.jpg'
+                ]
             },
             {
                 _id: new ObjectId(),
