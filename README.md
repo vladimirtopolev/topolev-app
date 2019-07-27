@@ -7,6 +7,10 @@ docker container using the following command:
    -p 27017:27017 \
     mongo
 ```
+Probably before run this command it makes sence to kill all run containers:
+```
+docker kill $(docker ps -q)
+```
 - To populate MongoDB is using `migrate-mongo` framework and set of scripts which may be found here `/migrations/`. 
 ```
   npm install migrate-mongo -g

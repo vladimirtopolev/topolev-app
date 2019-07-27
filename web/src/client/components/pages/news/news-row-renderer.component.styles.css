@@ -1,0 +1,36 @@
+.News {
+}
+
+.News__title {
+}
+
+.News__text {
+  margin-top: 25px;
+  margin-bottom: 30px;
+}
+
+.Title {
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.Title:after {
+  display: block;
+  content: '';
+  position: absolute;
+  max-width: 100%;
+  width: 75px;
+  height: 2px;
+  background: rgb(1, 131, 57);
+  bottom: 0;
+  left: 0;
+}
+
+.Title__text {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.Title__date {
+  font-size: 14px;
+}
