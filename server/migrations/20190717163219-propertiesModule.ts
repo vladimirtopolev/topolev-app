@@ -10,6 +10,17 @@ const PROPERTIES: PropertyProperties[] = [
     {
         _id: new ObjectId(),
         type: 'INPUT',
+        name: 'Назание компании',
+        internalName: 'company',
+        order: 1,
+        value: {
+            ru: 'OOO "Экспосервис"',
+            en: '220021, Belarus, Minsk'
+        },
+    },
+    {
+        _id: new ObjectId(),
+        type: 'INPUT',
         name: 'Индекс, страна, город',
         internalName: 'country',
         group: 'address',
@@ -32,6 +43,28 @@ const PROPERTIES: PropertyProperties[] = [
             ru: 'ул. Челюскинцев, 15-1',
             en: 'st. Cheluskincev, 15-1'
         },
+    },
+    {
+        _id: new ObjectId(),
+        type: 'INPUT',
+        name: 'Широта',
+        internalName: 'latitude',
+        group: 'coordinate',
+        titleGroup: 'Координаты',
+        order: 1,
+        notLocalized: true,
+        value: 53.849535
+    },
+    {
+        _id: new ObjectId(),
+        type: 'INPUT',
+        name: 'Долгота',
+        internalName: 'longitude',
+        group: 'coordinate',
+        titleGroup: 'Координаты',
+        order: 1,
+        notLocalized: true,
+        value: 27.471748
     },
     {
         _id: new ObjectId(),
@@ -66,15 +99,6 @@ const PROPERTIES: PropertyProperties[] = [
         notLocalized: true,
         value: '+375 17 273 73 03'
 
-    },
-    {
-        _id: new ObjectId(),
-        type: 'INPUT',
-        name: 'Email',
-        internalName: 'email',
-        notLocalized: true,
-        order: 2,
-        value: 80,
     },
     {
         _id: new ObjectId(),

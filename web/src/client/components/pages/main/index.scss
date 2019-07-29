@@ -240,7 +240,11 @@ $primary-text-color: #444444;
   }
 
   &__works {
-    padding-bottom: 40px;
+  }
+
+  &__linkContainer{
+    text-align: right;
+    padding-bottom:40px;
   }
 }
 

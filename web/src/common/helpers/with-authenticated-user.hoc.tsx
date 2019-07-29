@@ -19,7 +19,6 @@ export default function withAuthenticatesUser<P>(OriginComponent: React.Componen
 
 
     const DecoratedComponent = (props: P & WithAuthenticatedUserProps) => {
-        console.log('PROPS', props, props.auth === null);
         return props.auth === null
             ? <Redirect to={'/user/signin'}/>
             : <OriginComponent {...props}/>;

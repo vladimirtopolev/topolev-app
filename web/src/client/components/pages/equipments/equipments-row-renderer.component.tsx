@@ -4,9 +4,9 @@ import Layout from '../../layout/layout.component';
 export default () => {
     return (
         <Layout>
-                <div>
-                    SINGLE EQUIPMENT
-                </div>
+            <div>
+                SINGLE EQUIPMENT
+            </div>
         </Layout>
     );
 }

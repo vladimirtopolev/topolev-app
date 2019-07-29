@@ -26,7 +26,10 @@ const HEADERS: TableHeaderProperties[] = [
         internalName: 'image',
         name: 'Основное изображение',
         notLocalized: true,
-        order: 2
+        order: 2,
+        properties:{
+            aspectRatio:323/215
+        },
     },
     {
         _id: new ObjectId(),

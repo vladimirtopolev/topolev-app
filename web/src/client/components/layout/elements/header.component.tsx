@@ -6,13 +6,16 @@ import {LOCALES} from '../../../../config/locales';
 import {clientNavbarLinks} from '../../../../config/client-navbar.config';
 import {LanguageContext} from '../../../../common/helpers/with-language-context.render-props-component';
 import './header.component.scss';
+import {Property} from '../../../../modules/properties/schema/models';
 
-interface HeaderProps {
+export interface HeaderProps {
     toggleScrollWrapper: (state?: boolean) => void
-    className?: string
+    className?: string,
+    isSecondary?:boolean,
+    properties?: Property[]
 }
 
-export default ({toggleScrollWrapper, className}: HeaderProps) => {
+export default ({toggleScrollWrapper, className, isSecondary}: HeaderProps) => {
     const [headerState, changeHeaderState] = useState({
         disablePinning: false,
         toggledMenu: false
@@ -46,7 +49,8 @@ export default ({toggleScrollWrapper, className}: HeaderProps) => {
     }, []);
 
     return (
-        <Headroom pinStart={100} disable={headerState.disablePinning} className={className}>
+        <Headroom pinStart={100} disable={headerState.disablePinning} className={className}
+                  wrapperStyle={{height:100}}>
             <header className={cn('header', {'header_close-nav': headerState.toggledMenu})}>
                 <div className="header__top">
                     <div className="header__top-container container row justify-content-end">

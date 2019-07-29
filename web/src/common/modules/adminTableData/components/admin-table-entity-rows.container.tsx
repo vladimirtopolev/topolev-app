@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 const AdminTableEntityRows =  ({RowsRenderer, dispatch, tableName, rows}: any) => {
     useEffect(() => {
         dispatch(getAdminTableData(tableName));
-    }, []);
+    }, [tableName]);
 
     return <RowsRenderer rows={rows}/>
 };

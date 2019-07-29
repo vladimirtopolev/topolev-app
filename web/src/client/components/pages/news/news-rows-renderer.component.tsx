@@ -69,7 +69,7 @@ export default ({rows}: NewsProps) => {
                                         <img src={img} className={styles.RecentNews__img}/>
                                         <div className={cn(styles.RecentNews__date, styles.Date)}>
                                             <div className={styles.Date__day}>
-                                                {moment(date).day()}
+                                                {moment(date).format('DD')}
                                             </div>
                                             <div className={styles.Date__monthYearContainer}>
                                                 <div className={styles.Date__month}>

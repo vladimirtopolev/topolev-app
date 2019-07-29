@@ -3,8 +3,24 @@ import {YMaps, Map, Placemark} from 'react-yandex-maps';
 import Layout from '../../layout/layout.component';
 
 import * as styles from './contact.component.styles.scss';
+import {LanguageContext} from '../../../../common/helpers/with-language-context.render-props-component';
+import {useContext} from 'react';
+import getPropertyValueByName from '../../../../common/modules/properties/helpers/getPropertyValueByName';
+import withAdminProperties from '../../../../common/helpers/with-admin-properties.hoc';
 
-export default () => {
+const Contacts = ({properties}: any) => {
+    const languageContext = useContext(LanguageContext);
+
+    const company = getPropertyValueByName(properties, 'company', languageContext.locale);
+    const country = getPropertyValueByName(properties, 'country', languageContext.locale);
+    const street = getPropertyValueByName(properties, 'street', languageContext.locale);
+    const phone = getPropertyValueByName(properties, 'phone1');
+    const email = getPropertyValueByName(properties, 'mail');
+
+    const latitude = Number(getPropertyValueByName(properties, 'latitude'));
+    const longitude = Number(getPropertyValueByName(properties, 'longitude'));
+
+
     return (
         <Layout>
             <div className={styles.Contact}>
@@ -22,18 +38,18 @@ export default () => {
                             <div className={styles.AddressContainer}>
                                 <div className={styles.Address}>
                                     <p className={styles.Address__title}>Адрес</p>
-                                    <p className={styles.Address__companyName}>ООО "Экспосервис"</p>
-                                    <p className={styles.Address__item}>220021, Беларусь, Минск,</p>
-                                    <p className={styles.Address__item}>ул. Челюскинцев, 15-1,</p>
+                                    <p className={styles.Address__companyName}>{company}</p>
+                                    <p className={styles.Address__item}>{country}</p>
+                                    <p className={styles.Address__item}>{street}</p>
                                 </div>
                                 <div className={styles.ContactItems}>
                                     <div className={styles.ContactItems__item}>
                                         <div className={styles.ContactItems__title}>Телефон:</div>
-                                        <div className={styles.ContactItems__content}>+375 29 899 52 70</div>
+                                        <div className={styles.ContactItems__content}>{phone}</div>
                                     </div>
                                     <div className={styles.ContactItems__item}>
                                         <div className={styles.ContactItems__title}>Email:</div>
-                                        <div className={styles.ContactItems__content}>i.topolev.vladimir@gmail.com</div>
+                                        <div className={styles.ContactItems__content}>{email}</div>
                                     </div>
                                 </div>
                             </div>
@@ -43,15 +59,23 @@ export default () => {
                                 <p className={styles.AskQuestion__title}>Задайте вопрос</p>
                                 <div className={styles.AskQuestion__form}>
                                     <div className="row">
-                                    <div className="form-group col-md-6">
-                                        <input type="email" className="form-control" placeholder="Имя"/>
-                                    </div>
-                                    <div className="form-group col-md-6">
-                                        <input type="email" className="form-control" placeholder="Фамилия"/>
-                                    </div>
+                                        <div className="form-group col-md-6">
+                                            <input type="email" className="form-control" placeholder="Имя"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <input type="email" className="form-control" placeholder="Фамилия"/>
+                                        </div>
                                     </div>
                                     <div className="form-group">
                                         <input type="email" className="form-control" placeholder="Компания"/>
+                                    </div>
+                                    <div className="row">
+                                        <div className="form-group col-md-6">
+                                            <input type="email" className="form-control" placeholder="Телефон"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <input type="email" className="form-control" placeholder="Email"/>
+                                        </div>
                                     </div>
                                     <div className="form-group">
                                         <textarea className="form-control" placeholder="Текст сообщения" rows={4}/>
@@ -66,13 +90,12 @@ export default () => {
                 <div className={styles.Map}>
                     <p className={styles.Map__title}>Схема проезда</p>
                     <YMaps>
-                        <Map defaultState={{center: [53.849535, 27.471748], zoom: 17}}
+                        <Map defaultState={{center: [latitude, longitude], zoom: 17}}
                              style={{width: '100%', height: '350px'}}>
                             <Placemark
-                                geometry={[53.849535, 27.471748]}
+                                geometry={[latitude, longitude]}
                                 properties={{
-                                    balloonContent: '&lt;img src="http://img-fotki.yandex.ru/get/6114/82599242.2d6/0_88b97_ec425cf5_M" /&gt;',
-                                    iconContent: "Экспофорум"
+                                    iconContent: company
                                 }}
                                 options={{
                                     preset: "islands#greenStretchyIcon",
@@ -88,4 +111,6 @@ export default () => {
             </div>
         </Layout>
     );
-}
+};
+
+export default withAdminProperties(Contacts);

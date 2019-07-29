@@ -200,6 +200,17 @@ $primary-text-color: #444444;
 }
 
 .header_static{
+  .header{
+    height: 100px;
+  }
+  &.headroom-wrapper{
+    height: 100px;
+  }
+
+  .headroom{
+    height: 100px;
+  }
+
   .header__top {
     display: none;
   }

@@ -27,7 +27,6 @@ const AdminTableEntityRow = ({RowRenderer, dispatch, tableName, rowId, row}: Tab
 };
 
 const mapStateToProps = (state: any, ownProps: TableContainerProps) => {
-    console.log('OWNS', ownProps);
     const rowId = ownProps.match.params.tableEntityRowId;
     return {
         rowId,

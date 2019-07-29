@@ -4,28 +4,33 @@ import Footer from './elements/footer.component';
 import {Fragment} from 'react';
 import {useState} from 'react';
 
+import withAdminProperties from '../../../common/helpers/with-admin-properties.hoc';
 import './layout.component.css';
+import {Property} from '../../../modules/properties/schema/models';
 
 interface LayoutProps {
-    children: JSX.Element
+    children: JSX.Element,
+    properties?: Property[]
 }
 
-export default ({children}: LayoutProps) => {
+const Layout = ({children, properties}: LayoutProps) => {
     const [scrollWrapper, changeScrollWrapper] = useState(true);
     const toggleScrollWrapper = (newState: any) => {
         changeScrollWrapper(newState === undefined ? !scrollWrapper : newState);
     };
     return (
         <Fragment>
-            <Header toggleScrollWrapper={toggleScrollWrapper} className="header_static"/>
+            <Header toggleScrollWrapper={toggleScrollWrapper} isSecondary={true} className="header_static"/>
             <div className="wrapper" style={{overflowY: scrollWrapper ? 'visible' : 'hidden'}}>
                 <div className="content">
                     <div className="secondary-content container">
                         {children}
                     </div>
                 </div>
-                <Footer/>
+                <Footer properties={properties}/>
             </div>
         </Fragment>
     );
-}
+};
+
+export default withAdminProperties(Layout);

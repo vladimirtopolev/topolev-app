@@ -11,7 +11,6 @@ export default (props: any) => {
     const languageContext = useContext(LanguageContext);
     const title = getCellValueByInternalName(props.row, 'title', languageContext.locale);
     const date = getCellValueByInternalName(props.row, 'date');
-    const articleImg = getCellValueByInternalName(props.row, 'article_img');
     const text = getCellValueByInternalName(props.row, 'text', languageContext.locale);
 
     return (

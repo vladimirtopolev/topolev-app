@@ -8,29 +8,33 @@ import WithLanguageContext from './common/helpers/with-language-context.render-p
 const MainPage = lazy(() => import('./client/components/pages/main'));
 const ContactPage = lazy(() => import('./client/components/pages/contacts/contact.component'));
 
-const NewsRowsRenderer = lazy(()=> import('./client/components/pages/news/news-rows-renderer.component'));
-const NewsRowRenderer = lazy(()=> import('./client/components/pages/news/news-row-renderer.component'));
+const NewsRowsRenderer = lazy(() => import('./client/components/pages/news/news-rows-renderer.component'));
+const NewsRowRenderer = lazy(() => import('./client/components/pages/news/news-row-renderer.component'));
 
-const EquipmentRowsRenderer = lazy(()=> import('./client/components/pages/equipments/equipments-rows-renderer.component'));
-const EquipmentRowRenderer = lazy(()=> import('./client/components/pages/equipments/equipments-row-renderer.component'));
+const EquipmentRowsRenderer = lazy(() => import('./client/components/pages/equipments/equipments-rows-renderer.component'));
+const EquipmentRowRenderer = lazy(() => import('./client/components/pages/equipments/equipments-row-renderer.component'));
 
-import {adminTableEntityCreator} from './common/modules/adminTableData'
+import {adminTableEntityCreator} from './common/modules/adminTableData';
 
-import {getProperties} from './common/modules/properties/store/actions/actions'
+import {getProperties} from './common/modules/properties/store/actions/actions';
 
 interface ClientProps {
     dispatch: any
 }
 
-const Client = ({dispatch}: ClientProps) => {
-    useEffect(() => {dispatch(getProperties())}, []);
+const Client = (props: ClientProps) => {
+    console.log('MAIN', props);
+    useEffect(() => {
+        props.dispatch(getProperties());
+    }, []);
     return (
         <WithLanguageContext>
             <Switch>
                 <Route path="/" exact component={MainPage}/>
                 <Route path="/contact" component={ContactPage}/>
                 {adminTableEntityCreator('/news', 'news', NewsRowsRenderer, NewsRowRenderer)}
-                {adminTableEntityCreator('/equipments', 'equipments', EquipmentRowsRenderer, EquipmentRowRenderer)}
+                {adminTableEntityCreator('/equipments/buildingStands', 'buildingStands', EquipmentRowsRenderer, EquipmentRowRenderer)}
+                {adminTableEntityCreator('/equipments/fullingStands', 'fullingStands', EquipmentRowsRenderer, EquipmentRowRenderer)}
             </Switch>
         </WithLanguageContext>
     );

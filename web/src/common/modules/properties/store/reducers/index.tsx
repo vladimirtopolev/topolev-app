@@ -24,3 +24,7 @@ export default properties;
 const requestProperties = (state: Property[], action: GetPropertiesActionSuccess):Property[] => {
     return action.payload;
 };
+
+// selectors
+
+export const getProperties =(state:any) => state;

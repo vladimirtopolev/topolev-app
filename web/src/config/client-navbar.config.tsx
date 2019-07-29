@@ -14,7 +14,7 @@ export const clientNavbarLinks: ClientNavbarLink[] = [
     },
     {
         title: 'Оборудование',
-        href: '/equipments'
+        href: '/equipments/buildingStands'
     },
     {
         title: 'Новости',
