@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {YMaps, Map, Placemark} from 'react-yandex-maps';
 import Layout from '../../layout/layout.component';
+import ContactForm from './contact-form.component';
 
 import * as styles from './contact.component.styles.scss';
 import {LanguageContext} from '../../../../common/helpers/with-language-context.render-props-component';
@@ -58,29 +59,7 @@ const Contacts = ({properties}: any) => {
                             <div className={styles.AskQuestion}>
                                 <p className={styles.AskQuestion__title}>Задайте вопрос</p>
                                 <div className={styles.AskQuestion__form}>
-                                    <div className="row">
-                                        <div className="form-group col-md-6">
-                                            <input type="email" className="form-control" placeholder="Имя"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <input type="email" className="form-control" placeholder="Фамилия"/>
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="email" className="form-control" placeholder="Компания"/>
-                                    </div>
-                                    <div className="row">
-                                        <div className="form-group col-md-6">
-                                            <input type="email" className="form-control" placeholder="Телефон"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <input type="email" className="form-control" placeholder="Email"/>
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <textarea className="form-control" placeholder="Текст сообщения" rows={4}/>
-                                    </div>
-                                    <button type="submit" className="btn btn-primary mb-2">Отправить</button>
+                                    <ContactForm/>
                                 </div>
                             </div>
                         </div>
