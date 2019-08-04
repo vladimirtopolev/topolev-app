@@ -9,13 +9,13 @@ import {Link, NavLink} from 'react-router-dom';
 import * as styles from './equipments-rows-renderer.component.styles.css';
 
 interface RowsRendererProps {
-    rows: Row[]
+    rows: Row[],
+    tableName: string
 }
 
 
-export default ({rows}: RowsRendererProps) => {
+export default ({rows, tableName}: RowsRendererProps) => {
     const languageContext = useContext(LanguageContext);
-
     return (
         <Layout>
             <div className={styles.Equipments}>
@@ -36,32 +36,43 @@ export default ({rows}: RowsRendererProps) => {
                             </NavLink>
                         </li>
                         <li className={styles.Navigation__item}>
-                            <NavLink to="/equipments/buildingStands"
+                            <NavLink to="/equipments/design"
                                      className={styles.Navigation__link}
                                      activeClassName={styles.Navigation__link_active}>
                                 Оформление стендов
                             </NavLink>
                         </li>
                         <li className={styles.Navigation__item}>
-                            <NavLink to="/equipments/buildingStands"
+                            <NavLink to="/equipments/electricity"
                                      className={styles.Navigation__link}
                                      activeClassName={styles.Navigation__link_active}>
                                 Энергосбережение и освещение
                             </NavLink>
                         </li>
+                        <li className={styles.Navigation__item}>
+                            <NavLink to="/equipments/presentations"
+                                     className={styles.Navigation__link}
+                                     activeClassName={styles.Navigation__link_active}>
+                                Презентации, семинары
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
-                {rows.map((itemRow) => {
+                <div className="row">
+                {rows.map((itemRow:Row) => {
                     const title = getCellValueByInternalName(itemRow, 'title', languageContext.locale);
                     const image = getCellValueByInternalName(itemRow, 'image');
 
                     return (
-                        <div>
-                            <img src={image}/>
-                            {title}
+                        <div className="col-md-4">
+                            <div className={styles.Equipment}>
+                            <img src={image} className={styles.Equipment__img}/>
+                                <Link to={`/equipments/${tableName}/${itemRow._id}`}>{title}</Link>
+                            </div>
                         </div>
                     );
                 })}
+                </div>
             </div>
         </Layout>
     );

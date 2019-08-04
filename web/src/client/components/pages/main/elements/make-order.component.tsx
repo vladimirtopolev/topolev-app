@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ContactForm from '../../contacts/contact-form.component';
 
 export default () => {
     return (
@@ -15,6 +16,7 @@ export default () => {
                                     время
                                 </div>
                                 <div className="make-order__form">
+                                    {/*
                                     <div className="make-order__input-container">
                                         <input className="make-order__input" type="text"
                                                placeholder="Имя"/>
@@ -29,6 +31,8 @@ export default () => {
                                     </div>
                                     <button className="make-order__btn btn btn-primary">Отправить
                                     </button>
+                                    */}
+                                    <ContactForm hideMessageField={true}/>
                                 </div>
                             </div>
                         </div>

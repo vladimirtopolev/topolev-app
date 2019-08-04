@@ -118,9 +118,46 @@ const PROPERTIES: PropertyProperties[] = [
         internalName: 'aboutUs',
         order: 2,
         value: {
-            ru: 'text',
-            en: 'какой-то текст'
-        }
+            ru: `
+                <p>
+                Предприятие "Экспосервис" работает на рынке выставочных услуг 
+                Республики Беларусь более 28 лет, начиная с 1991 года.
+                </p>
+                <p>
+                Мы оказываем услуги по проектированию, дизайну и строительству выстовочных стендов.
+                </p>
+                <p>
+                Залогом успеха работы гашей компании является слаженный труд команды профессионалов, 
+                умение оперативно и эффективно решать разнообразные задачи, возникающие в процессе подготовки 
+                и проведении выставок.
+                </p>
+                <p>
+                Наше предприятие является генеральным подрядчиком УП "Экспоформу", один из лидеров
+                национального выставочного бизнеса.
+                </p>`,
+            en: `
+                <p>EXPOSERVICE, Ltd works on market of exhibition services of Republic of Belarus more then 28 years since 1991. 
+                </p>
+                <p>
+                We offer such services as design and building exhibition stands
+                </p>
+                <p>
+                Our specialists have huge experience of designing and construction of differing complexity exhibition stands.
+                </p>
+                <p>
+                EXPOSERVICE, Ltd is general contractor of EXPOFORUM, Exhibition Company  one of national exhibition business leaders.
+                </p>
+            `
+        },
+    },
+    {
+        _id: new ObjectId(),
+        type: 'INPUT',
+        name: 'Кол-во лет на рынке',
+        internalName: 'yearWork',
+        order: 2,
+        notLocalized:true,
+        value: 28,
     },
     {
         _id: new ObjectId(),
@@ -129,7 +166,7 @@ const PROPERTIES: PropertyProperties[] = [
         internalName: 'copyright',
         order: 2,
         value: {
-            ru:'2019, Удачный дом',
+            ru: '2019, Удачный дом',
             en: '2019, English copyright'
         },
     },
@@ -169,7 +206,7 @@ export async function up(): Promise<void> {
 }
 
 export async function down(): Promise<void> {
-    await  getMongooseConnection()
+    await getMongooseConnection()
         .then((config) => {
             return dropTable(PropertyModel, (e) => {
                 if (e) {
@@ -177,7 +214,7 @@ export async function down(): Promise<void> {
                 } else {
                     console.log(`Rollbacl migration script connect to DB: ${config.host}`);
                 }
-            })
-        })
+            });
+        });
 }
 

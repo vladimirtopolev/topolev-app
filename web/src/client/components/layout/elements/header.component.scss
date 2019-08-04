@@ -155,7 +155,9 @@ $primary-text-color: #444444;
     }
 
     &:hover.main-nav__link:after,
-    &:hover.main-nav__link:before {
+    &:hover.main-nav__link:before,
+    &_active:after,
+    &_active:before{
       display: block;
     }
 

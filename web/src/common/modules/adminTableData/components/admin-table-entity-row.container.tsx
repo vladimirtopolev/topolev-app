@@ -23,7 +23,7 @@ const AdminTableEntityRow = ({RowRenderer, dispatch, tableName, rowId, row}: Tab
         dispatch(getAdminTableRow(tableName, rowId))
     }, [tableName, rowId]);
 
-    return <RowRenderer row={row}/>
+    return <RowRenderer row={row} tableName={tableName}/>
 };
 
 const mapStateToProps = (state: any, ownProps: TableContainerProps) => {

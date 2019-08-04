@@ -9,12 +9,14 @@ const AdminTableEntityRows =  ({RowsRenderer, dispatch, tableName, rows}: any) =
         dispatch(getAdminTableData(tableName));
     }, [tableName]);
 
-    return <RowsRenderer rows={rows}/>
+    console.log('TABLE NAME', tableName);
+    return <RowsRenderer rows={rows} tableName={tableName}/>
 };
 
 const mapStateToProps = (state:any, ownProps:any) => {
     return {
-        rows: fromAdminTableData.getAdminTableRowsData(state, ownProps.tableName)
+        rows: fromAdminTableData.getAdminTableRowsData(state, ownProps.tableName),
+        tableName: ownProps.tableName
     }
 };
 

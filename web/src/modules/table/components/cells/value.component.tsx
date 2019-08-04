@@ -2,6 +2,7 @@ import * as React from 'react';
 import InputValue from './value-input.component';
 import SingleImageCell from './value-single-image.component';
 import TextareaValue from './value-textarea.component';
+import DateValue from './value-date.component';
 import {Locale} from '../../schema/models';
 
 export interface ValueRenderProps {
@@ -19,6 +20,8 @@ export interface ValueProps extends ValueRenderProps{
 
 export default ({type, ...rest}: ValueProps) => {
     switch (type) {
+        case 'DATE':
+            return <DateValue {...rest}/>;
         case 'INPUT':
             return <InputValue  {...rest}/>;
         case 'IMAGE':

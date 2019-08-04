@@ -23,18 +23,19 @@ const Main = (props:any) => {
 
     return (
         <Fragment>
-            <Header toggleScrollWrapper={toggleScrollWrapper} properties={props.properties}/>
+            <Header toggleScrollWrapper={toggleScrollWrapper}
+                    properties={props.properties}/>
             <div className="wrapper" style={{overflowY: scrollWrapper ? 'visible' : 'hidden'}}>
                 <div className="content">
                     <MainView/>
                     <Advantages/>
-                    <AboutUs/>
+                    <AboutUs properties={props.properties}/>
                     <News/>
                     <BestWorks/>
                     <MakeOrder/>
-                    <Partners properties={props.properties}/>
+                    <Partners/>
                 </div>
-                <Footer/>
+                <Footer properties={props.properties}/>
             </div>
         </Fragment>
     );

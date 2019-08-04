@@ -1,0 +1,16 @@
+.Modal{
+  padding: 30px;
+  background: #018339;
+  color: #fff;
+  position: relative;
+  text-align: center;
+}
+
+.Modal__closeBtn{
+  border:none;
+  background: none;
+  color: #fff;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

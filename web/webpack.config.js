@@ -60,7 +60,7 @@ module.exports = {
                 loader: 'ts-loader'
             },
             {
-                test: /\.(jpe?g|png|gif)$/i,
+                test: /\.(png|jpe?g|gif)$/i,
                 loader: 'file-loader?name=img/[name].[ext]'
             },
             {

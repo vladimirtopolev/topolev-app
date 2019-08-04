@@ -1,0 +1,74 @@
+.PortfolioGroup{
+
+}
+.PortfolioGroup__title{
+  font-size:32px;
+  font-weight: bold;
+  background:  #018339;
+  color: #fff;
+  padding: 5px 20px 5px 20px;
+  display: inline-block;
+}
+.PortfolioGroup__content{
+
+}
+
+.Portfolio{
+  padding-bottom: 20px;
+}
+
+.Portfolio__imageContainer{
+  padding-right: 10%;
+  width: 100%;
+  position: relative;
+}
+
+.Portfolio__mainImage{
+  width: 100%;
+  position: relative;
+}
+
+.Portfolio__mainImage:hover:after{
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\F002";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.Portfolio__mainImage img{
+  width: 100%;
+}
+
+.Portfolio__mockupImage{
+  width: 30%;
+  position: absolute;
+  right: 0;
+  bottom: -10%;
+  border: 8px solid #fff;
+}
+
+.Portfolio__description{
+
+}
+
+.Portfolio__date{
+  color:  #444444;
+  font-size: 12px;
+  margin:0;
+}
+
+.Portfolio__title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #018339;
+}

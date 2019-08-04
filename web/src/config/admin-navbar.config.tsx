@@ -13,6 +13,16 @@ export const adminNavbarLinks: NavbarLink[] = [
         href: '/admin/properties/dashboard'
     },
     {
+        iconClassName: 'fas fa-rss link__icon',
+        title: 'Новости',
+        href: '/admin/tables/news',
+    },
+    {
+        iconClassName: 'fas fa-rss link__icon',
+        title: 'Портфолио стендов',
+        href: '/admin/tables/portfolio',
+    },
+    {
         iconClassName: 'fas fa-tools link__icon',
         title: 'Оборудование',
         href: '#',
@@ -30,40 +40,28 @@ export const adminNavbarLinks: NavbarLink[] = [
             {
                 iconClassName: 'fa fa-table link__icon',
                 title: 'Оформление стендов',
-                href: `/admin/tables/fullingStands`
+                href: `/admin/tables/design`
             },
             {
                 iconClassName: 'fa fa-table link__icon',
                 title: 'Энергоснабжение, освещение',
-                href: `/admin/tables/fullingStands`
+                href: `/admin/tables/electricity`
             },
             {
                 iconClassName: 'fa fa-table link__icon',
                 title: 'Презентации, семинары',
-                href: `/admin/tables/fullingStands`
+                href: `/admin/tables/presentations`
             }
         ]
     },
     {
-        iconClassName: 'fa fa-table link__icon',
-        title: 'Таблицы',
-        href: '#',
-        links: [
-            {
-                iconClassName: 'fa fa-table link__icon',
-                title: 'Новости',
-                href: `/admin/tables/news`
-            },
-            {
-                iconClassName: 'fa fa-table link__icon',
-                title: 'Партнеры',
-                href: `/admin/tables/partners`
-            }
-        ]
+        iconClassName: 'fas fa-handshake link__icon',
+        title: 'Партнеры',
+        href: `/admin/tables/partners`
     },
     {
         iconClassName: 'fas fa-phone link__icon',
-        title: 'Заказанные звонки',
+        title: 'Сообщения клиентов',
         href: '#',
         links: [
             {

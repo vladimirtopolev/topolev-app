@@ -28,7 +28,7 @@ const HEADERS: TableHeaderProperties[] = [
         notLocalized: true,
         order: 2,
         properties:{
-            aspectRatio:323/215
+            aspectRatio:160/140
         },
     },
     {

@@ -20,7 +20,10 @@ const Layout = ({children, properties}: LayoutProps) => {
     };
     return (
         <Fragment>
-            <Header toggleScrollWrapper={toggleScrollWrapper} isSecondary={true} className="header_static"/>
+            <Header toggleScrollWrapper={toggleScrollWrapper}
+                    isSecondary={true}
+                    className="header_static"
+                    properties={properties}/>
             <div className="wrapper" style={{overflowY: scrollWrapper ? 'visible' : 'hidden'}}>
                 <div className="content">
                     <div className="secondary-content container">

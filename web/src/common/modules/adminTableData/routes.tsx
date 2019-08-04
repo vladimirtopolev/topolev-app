@@ -19,7 +19,8 @@ export default ({domainPath, tableName, RowsRenderer, RowRenderer}: RoutesProps)
                    path={`${domainPath}`}
                    render={() => <AdminTableEntityRows tableName={tableName}
                                                        RowsRenderer={RowsRenderer}/>}/>
-            <Route path={`${domainPath}/:tableEntityRowId`}
+            <Route exact
+                   path={`${domainPath}/:tableEntityRowId`}
                    render={() => <AdminTableEntityRow tableName={tableName}
                                                       RowRenderer={RowRenderer}/>}/>
         </Switch>

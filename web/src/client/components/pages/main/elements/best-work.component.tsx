@@ -4,6 +4,7 @@ import withAdminTableData, {WithAdminTableDataHoc} from '../../../../../common/h
 import {getCellValueByInternalName} from '../../../../../common/modules/adminTableData/helpers';
 import {useContext} from 'react';
 import {LanguageContext} from '../../../../../common/helpers/with-language-context.render-props-component';
+import {Link} from 'react-router-dom';
 
 const Portfolio = ({adminTableData}: WithAdminTableDataHoc) => {
     const languageContext = useContext(LanguageContext);
@@ -29,7 +30,7 @@ const Portfolio = ({adminTableData}: WithAdminTableDataHoc) => {
                     })}
                 </div>
                 <div className="bestworks__linkContainer">
-                    <a href="/" className="link">Смотреть всю коллекцию...</a>
+                    <Link to="/portfolio" className="link">Смотреть всю коллекцию...</Link>
                 </div>
             </div>
         </section>

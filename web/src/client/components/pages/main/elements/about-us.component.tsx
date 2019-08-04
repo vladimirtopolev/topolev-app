@@ -1,6 +1,12 @@
 import * as React from 'react';
 import Slider from 'react-slick';
-
+import {Property} from '../../../../../modules/properties/schema/models';
+import getPropertyValueByName from '../../../../../common/modules/properties/helpers/getPropertyValueByName';
+import {useContext} from 'react';
+import {LanguageContext} from '../../../../../common/helpers/with-language-context.render-props-component';
+interface AboutUsProps {
+    properties?: Property[]
+}
 var settings = {
     dots: true,
     dotsClass: 'portfolio__slider-dots slick-dots',
@@ -30,46 +36,28 @@ var settings = {
     ]
 };
 
-export default () => {
+export default ({properties}:AboutUsProps) => {
+    const languageContext = useContext(LanguageContext);
+
+    const aboutUs = getPropertyValueByName(properties, 'aboutUs', languageContext.locale);
+    const yearOnMarker = getPropertyValueByName(properties, 'yearWork');
+
     return (
         <section className="about-us">
             <div className="about-us__container container">
                 <div className="row">
                     <div className="col-md-4 about-us__statistic-container">
                         <div className="about-us__statistic">
-                            <h1>28 <span>лет</span></h1>
+                            <h1>{yearOnMarker} <span>лет</span></h1>
                         </div>
                     </div>
                     <div className="col-md-8">
                         <div className="about-us__title title">О компании</div>
-                        <div className="about-us__description">
-                            <p>
-                                Предприятие "Экспосервис" работает на рынке выставочных услуг
-                                Республики Беларусь более 28 лет, начиная с 1991 года.
-                            </p>
-                            <p>
-                                Мы оказываем услуги по проектированию, дизайну и строительству
-                                выстовочных
-                                стендов.
-                            </p>
-                            <p>
-                                Залогом успеха работы гашей компании является слаженный труд команды
-                                профессионалов,
-                                умение оперативно и эффективно решать разнообразные задачи, возникающие
-                                в
-                                процессе
-                                подготовки и проведении выставок.
-                            </p>
-                            <p>
-                                Наше предприятие является генеральным подрядчиком УП "Экспоформу",
-                                один из лидеров национального выставочного бизнеса.
-                            </p>
-                        </div>
-                        <div className="about-us__btn">
-                            <button className="btn btn-primary">Подробнее</button>
+                        <div className="about-us__description" dangerouslySetInnerHTML={{__html: aboutUs}}>
                         </div>
                     </div>
                 </div>
+                {/*
                 <section className="exhibitions">
                     <div className="exhibitions__container container">
                         <div className="exhibitions__title">Расписание выставок</div>
@@ -135,6 +123,7 @@ export default () => {
                         </div>
                     </div>
                 </section>
+                */}
             </div>
         </section>
     );

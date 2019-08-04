@@ -5,12 +5,8 @@ export interface ClientNavbarLink {
 
 export const clientNavbarLinks: ClientNavbarLink[] = [
     {
-        title: 'Информация',
-        href: '#'
-    },
-    {
         title: 'Стенды',
-        href: '#'
+        href: '/portfolio'
     },
     {
         title: 'Оборудование',
@@ -24,4 +20,5 @@ export const clientNavbarLinks: ClientNavbarLink[] = [
         title: 'Контакты',
         href: '/contact'
     }
-]
+];
+

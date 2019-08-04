@@ -15,6 +15,10 @@ class ClientMessageController {
                 status: CLIENT_MESSAGE_STATUSES.CREATED
             }
         ));
+        const savedClientMessage = await clientMessage.save();
+        if (savedClientMessage) {
+            res.json(savedClientMessage);
+        }
     };
 
     getClientMessages = async (req: Request, res: Response) => {

@@ -7,6 +7,8 @@ import {clientNavbarLinks} from '../../../../config/client-navbar.config';
 import {LanguageContext} from '../../../../common/helpers/with-language-context.render-props-component';
 import './header.component.scss';
 import {Property} from '../../../../modules/properties/schema/models';
+import getPropertyValueByName from '../../../../common/modules/properties/helpers/getPropertyValueByName';
+import {NavLink} from 'react-router-dom';
 
 export interface HeaderProps {
     toggleScrollWrapper: (state?: boolean) => void
@@ -15,12 +17,13 @@ export interface HeaderProps {
     properties?: Property[]
 }
 
-export default ({toggleScrollWrapper, className, isSecondary}: HeaderProps) => {
+export default ({toggleScrollWrapper, className, isSecondary, properties}: HeaderProps) => {
     const [headerState, changeHeaderState] = useState({
         disablePinning: false,
         toggledMenu: false
     });
     const {changeLocale} = useContext(LanguageContext);
+    const phone = getPropertyValueByName(properties, 'phone1');
 
     const togglePinningHeader = (media: any) => {
         if (!media.matches) {
@@ -52,11 +55,11 @@ export default ({toggleScrollWrapper, className, isSecondary}: HeaderProps) => {
         <Headroom pinStart={100} disable={headerState.disablePinning} className={className}
                   wrapperStyle={{height:100}}>
             <header className={cn('header', {'header_close-nav': headerState.toggledMenu})}>
-                <div className="header__top">
-                    <div className="header__top-container container row justify-content-end">
+                <div className="header__top container">
+                    <div className="header__top-container row justify-content-end">
                         <div className="header__phone">
                             <i className="fas fa-phone"></i>
-                            +375 17 273 73 00
+                            {phone}
                         </div>
                         <div className="header__lang">
                             <ul className="lang">
@@ -97,7 +100,11 @@ export default ({toggleScrollWrapper, className, isSecondary}: HeaderProps) => {
                             <ul className="main-nav">
                                 {clientNavbarLinks.map(link => (
                                     <li className="main-nav__item" key={link.title}>
-                                        <a href={link.href} className="main-nav__link">{link.title}</a>
+                                        <NavLink to={link.href}
+                                                 className="main-nav__link"
+                                                 activeClassName="main-nav__link_active">
+                                            {link.title}
+                                        </NavLink>
                                     </li>
                                 ))}
                             </ul>

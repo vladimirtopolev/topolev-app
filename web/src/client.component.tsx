@@ -14,6 +14,8 @@ const NewsRowRenderer = lazy(() => import('./client/components/pages/news/news-r
 const EquipmentRowsRenderer = lazy(() => import('./client/components/pages/equipments/equipments-rows-renderer.component'));
 const EquipmentRowRenderer = lazy(() => import('./client/components/pages/equipments/equipments-row-renderer.component'));
 
+const Portfolio = lazy(() => import('./client/components/pages/portfolio/portfolio.component'));
+
 import {adminTableEntityCreator} from './common/modules/adminTableData';
 
 import {getProperties} from './common/modules/properties/store/actions/actions';
@@ -23,7 +25,6 @@ interface ClientProps {
 }
 
 const Client = (props: ClientProps) => {
-    console.log('MAIN', props);
     useEffect(() => {
         props.dispatch(getProperties());
     }, []);
@@ -32,9 +33,13 @@ const Client = (props: ClientProps) => {
             <Switch>
                 <Route path="/" exact component={MainPage}/>
                 <Route path="/contact" component={ContactPage}/>
+                <Route path="/portfolio" component={Portfolio}/>
                 {adminTableEntityCreator('/news', 'news', NewsRowsRenderer, NewsRowRenderer)}
                 {adminTableEntityCreator('/equipments/buildingStands', 'buildingStands', EquipmentRowsRenderer, EquipmentRowRenderer)}
                 {adminTableEntityCreator('/equipments/fullingStands', 'fullingStands', EquipmentRowsRenderer, EquipmentRowRenderer)}
+                {adminTableEntityCreator('/equipments/design', 'design', EquipmentRowsRenderer, EquipmentRowRenderer)}
+                {adminTableEntityCreator('/equipments/electricity', 'electricity', EquipmentRowsRenderer, EquipmentRowRenderer)}
+                {adminTableEntityCreator('/equipments/presentations', 'presentations', EquipmentRowsRenderer, EquipmentRowRenderer)}
             </Switch>
         </WithLanguageContext>
     );
