@@ -7157,7 +7157,7 @@ a.text-dark:hover, a.text-dark:focus {
 .header_open {
   z-index: 1000; }
 
-.header_static .header {
+.header_static.header_open .header {
   height: 100vh; }
 
 .header_static.headroom-wrapper {
