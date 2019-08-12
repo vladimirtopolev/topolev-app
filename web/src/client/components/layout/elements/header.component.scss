@@ -206,9 +206,10 @@ $primary-text-color: #444444;
 }
 
 .header_static{
-  .header{
+  &.header_open .header{
     height: 100vh;
   }
+
   &.headroom-wrapper{
     height: 100px;
   }
