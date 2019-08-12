@@ -106,7 +106,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "scripts": {
-    "web": "npm run server_dev",
+    "start": "npm run server_dev",
 
     "client_build": "cd ./web && webpack --mode production",
     "server_build": "cd ./server && tsc",
