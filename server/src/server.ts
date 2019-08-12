@@ -1,12 +1,13 @@
 import * as express from "express";
 import * as bodyParser from 'body-parser';
+import * as path from 'path';
 //@ts-ignore
 import * as formData from 'express-form-data';
 import * as morgan from 'morgan';
 import rootRouter from './routes/index';
 import bootDev from './boot/expressBootDevelopment';
 
-export interface FormRequest extends Request{
+export interface FormRequest extends Request {
     files: any;
 }
 
@@ -41,16 +42,24 @@ export class Server {
     }
 
     private routes() {
-        let router : express.Router= express.Router();
+        let router: express.Router = express.Router();
 
         rootRouter(this.app);
         //use router middleware
         this.app.use(router);
 
-        bootDev(this.app, __dirname);
-        /*if (process.env.NODE_ENV === 'development') {
+
+        console.log('ENV', process.env.NODE_ENV);
+        if (process.env.NODE_ENV === 'development') {
             bootDev(this.app, __dirname);
-        }*/
+        }
+
+        if (process.env.NODE_ENV === 'production') {
+            this.app.use(express.static(path.join(__dirname, '..', '..', 'web')));
+            this.app.get("/*", (req, res, next) => {
+                res.sendFile(path.join(__dirname, '..', '..', 'web', 'index.html'));
+            });
+        }
     }
 
 }

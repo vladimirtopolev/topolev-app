@@ -1,3 +1,6 @@
+import './default';
+import './production';
+
 export interface DBConfig {
     host: string,
     dbName: string

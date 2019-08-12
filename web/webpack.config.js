@@ -14,7 +14,7 @@ module.exports = {
         index: './src/index.tsx'
     },
     output: {
-        path: path.join(__dirname, "/dist"),
+        path: path.join(__dirname, "../build/web"),
         filename: "[name].bundle.js",
         chunkFilename: "[name].bundle.js",
         publicPath: '/'

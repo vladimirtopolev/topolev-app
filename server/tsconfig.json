@@ -12,10 +12,13 @@
       "dom"
     ],
     "jsx": "react",
-    "typeRoots": [ "./types", "../node_modules/@types"]
+    "typeRoots": [ "./types", "../node_modules/@types"],
+    "outDir": "../build/server",
+    "resolveJsonModule": true
   },
   "include": [
     "config/**/*",
+    "config/**/*.json",
     "migrations/**/*",
     "src/**/*"
   ],

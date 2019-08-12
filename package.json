@@ -106,9 +106,19 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "scripts": {
+    "web": "npm run server_dev",
+
+    "client_build": "cd ./web && webpack --mode production",
+    "server_build": "cd ./server && tsc",
+    "build": "npm run client_build && npm run server_build",
+
     "client_dev": "webpack-dev-server --config ./web/webpack.config.js --mode development --open --hot",
     "server_dev": "cd ./server && tsc &&NODE_ENV=development nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
-    "migrate_dev": "cd ./server && tsc && ../node_modules/.bin/migrate-mongo up"
+
+    "server_prod": "cd ./build/server && NODE_ENV=production node src/index.js",
+
+    "migrate_dev": "cd ./server && tsc && ../node_modules/.bin/migrate-mongo up",
+    "migrate_prod": "cd ./server && tsc && NODE_ENV=production ../node_modules/.bin/migrate-mongo up"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -124,5 +134,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
