@@ -38,6 +38,7 @@ var settings = {
 
 export default ({properties}:AboutUsProps) => {
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
 
     const aboutUs = getPropertyValueByName(properties, 'aboutUs', languageContext.locale);
     const yearOnMarker = getPropertyValueByName(properties, 'yearWork');
@@ -48,11 +49,11 @@ export default ({properties}:AboutUsProps) => {
                 <div className="row">
                     <div className="col-md-4 about-us__statistic-container">
                         <div className="about-us__statistic">
-                            <h1>{yearOnMarker} <span>лет</span></h1>
+                            <h1>{yearOnMarker} <span>{dictionary['year']}</span></h1>
                         </div>
                     </div>
                     <div className="col-md-8">
-                        <div className="about-us__title title">О компании</div>
+                        <div className="about-us__title title">{dictionary['aboutCompany']}</div>
                         <div className="about-us__description" dangerouslySetInnerHTML={{__html: aboutUs}}>
                         </div>
                     </div>

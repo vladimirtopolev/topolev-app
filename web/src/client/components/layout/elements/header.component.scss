@@ -201,9 +201,13 @@ $primary-text-color: #444444;
   }
 }
 
+.header_open{
+  z-index: 1000;
+}
+
 .header_static{
   .header{
-    height: 100px;
+    height: auto;
   }
   &.headroom-wrapper{
     height: 100px;

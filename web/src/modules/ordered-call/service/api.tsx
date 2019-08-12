@@ -8,7 +8,7 @@ const clientApi = axios.create({
 });
 
 // MODULE TABLE
-const MODULE_TABLE_DOMAIN = 'orderedCalls';
+const MODULE_TABLE_DOMAIN = 'clientMessages';
 
 export function getOrderedCalls(): Promise<any> {
     return clientApi.get(`/api/${MODULE_TABLE_DOMAIN}`);

@@ -15,7 +15,7 @@ const TABLE: TableProperties = {
 const HEADERS: TableHeaderProperties[] = [
     {
         _id: new ObjectId(),
-        type: 'INPUT',
+        type: 'DATE',
         internalName: 'date',
         name: 'Дата публикации',
         notLocalized: true,
@@ -127,7 +127,7 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
                 value: {
-                    ru: 'Вторая новость',
+                    ru: 'Третья новость',
                     en: 'The first new'
                 }
             },
@@ -160,7 +160,40 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
                 value: {
-                    ru: 'Вторая новость',
+                    ru: 'Четвертая новость',
+                    en: 'The first new'
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[2]._id,
+                value: [
+                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564137390/l1m6n7qolvxyt6fylmow.jpg'
+                ]
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Пятая новость сожержание',
+                    en: 'The second new content'
+                }
+            },
+        ]
+    },
+    {
+        _id: new ObjectId(),
+        cells: [
+            {
+                _id: new ObjectId(),
+                header: HEADERS[0]._id,
+                value: new Date()
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[1]._id,
+                value: {
+                    ru: 'Пятая новость',
                     en: 'The first new'
                 }
             },
@@ -193,7 +226,40 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
                 value: {
-                    ru: 'Вторая новость',
+                    ru: 'Шестая новость',
+                    en: 'The first new'
+                }
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[2]._id,
+                value: [
+                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564137390/l1m6n7qolvxyt6fylmow.jpg'
+                ]
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[3]._id,
+                value: {
+                    ru: 'Восьмая новость сожержание',
+                    en: 'The second new content'
+                }
+            },
+        ]
+    },
+    {
+        _id: new ObjectId(),
+        cells: [
+            {
+                _id: new ObjectId(),
+                header: HEADERS[0]._id,
+                value: new Date()
+            },
+            {
+                _id: new ObjectId(),
+                header: HEADERS[1]._id,
+                value: {
+                    ru: 'Сельмаяы новость',
                     en: 'The first new'
                 }
             },
@@ -226,7 +292,7 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
                 value: {
-                    ru: 'Вторая новость',
+                    ru: 'Восьмая новость',
                     en: 'The first new'
                 }
             },
@@ -259,7 +325,7 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
                 value: {
-                    ru: 'Вторая новость',
+                    ru: 'Девятая новость',
                     en: 'The first new'
                 }
             },
@@ -292,73 +358,7 @@ const ROWS: TableRowProperties[] = [
                 _id: new ObjectId(),
                 header: HEADERS[1]._id,
                 value: {
-                    ru: 'Вторая новость',
-                    en: 'The first new'
-                }
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[2]._id,
-                value: [
-                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564137390/l1m6n7qolvxyt6fylmow.jpg'
-                ]
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[3]._id,
-                value: {
-                    ru: 'Вторая новость сожержание',
-                    en: 'The second new content'
-                }
-            },
-        ]
-    },
-    {
-        _id: new ObjectId(),
-        cells: [
-            {
-                _id: new ObjectId(),
-                header: HEADERS[0]._id,
-                value: new Date()
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[1]._id,
-                value: {
-                    ru: 'Вторая новость',
-                    en: 'The first new'
-                }
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[2]._id,
-                value: [
-                    'http://res.cloudinary.com/dix3v9vzg/image/upload/v1564137390/l1m6n7qolvxyt6fylmow.jpg'
-                ]
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[3]._id,
-                value: {
-                    ru: 'Вторая новость сожержание',
-                    en: 'The second new content'
-                }
-            },
-        ]
-    },
-    {
-        _id: new ObjectId(),
-        cells: [
-            {
-                _id: new ObjectId(),
-                header: HEADERS[0]._id,
-                value: new Date()
-            },
-            {
-                _id: new ObjectId(),
-                header: HEADERS[1]._id,
-                value: {
-                    ru: 'Вторая новость',
+                    ru: 'Десятая новость',
                     en: 'The first new'
                 }
             },

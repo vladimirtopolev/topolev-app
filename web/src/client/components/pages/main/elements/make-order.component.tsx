@@ -1,7 +1,12 @@
 import * as React from 'react';
 import ContactForm from '../../contacts/contact-form.component';
+import {useContext} from 'react';
+import {LanguageContext} from '../../../../../common/helpers/with-language-context.render-props-component';
 
 export default () => {
+    const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
+
     return (
         <section className="make-order">
             <div className="make-order__container container">
@@ -11,27 +16,10 @@ export default () => {
                         </div>
                         <div className="col-xl-5 col-lg-6">
                             <div className="make-order__form-container">
-                                <div className="make-order__title">Оставить заявку</div>
-                                <div className="make-order__description">Мы свяжемся с вами в ближайшее
-                                    время
+                                <div className="make-order__title">{dictionary['makeCall']}</div>
+                                <div className="make-order__description">{dictionary['makeCallDescription']}
                                 </div>
                                 <div className="make-order__form">
-                                    {/*
-                                    <div className="make-order__input-container">
-                                        <input className="make-order__input" type="text"
-                                               placeholder="Имя"/>
-                                    </div>
-                                    <div className="make-order__input-container">
-                                        <input className="make-order__input" type="text"
-                                               placeholder="Email"/>
-                                    </div>
-                                    <div className="make-order__input-container">
-                                        <input className="make-order__input" type="text"
-                                               placeholder="Телефон"/>
-                                    </div>
-                                    <button className="make-order__btn btn btn-primary">Отправить
-                                    </button>
-                                    */}
                                     <ContactForm hideMessageField={true}/>
                                 </div>
                             </div>

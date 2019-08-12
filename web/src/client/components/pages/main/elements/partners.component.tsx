@@ -2,13 +2,18 @@ import * as React from 'react';
 import * as _ from 'lodash';
 import withAdminTableData, {WithAdminTableDataHoc} from '../../../../../common/helpers/with-admin-table-data.hoc';
 import {getCellValueByInternalName} from '../../../../../common/modules/adminTableData/helpers';
+import {useContext} from 'react';
+import {LanguageContext} from '../../../../../common/helpers/with-language-context.render-props-component';
 
 export const Partners = (props: WithAdminTableDataHoc) => {
     const {adminTableData} = props;
+    const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
+
     return (
         <section className="partners">
             <div className="container">
-                <h1 className="partners__title title">Партнеры</h1>
+                <h1 className="partners__title title">{dictionary['partners']}</h1>
                 <div className="partners__container row">
                     {
                         _.take(adminTableData, 3)

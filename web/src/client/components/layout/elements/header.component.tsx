@@ -8,7 +8,7 @@ import {LanguageContext} from '../../../../common/helpers/with-language-context.
 import './header.component.scss';
 import {Property} from '../../../../modules/properties/schema/models';
 import getPropertyValueByName from '../../../../common/modules/properties/helpers/getPropertyValueByName';
-import {NavLink} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 export interface HeaderProps {
     toggleScrollWrapper: (state?: boolean) => void
@@ -22,7 +22,8 @@ export default ({toggleScrollWrapper, className, isSecondary, properties}: Heade
         disablePinning: false,
         toggledMenu: false
     });
-    const {changeLocale} = useContext(LanguageContext);
+    const {changeLocale, dictionary} = useContext(LanguageContext);
+
     const phone = getPropertyValueByName(properties, 'phone1');
 
     const togglePinningHeader = (media: any) => {
@@ -52,7 +53,9 @@ export default ({toggleScrollWrapper, className, isSecondary, properties}: Heade
     }, []);
 
     return (
-        <Headroom pinStart={100} disable={headerState.disablePinning} className={className}
+        <Headroom pinStart={100} disable={headerState.disablePinning} className={cn(className, {
+            'header_open': headerState.toggledMenu
+        })}
                   wrapperStyle={{height:100}}>
             <header className={cn('header', {'header_close-nav': headerState.toggledMenu})}>
                 <div className="header__top container">
@@ -87,9 +90,9 @@ export default ({toggleScrollWrapper, className, isSecondary, properties}: Heade
                 <div className="header__bottom">
                     <div className="header__bottom-container">
                         <div className="header__logo">
-                            <a href="/" className="header__logo-link">
+                            <Link to="/" className="header__logo-link">
                                 <img src={require("../../../../../sources/client/logo.jpg")} className="header__logo-img"/>
-                            </a>
+                            </Link>
                         </div>
                         <div className="header__navigation">
                             <div className="main-nav__toggler">
@@ -103,7 +106,7 @@ export default ({toggleScrollWrapper, className, isSecondary, properties}: Heade
                                         <NavLink to={link.href}
                                                  className="main-nav__link"
                                                  activeClassName="main-nav__link_active">
-                                            {link.title}
+                                            {dictionary[link.title]}
                                         </NavLink>
                                     </li>
                                 ))}

@@ -8,6 +8,7 @@ interface FooterProps {
 }
 export default ({properties}:FooterProps) => {
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
 
     const country = getPropertyValueByName(properties, 'country', languageContext.locale);
     const street = getPropertyValueByName(properties, 'street', languageContext.locale);
@@ -21,8 +22,8 @@ export default ({properties}:FooterProps) => {
                 <div className="footer__address">
                     {country}<br/>
                     {street}<br/>
-                    тел. {phone}<br/>
-                    e-mail: {email}
+                    {dictionary['phoneContraction']}: {phone}<br/>
+                    {dictionary['emailContraction']}: {email}
                 </div>
                 <div className="footer__copyright ">
                     © {copyright}

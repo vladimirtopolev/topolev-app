@@ -3,6 +3,7 @@
 interface CssExports {
   'Equipment': string;
   'Equipment__img': string;
+  'Equipment__link': string;
   'Equipments': string;
   'Equipments__nav': string;
   'Navigation': string;

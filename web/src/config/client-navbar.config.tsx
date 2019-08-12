@@ -5,19 +5,19 @@ export interface ClientNavbarLink {
 
 export const clientNavbarLinks: ClientNavbarLink[] = [
     {
-        title: 'Стенды',
+        title: 'stands',
         href: '/portfolio'
     },
     {
-        title: 'Оборудование',
+        title: 'equipments',
         href: '/equipments/buildingStands'
     },
     {
-        title: 'Новости',
+        title: 'news',
         href: '/news'
     },
     {
-        title: 'Контакты',
+        title: 'contacts',
         href: '/contact'
     }
 ];

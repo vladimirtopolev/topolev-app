@@ -21,6 +21,8 @@ const InputField = ({className, field, placeholder}: { field: FieldRenderProps, 
 
 export default ({callback, hideMessageField}: { callback?: () => void, hideMessageField?: boolean }) => {
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
+
     const [isOpen, changeModalState] = useState(false);
 
     const onToggleModal = () => {
@@ -58,21 +60,22 @@ export default ({callback, hideMessageField}: { callback?: () => void, hideMessa
         <div>
             <form onSubmit={(event: any) => handleSubmit(event).then(form.reset)}>
                 <div className="row">
-                    <InputField field={firstName} className='col-md-6' placeholder='Имя'/>
-                    <InputField field={lastName} className='col-md-6' placeholder='Фамилия'/>
+                    <InputField field={firstName} className='col-md-6' placeholder={dictionary['firstName']}/>
+                    <InputField field={lastName} className='col-md-6' placeholder={dictionary['lastName']}/>
                 </div>
-                <InputField field={company} placeholder='Компания'/>
+                <InputField field={company} placeholder={dictionary['company']}/>
                 <div className="row">
-                    <InputField field={phone} className='col-md-6' placeholder='Телефон' key={0}/>
-                    <InputField field={email} className='col-md-6' placeholder='Email' key={1}/>
+                    <InputField field={phone} className='col-md-6' placeholder={dictionary['phone']} key={0}/>
+                    <InputField field={email} className='col-md-6' placeholder={dictionary['email']} key={1}/>
                 </div>
                 {!hideMessageField && (
                     <div className="form-group">
-                        <textarea {...message.input} className="form-control" placeholder="Текст сообщения" rows={4}/>
+                        <textarea {...message.input} className="form-control" placeholder={dictionary['message']} rows={4}/>
                         {renderInputIssue(message)}
                     </div>
                 )}
-                <button type="submit" disabled={pristine || submitting} className={formStyles.FormBtn}>Отправить
+                <button type="submit" disabled={pristine || submitting} className={formStyles.FormBtn}>
+                    {dictionary['send']}
                 </button>
             </form>
             <Modal isOpen={isOpen} toggle={onToggleModal}>
@@ -81,8 +84,7 @@ export default ({callback, hideMessageField}: { callback?: () => void, hideMessa
                             onClick={onToggleModal}>
                         <i className="fas fa-times"></i>
                     </button>
-                    Спасибо за проявленный интерес к нам. Мы обязательно ответим
-                    на все возникающие вопросы. Наш представитель свяжется с Вами в ближайшее время.
+                    {dictionary['makeOrderMessageSuccess']}
                 </div>
             </Modal>
         </div>

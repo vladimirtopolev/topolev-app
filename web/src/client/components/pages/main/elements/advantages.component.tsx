@@ -1,6 +1,8 @@
 import * as React from 'react';
 import cn from 'classnames';
 import * as styles from './advantages.component.styles.css';
+import {useContext} from 'react';
+import {LanguageContext} from '../../../../../common/helpers/with-language-context.render-props-component';
 
 interface Advantage {
     image: any,
@@ -11,29 +13,21 @@ interface Advantage {
 const ADVANTAGES: Advantage[] = [
     {
         image: require( '../../../../../../sources/client/adProject.png'),
-        title: 'Проектирование',
-        text: `
-        Мы можем предложить как стандартную комплектацию стендов,
-        которые позволяют подготовиться к участию за несколько дней,
-        а также разаработать индивидуальный проект исходя из бюджета
-        и пожеланий`
+        title: 'engineering',
+        text: 'engineeringDescription'
     }, {
         image: require( '../../../../../../sources/client/adDesign.png'),
-        title: 'Дизайн',
-        text: `
-        Стенды украшаются различной полиграфической продукцией:
-        печтатью полотен, наклейками различного вида исполнения,
-        баннерами, растяжками, разрабатывается система освещения `
+        title: 'design',
+        text: 'designDescription'
     }, {
         image: require( '../../../../../../sources/client/adBuild.png'),
-        title: 'Строительство',
-        text: `
-        Профессиональная команда устанавливает стенд,
-        обеспечивая его электроснабжением и водоснабжением.
-        Стенд собирается в помещении выставки незадолго до ее начала.  `
+        title: 'building',
+        text: 'buildingDescription'
     }
 ];
 export default () => {
+    const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
 
     return (
 
@@ -45,8 +39,8 @@ export default () => {
                             <div className={styles.Advantage__label}>
                                 <img className={styles.Advantage__img} src={advantage.image}/>
                             </div>
-                            <div className={styles.Advantage__title}>{advantage.title}</div>
-                            <div className={styles.Advantage__description}>{advantage.text}</div>
+                            <div className={styles.Advantage__title}>{dictionary[advantage.title]}</div>
+                            <div className={styles.Advantage__description}>{dictionary[advantage.text]}</div>
                         </div>
                     </div>
                 ))}

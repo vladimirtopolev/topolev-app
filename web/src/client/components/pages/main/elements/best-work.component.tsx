@@ -8,11 +8,13 @@ import {Link} from 'react-router-dom';
 
 const Portfolio = ({adminTableData}: WithAdminTableDataHoc) => {
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
+
     const portfolios = _.takeRight(adminTableData, 6);
     return (
         <section className="bestworks">
             <div className="container">
-                <h1 className="bestworks__title title">Последние работы</h1>
+                <h1 className="bestworks__title title">{dictionary['latestWork']}</h1>
                 <div className="bestworks__works row">
                     {portfolios.map(portfolio => {
                         const image = getCellValueByInternalName(portfolio, 'image');
@@ -30,7 +32,7 @@ const Portfolio = ({adminTableData}: WithAdminTableDataHoc) => {
                     })}
                 </div>
                 <div className="bestworks__linkContainer">
-                    <Link to="/portfolio" className="link">Смотреть всю коллекцию...</Link>
+                    <Link to="/portfolio" className="link">{dictionary['seeAllCollection']}</Link>
                 </div>
             </div>
         </section>

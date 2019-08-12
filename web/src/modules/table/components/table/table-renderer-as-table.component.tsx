@@ -26,6 +26,7 @@ export default ({
         <table className={cn(styles.Table)}>
             <thead>
             <tr>
+                <th></th>
                 {headers
                     .filter(headerFilters)
                     .map(header => <th key={header._id}>{header.name}</th>)}
@@ -36,6 +37,7 @@ export default ({
             {rows.map(row => {
                 return (
                     <tr key={row._id}>
+                        <td>{row._id}</td>
                         {headers
                             .filter(headerFilters)
                             .map(header => {

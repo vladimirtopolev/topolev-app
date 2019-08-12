@@ -11,13 +11,16 @@ import {Link} from 'react-router-dom';
 
 const News = (props: WithAdminTableDataHoc) => {
     const {adminTableData} = props;
+
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
+
     return (
         <section className="news">
             <div className="news__container container">
                 <div className="row">
                     <div className="col-lg-4 col-md-12">
-                        <div className="news__title title">Новости</div>
+                        <div className="news__title title">{dictionary['news']}</div>
                     </div>
                     <div className="col-lg-8 col-md-12">
                         <div className="news__container row">
@@ -36,7 +39,7 @@ const News = (props: WithAdminTableDataHoc) => {
                                                         {title}
                                                     </div>
                                                     <div className="new-item__link">
-                                                        <Link to={`/news/${newsRow._id}`} className="link">Читать...</Link>
+                                                        <Link to={`/news/${newsRow._id}`} className="link">{dictionary['readMore']}</Link>
                                                     </div>
                                                 </div>
                                             </div>

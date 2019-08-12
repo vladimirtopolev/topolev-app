@@ -11,6 +11,7 @@ import withAdminProperties from '../../../../common/helpers/with-admin-propertie
 
 const Contacts = ({properties}: any) => {
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
 
     const company = getPropertyValueByName(properties, 'company', languageContext.locale);
     const country = getPropertyValueByName(properties, 'country', languageContext.locale);
@@ -26,11 +27,10 @@ const Contacts = ({properties}: any) => {
         <Layout>
             <div className={styles.Contact}>
                 <div className={styles.Contact__title}>
-                    Контакты
+                    {dictionary['contacts']}
                 </div>
                 <div className={styles.Contact__description}>
-                    Мы рады будем помочь Вам по любому
-                    любому возникающему Вам опросу.
+                    {dictionary['makeCallDescription']}
                 </div>
 
                 <div className={styles.Contact__content}>
@@ -38,18 +38,18 @@ const Contacts = ({properties}: any) => {
                         <div className="col-md-6">
                             <div className={styles.AddressContainer}>
                                 <div className={styles.Address}>
-                                    <p className={styles.Address__title}>Адрес</p>
+                                    <p className={styles.Address__title}>{dictionary['address']}</p>
                                     <p className={styles.Address__companyName}>{company}</p>
                                     <p className={styles.Address__item}>{country}</p>
                                     <p className={styles.Address__item}>{street}</p>
                                 </div>
                                 <div className={styles.ContactItems}>
                                     <div className={styles.ContactItems__item}>
-                                        <div className={styles.ContactItems__title}>Телефон:</div>
+                                        <div className={styles.ContactItems__title}>{dictionary['phone']}:</div>
                                         <div className={styles.ContactItems__content}>{phone}</div>
                                     </div>
                                     <div className={styles.ContactItems__item}>
-                                        <div className={styles.ContactItems__title}>Email:</div>
+                                        <div className={styles.ContactItems__title}>{dictionary['email']}:</div>
                                         <div className={styles.ContactItems__content}>{email}</div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@ const Contacts = ({properties}: any) => {
                         </div>
                         <div className="col-md-6">
                             <div className={styles.AskQuestion}>
-                                <p className={styles.AskQuestion__title}>Задайте вопрос</p>
+                                <p className={styles.AskQuestion__title}>{dictionary['askQuestion']}</p>
                                 <div className={styles.AskQuestion__form}>
                                     <ContactForm/>
                                 </div>
@@ -67,8 +67,8 @@ const Contacts = ({properties}: any) => {
                 </div>
 
                 <div className={styles.Map}>
-                    <p className={styles.Map__title}>Схема проезда</p>
-                    <YMaps>
+                    <p className={styles.Map__title}>{dictionary['routeSchema']}</p>
+                    <YMaps  query={{ lang: languageContext.locale.lang }}>
                         <Map defaultState={{center: [latitude, longitude], zoom: 17}}
                              style={{width: '100%', height: '350px'}}>
                             <Placemark

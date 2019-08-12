@@ -142,19 +142,18 @@ class TableController {
 
     deleteRow = async (req: Request, res: Response) => {
         const {rowId, tableName} = req.params;
+        console.log('REQUEST', tableName, rowId);
         const table = await this.findTableByName(tableName);
         if (!table) {
             return res.status(404).json({error: `Table "${tableName}" does not exist`});
         }
 
+        console.log(table.rows.length, table.rows.filter((row: any) => String(row._id) !== rowId).length);
         await TableModel.findByIdAndUpdate(table._id, {
-            rows: table.rows.filter((row: any) => row._id !== rowId)
+            rows: table.rows.filter((row: any) => String(row._id) !== rowId)
         });
 
-        const deletedRow = await TableRowModel.findOneAndRemove(rowId)
-            .populate(populateCellDescription)
-            .exec();
-        res.json(deletedRow);
+        res.json({});
     };
 }
 

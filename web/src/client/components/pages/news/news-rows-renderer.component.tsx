@@ -16,6 +16,7 @@ interface NewsProps {
 
 export default ({rows}: NewsProps) => {
     const languageContext = useContext(LanguageContext);
+    const {dictionary} = languageContext;
 
     const extractNewsFromRow = (news: Row) => {
         return {
@@ -26,9 +27,9 @@ export default ({rows}: NewsProps) => {
     };
 
     const mainNews = _.take(rows, 2);
+    const restNews = _.slice(rows, 2, 5);
 
-    const restNews = _.slice(rows, 3, 7);
-    const newsPerColumn = Math.floor(restNews.length / 3);
+    const newsPerColumn = Math.ceil(restNews.length / 3);
     const generateNewsColumn = (colNumber: number) => {
         const firstIndex = (colNumber - 1) * newsPerColumn;
         const lastIndex = firstIndex + newsPerColumn;
@@ -46,7 +47,7 @@ export default ({rows}: NewsProps) => {
                                 <div className={styles.NewsItem__content}>
                                     <div className={styles.NewsItem__date}>{moment(date).format('DD/MM/YYYY')}</div>
                                     {title}
-                                    <Link to={`/news/${news._id}`} className={styles.NewsItem__link}>Читать...</Link>
+                                    <Link to={`/news/${news._id}`} className={styles.NewsItem__link}>{dictionary['readMore']}</Link>
                                 </div>
                             </div>
                         );
@@ -73,7 +74,7 @@ export default ({rows}: NewsProps) => {
                                             </div>
                                             <div className={styles.Date__monthYearContainer}>
                                                 <div className={styles.Date__month}>
-                                                    {moment(date).locale('ru').format('MMM')}
+                                                    {moment(date).locale(languageContext.locale.key).format('MMM')}
                                                 </div>
                                                 <div className={styles.Date__year}>
                                                     {moment(date).year()}
@@ -89,7 +90,7 @@ export default ({rows}: NewsProps) => {
                         );
                     })}
                 </div>
-                <h1 className={styles.RestNews__title}>Читайте также:</h1>
+                <h1 className={styles.RestNews__title}>{dictionary['readAlso']}</h1>
 
                 <div className="row">
                     {generateNewsColumn(1)}
