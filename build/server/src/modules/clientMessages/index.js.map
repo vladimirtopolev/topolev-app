@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../server/src/modules/clientMessages/index.ts"],"names":[],"mappings":";;AACA,qFAA+E;AAElE,QAAA,2BAA2B,GAAG,UAAC,GAAgB,EAAE,UAA0C;IAA1C,2BAAA,EAAA,kCAA0C;IAEpG,GAAG,CAAC,KAAK,CAAC,UAAU,CAAC;SAChB,IAAI,CAAC,mCAAwB,CAAC,iBAAiB,CAAC;SAChD,GAAG,CAAC,mCAAwB,CAAC,iBAAiB,CAAC,CAAA;AACxD,CAAC,CAAC"}

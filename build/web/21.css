@@ -1,0 +1,59 @@
+.OrderedCallItem___1YXyh{
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  position:relative;
+}
+
+.OrderedCallItem__container___TvhP3{}
+
+.OrderedCallItem__deleteBtn___W1PRY{}
+
+.OrderedCallItem__bottom___3UaF7{}
+
+.Field___2Z8E_{
+  display: flex;
+  margin-bottom:5px;
+}
+.Field__name___305Aj{
+  margin-right: 5px;
+  min-width: 120px;
+  font-weight: bold;
+}
+.Field__value___1XjOk{}
+
+.DateContainer___2kVHf{}
+.Date___1MlC6{}
+.Date__label___3307B{}
+.Date__date___2fFQM{}
+
+
+.GroupOrderedCalls___27Lzp{
+  width: 33%;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.GroupOrderedCalls__title___e2I7X{
+
+}
+
+.GroupOrderedCalls__content___3Sc9E{
+  margin-top: 10px;
+  background: #efefef;
+  flex-grow: 1;
+  padding: 15px;
+}
+
+.OrderedCallsPanel___tAFtE{
+  display: flex;
+  justify-content: stretch;
+  min-height: 100%;
+  padding: 10px 10px 20px 10px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+
+/*# sourceMappingURL=21.css.map*/

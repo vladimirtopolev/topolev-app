@@ -1,0 +1,54 @@
+.Row___6pQfT {
+}
+
+.Row__backBtn___2jt9w {
+  background: none;
+  border: none;
+}
+
+.Row__backBtn___2jt9w:hover {
+  color: #00acac;
+}
+
+.Row__backBtn___2jt9w:focus,
+.Row__backBtn___2jt9w:visited,
+.Row__backBtn___2jt9w:active{
+  outline: none;
+}
+
+.Row__backBtn___2jt9w:before {
+  content: "\F0A8";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 7px;
+}
+
+.Row__container___1kSkx {
+  margin-top: 15px;
+  background: #ffffff;
+}
+
+.Row__toolbar___2j2e0{
+  margin-top: 15px;
+  padding: 15px;
+}
+
+.Cell___2iLFv {
+  padding: 20px 15px 15px 15px;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+}
+
+.Cell__title___11KMF {
+  min-width: 200px;
+  margin-right: 5px;
+  line-height: 42px;
+}
+
+.Cell__value___1wEq8 {
+  flex-grow: 1;
+}
+
+
+
+/*# sourceMappingURL=27.css.map*/
